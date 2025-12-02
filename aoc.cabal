@@ -1,6 +1,6 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yaml by hpack version 0.37.0.
+-- This file has been generated from package.yaml by hpack version 0.38.1.
 --
 -- see: https://github.com/sol/hpack
 
@@ -40,6 +40,7 @@ executable aoc-2015-01
     , monoidal-containers
     , mtl
     , sized-grid
+    , vector
     , vector-space
   default-language: Haskell2010
 
@@ -60,6 +61,7 @@ executable aoc-2024-01
     , monoidal-containers
     , mtl
     , sized-grid
+    , vector
     , vector-space
   default-language: Haskell2010
 
@@ -80,6 +82,7 @@ executable aoc-2024-02
     , monoidal-containers
     , mtl
     , sized-grid
+    , vector
     , vector-space
   default-language: Haskell2010
 
@@ -100,6 +103,7 @@ executable aoc-2024-03
     , monoidal-containers
     , mtl
     , sized-grid
+    , vector
     , vector-space
   default-language: Haskell2010
 
@@ -120,5 +124,27 @@ executable aoc-2024-04
     , monoidal-containers
     , mtl
     , sized-grid
+    , vector
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2025-01
+  main-is: src/2025/01.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      attoparsec
+    , base >=4.7 && <5
+    , bytestring
+    , comonad
+    , constraints
+    , lens
+    , monoidal-containers
+    , mtl
+    , sized-grid
+    , vector
     , vector-space
   default-language: Haskell2010

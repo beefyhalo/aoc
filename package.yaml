@@ -30,6 +30,7 @@ dependencies:
 - vector-space
 - bytestring
 - constraints
+- vector
 
 ghc-options:
 - -Wall
@@ -53,3 +54,5 @@ executables:
     main: src/2024/03.hs
   aoc-2024-04:
     main: src/2024/04.hs
+  aoc-2025-01:
+    main: src/2025/01.hs
