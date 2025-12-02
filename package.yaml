@@ -24,6 +24,7 @@ dependencies:
 - attoparsec
 - lens
 - comonad
+- containers
 - monoidal-containers
 - mtl
 - sized-grid
@@ -56,3 +57,5 @@ executables:
     main: src/2024/04.hs
   aoc-2025-01:
     main: src/2025/01.hs
+  aoc-2025-02:
+    main: src/2025/02.hs
