@@ -41,8 +41,10 @@ executable aoc-2015-01
     , monad-loops
     , monoidal-containers
     , mtl
+    , parsec
     , sized-grid
     , vector
+    , vector-algorithms
     , vector-space
   default-language: Haskell2010
 
@@ -64,8 +66,10 @@ executable aoc-2024-01
     , monad-loops
     , monoidal-containers
     , mtl
+    , parsec
     , sized-grid
     , vector
+    , vector-algorithms
     , vector-space
   default-language: Haskell2010
 
@@ -87,8 +91,10 @@ executable aoc-2024-02
     , monad-loops
     , monoidal-containers
     , mtl
+    , parsec
     , sized-grid
     , vector
+    , vector-algorithms
     , vector-space
   default-language: Haskell2010
 
@@ -110,8 +116,10 @@ executable aoc-2024-03
     , monad-loops
     , monoidal-containers
     , mtl
+    , parsec
     , sized-grid
     , vector
+    , vector-algorithms
     , vector-space
   default-language: Haskell2010
 
@@ -133,8 +141,10 @@ executable aoc-2024-04
     , monad-loops
     , monoidal-containers
     , mtl
+    , parsec
     , sized-grid
     , vector
+    , vector-algorithms
     , vector-space
   default-language: Haskell2010
 
@@ -156,8 +166,10 @@ executable aoc-2025-01
     , monad-loops
     , monoidal-containers
     , mtl
+    , parsec
     , sized-grid
     , vector
+    , vector-algorithms
     , vector-space
   default-language: Haskell2010
 
@@ -179,8 +191,10 @@ executable aoc-2025-02
     , monad-loops
     , monoidal-containers
     , mtl
+    , parsec
     , sized-grid
     , vector
+    , vector-algorithms
     , vector-space
   default-language: Haskell2010
 
@@ -202,8 +216,10 @@ executable aoc-2025-03
     , monad-loops
     , monoidal-containers
     , mtl
+    , parsec
     , sized-grid
     , vector
+    , vector-algorithms
     , vector-space
   default-language: Haskell2010
 
@@ -225,7 +241,59 @@ executable aoc-2025-04
     , monad-loops
     , monoidal-containers
     , mtl
+    , parsec
     , sized-grid
     , vector
+    , vector-algorithms
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2025-05
+  main-is: src/2025/05.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      attoparsec
+    , base >=4.7 && <5
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , lens
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , parsec
+    , sized-grid
+    , vector
+    , vector-algorithms
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2025-06
+  main-is: src/2025/06.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      attoparsec
+    , base >=4.7 && <5
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , lens
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , parsec
+    , sized-grid
+    , vector
+    , vector-algorithms
     , vector-space
   default-language: Haskell2010

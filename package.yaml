@@ -24,6 +24,7 @@ dependencies:
   - attoparsec
   - lens
   - comonad
+  - parsec
   - monad-loops
   - containers
   - monoidal-containers
@@ -33,6 +34,7 @@ dependencies:
   - bytestring
   - constraints
   - vector
+  - vector-algorithms
 
 ghc-options:
   - -Wall
@@ -64,3 +66,7 @@ executables:
     main: src/2025/03.hs
   aoc-2025-04:
     main: src/2025/04.hs
+  aoc-2025-05:
+    main: src/2025/05.hs
+  aoc-2025-06:
+    main: src/2025/06.hs
