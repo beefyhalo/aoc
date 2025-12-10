@@ -57,7 +57,7 @@ partTwo = sum . unfoldr go
         removed = on (-) (length . filter (== Paper) . toList) g g'
 
 forklift :: (KnownNat n, 1 <= n) => FocusedGrid '[HardWrap n, HardWrap n] Cell -> Coord '[HardWrap n, HardWrap n] -> Bool
-forklift g coord =
-  let neighs = experiment (filter (/= coord) . nubOrd . moorePoints 1) g
-      papers = length $ filter (== Paper) neighs
-   in papers < 4
+forklift g coord = papers < 4
+  where
+    neighs = experiment (filter (/= coord) . nubOrd . moorePoints 1) g
+    papers = length $ filter (== Paper) neighs

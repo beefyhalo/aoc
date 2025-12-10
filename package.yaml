@@ -34,7 +34,9 @@ dependencies:
   - bytestring
   - constraints
   - vector
+  - linear
   - vector-algorithms
+  - split
 
 ghc-options:
   - -Wall
@@ -70,3 +72,7 @@ executables:
     main: src/2025/05.hs
   aoc-2025-06:
     main: src/2025/06.hs
+  aoc-2025-07:
+    main: src/2025/07.hs
+  aoc-2025-08:
+    main: src/2025/08.hs
