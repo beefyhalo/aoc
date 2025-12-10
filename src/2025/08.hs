@@ -1,15 +1,18 @@
+{-# LANGUAGE BangPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 {-# OPTIONS_GHC -Wno-type-defaults #-}
 
 module Main (main) where
 
-import Control.Monad.Loops (iterateUntil)
+import Control.Monad.Loops (unfoldWhileM)
+import Data.Functor.Foldable (apo)
 import Data.IntMap.Monoidal.Strict (MonoidalIntMap)
 import qualified Data.IntMap.Monoidal.Strict as M
 import qualified Data.IntSet as S
-import Data.List (foldl', sortOn)
+import Data.List (foldl', sortOn, unfoldr)
 import Data.List.Split (splitOn)
+import Data.Maybe (mapMaybe)
 import Data.Ord (Down (Down))
 import GHC.Arr (listArray, (!))
 import Linear.V3 (V3 (..))
@@ -73,13 +76,13 @@ partTwo points = ans
   where
     n = length points
     ary = listArray (1, n) points
-    start = (M.fromList [(i, i) | i <- [1 .. n]], Nothing)
+    pairs = sortedPairs points
+    start = M.fromList [(i, i) | i <- [1 .. n]]
 
-    -- fold over pairs, carry UF and last merged edge
-    go (uf, lastEdge) p@(x, y)
-      | find uf x /= find uf y = (union uf x y, Just p)
-      | otherwise = (uf, lastEdge)
+    go !comps uf lastEdge ((x, y) : ps)
+      | comps == 1 = (uf, lastEdge)
+      | find uf x /= find uf y = go (comps - 1) (union uf x y) (Just (x, y)) ps
+      | otherwise = go comps uf lastEdge ps
 
-    (_, Just (a, b)) = foldl' go start (sortedPairs points)
-
+    (_, Just (a, b)) = go n start Nothing pairs
     V3 ans _ _ = ary ! a * ary ! b

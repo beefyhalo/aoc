@@ -43,6 +43,7 @@ executable aoc-2015-01
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -70,6 +71,7 @@ executable aoc-2024-01
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -97,6 +99,7 @@ executable aoc-2024-02
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -124,6 +127,7 @@ executable aoc-2024-03
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -151,6 +155,7 @@ executable aoc-2024-04
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -178,6 +183,7 @@ executable aoc-2025-01
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -205,6 +211,7 @@ executable aoc-2025-02
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -232,6 +239,7 @@ executable aoc-2025-03
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -259,6 +267,7 @@ executable aoc-2025-04
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -286,6 +295,7 @@ executable aoc-2025-05
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -313,6 +323,7 @@ executable aoc-2025-06
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -340,6 +351,7 @@ executable aoc-2025-07
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
@@ -367,6 +379,7 @@ executable aoc-2025-08
     , monoidal-containers
     , mtl
     , parsec
+    , recursion-schemes
     , sized-grid
     , split
     , vector
