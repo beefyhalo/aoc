@@ -29,6 +29,7 @@ dependencies:
   - containers
   - monoidal-containers
   - mtl
+  - recursion-schemes
   - sized-grid
   - vector-space
   - bytestring
