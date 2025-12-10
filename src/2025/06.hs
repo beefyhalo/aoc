@@ -5,7 +5,7 @@
 module Main (main) where
 
 import Control.Applicative (Alternative (many), (<|>))
-import Data.Attoparsec.ByteString.Char8 (Parser, char, decimal, parseOnly, skipSpace)
+import Data.Attoparsec.ByteString.Char8 (char, decimal, parseOnly, skipSpace)
 import qualified Data.ByteString.Char8 as BC
 import Data.Foldable (fold)
 import Data.List (foldl', transpose)
@@ -21,9 +21,7 @@ main = do
   print $ partTwo input
 
 -- >>> solve example
--- >>> partTwo example
 -- 4277556
--- 847058
 solve, partTwo :: [String] -> Int
 solve = sum . map (compute . reverse) . transpose . map words
   where
@@ -31,21 +29,20 @@ solve = sum . map (compute . reverse) . transpose . map words
       ("+" : nums) -> sum $ map read nums
       ("*" : nums) -> product $ map read nums
 
-type Col = Either Int Char
-
+-- >>> partTwo example
+-- 847058
 partTwo = fst . foldl' go (0, []) . concatMap parseCol . reverse . transpose
   where
     go (!total, buffer) = \case
-      Left !num -> (total, num : buffer)
+      Left num -> (total, num : buffer)
       Right '+' -> (total + sum buffer, [])
       Right '*' -> (total + product buffer, [])
 
-    parseCol :: String -> [Col]
+    parseCol :: String -> [Either Int Char]
     parseCol = fold . parseOnly columnParser . BC.pack
+      where
+        columnParser = liftA2 (<>)
+          (fmap Left  <$> (skipSpace *> many decimal))
+          (fmap Right <$> (skipSpace *> many op))
 
-    columnParser :: Parser [Col]
-    columnParser = liftA2 (<>)
-      (fmap Left <$> (skipSpace *> many decimal))
-      (fmap Right <$> (skipSpace *> many operation))
-
-    operation = char '+' <|> char '*'
+        op = char '+' <|> char '*'
