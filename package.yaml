@@ -28,6 +28,7 @@ dependencies:
   - monad-loops
   - containers
   - heap
+  - array
   - monoidal-containers
   - mtl
   - recursion-schemes
