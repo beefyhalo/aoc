@@ -27,9 +27,11 @@ dependencies:
   - parsec
   - monad-loops
   - containers
+  - heap
   - monoidal-containers
   - mtl
   - recursion-schemes
+  - deepseq
   - sized-grid
   - vector-space
   - bytestring
@@ -77,3 +79,5 @@ executables:
     main: src/2025/07.hs
   aoc-2025-08:
     main: src/2025/08.hs
+  aoc-2025-09:
+    main: src/2025/09.hs
