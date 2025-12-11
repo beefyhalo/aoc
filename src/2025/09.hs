@@ -32,7 +32,7 @@ area :: Coord -> Coord -> Int
 area (x1, y1) (x2, y2) = (abs (x2 - x1) + 1) * (abs (y2 - y1) + 1)
 
 -- >>> partTwo example
--- 6
+-- 24
 partTwo :: [Coord] -> Int
 partTwo poly =
   maximum
@@ -45,7 +45,7 @@ partTwo poly =
 
     -- pair up consecutive polygon vertices into horizontal/vertical segments
     edges :: ([HLine], [VLine])
-    edges = partitionEithers $ zipWith edge poly (tail poly)
+    edges = partitionEithers $ zipWith edge poly (tail poly ++ [head poly])
       where
         edge (ax, ay) (bx, by)
           | ax == bx = Right (ax, min ay by, max ay by)
@@ -57,5 +57,5 @@ partTwo poly =
       where
         crossH (_, x1, x2) = (x1 <= ax && ax < x2) || (x1 < bx && bx <= x2)
         crossV (_, y1, y2) = (y1 <= ay && ay < y2) || (y1 < by && by <= y2)
-        hSlice = filter (\(y, _, _) -> y > ay && y <= by) hSorted
-        vSlice = filter (\(x, _, _) -> x > ax && x <= bx) vSorted
+        hSlice = filter (\(y, _, _) -> y > ay && y < by) hSorted
+        vSlice = filter (\(x, _, _) -> x > ax && x < bx) vSorted
