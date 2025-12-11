@@ -1,18 +1,15 @@
-{-# LANGUAGE BangPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 {-# OPTIONS_GHC -Wno-type-defaults #-}
 
 module Main (main) where
 
-import Control.Monad.Loops (unfoldWhileM)
-import Data.Functor.Foldable (apo)
+import Data.Function (on)
 import Data.IntMap.Monoidal.Strict (MonoidalIntMap)
 import qualified Data.IntMap.Monoidal.Strict as M
 import qualified Data.IntSet as S
 import Data.List (foldl', sortOn, unfoldr)
 import Data.List.Split (splitOn)
-import Data.Maybe (mapMaybe)
 import Data.Ord (Down (Down))
 import GHC.Arr (listArray, (!))
 import Linear.V3 (V3 (..))
@@ -38,7 +35,7 @@ solve q points = product $ take 3 $ sortOn Down sizes
   where
     n = length points
     pairs = take q $ sortedPairs points
-    start = M.fromList [(i, i) | i <- [1 .. n]]
+    start = M.fromAscList [(i, i) | i <- [1 .. n]]
     final = foldl' (\uf (a, b) -> union uf a b) start pairs
     sizes = componentSizes final
 
@@ -77,12 +74,13 @@ partTwo points = ans
     n = length points
     ary = listArray (1, n) points
     pairs = sortedPairs points
-    start = M.fromList [(i, i) | i <- [1 .. n]]
+    start = (M.fromAscList [(i, i) | i <- [1 .. n]], n, pairs)
 
-    go !comps uf lastEdge ((x, y) : ps)
-      | comps == 1 = (uf, lastEdge)
-      | find uf x /= find uf y = go (comps - 1) (union uf x y) (Just (x, y)) ps
-      | otherwise = go comps uf lastEdge ps
+    -- pick next edge that merges components, stop when comps == 1
+    go (_, 1, _) = Nothing
+    go (uf, comps, ps) = case dropWhile (uncurry ((==) `on` find uf)) ps of
+      (x, y) : rest -> Just ((x, y), (union uf x y, comps - 1, rest))
 
-    (_, Just (a, b)) = go n start Nothing pairs
+    -- build MST edges, stop when fully connected
+    (a, b) = last $ unfoldr go start
     V3 ans _ _ = ary ! a * ary ! b
