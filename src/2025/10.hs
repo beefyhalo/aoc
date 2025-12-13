@@ -1,3 +1,5 @@
+{-# LANGUAGE BangPatterns #-}
+
 module Main (main) where
 
 import Control.Applicative ((<|>))
@@ -11,8 +13,7 @@ import Data.Foldable (Foldable (foldl'))
 import Data.List (subsequences)
 import qualified Data.Map.Strict as M
 import qualified Data.Vector.Storable as V
-import GHC.Float (double2Int)
-import Numeric.LinearAlgebra (Vector, vector)
+import Numeric.LinearAlgebra (Vector)
 
 data Machine = Machine
   { indicator :: [Bool],
@@ -81,33 +82,34 @@ minPressesXOR machine = minimum valid
     subsets = [combo | combo <- subsequences masks, k <- [1 .. length masks], length combo == k]
     valid = [length combo | combo <- subsets, foldl' xor 0 combo == target]
 
-type Vec = Vector Double
+type Vec = Vector Int
 
 -- >>> map minPresses example
 -- [10,12,11]
 minPresses :: Machine -> Int
-minPresses (Machine _ btns joltages) = fst $ go M.empty (vector $ map fromIntegral joltages)
+minPresses (Machine _ btns joltages) = fst $ go M.empty (V.fromList joltages)
   where
-    n = length btns
+    !n = length btns
 
     -- All subsets (parity patterns) of button indices
     subsets :: [[Int]]
-    subsets = map (\x -> filter (testBit x) [0 .. n - 1]) [0 .. 2 ^ n - 1 :: Int]
+    !subsets = map (\x -> filter (testBit x) [0 .. n - 1]) [0 .. 2 ^ n - 1 :: Int]
 
     -- Apply subset to current counters
     apply :: [Int] -> Vec -> Vec
-    apply subset = V.imap (\i vi -> vi - fromIntegral (length [j | j <- subset, i `elem` (btns !! j)]))
+    apply subset = V.imap (\i vi -> vi - length [j | j <- subset, i `elem` (btns !! j)])
 
+    -- Find all subsets where remaining voltages are even, divide by 2 and recurse
     go :: M.Map Vec Int -> Vec -> (Int, M.Map Vec Int)
     go memo v
       | V.all (== 0) v = (0, memo)
       | Just r <- M.lookup v memo = (r, memo)
       | otherwise = (best, M.insert v best finalMemo)
       where
-        subs = [s | s <- subsets, let r = apply s v, V.all (>= 0) r, V.all (even . double2Int) r]
+        subs = [s | s <- subsets, let r = apply s v, V.all (>= 0) r, V.all even r]
         (best, finalMemo) = foldl' process (10000000, memo) subs
         process (bestSoFar, m) s =
-          let half = apply s v / 2
+          let half = V.map (`div` 2) (apply s v)
               (subCost, m') = go m half
               cost = 2 * subCost + length s
            in (min bestSoFar cost, m')
