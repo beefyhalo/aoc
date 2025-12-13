@@ -25,6 +25,7 @@ dependencies:
   - lens
   - comonad
   - parsec
+  - hmatrix
   - monad-loops
   - containers
   - heap
@@ -82,3 +83,5 @@ executables:
     main: src/2025/08.hs
   aoc-2025-09:
     main: src/2025/09.hs
+  aoc-2025-10:
+    main: src/2025/10.hs
