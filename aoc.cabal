@@ -31,7 +31,8 @@ executable aoc-2015-01
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -63,7 +64,8 @@ executable aoc-2024-01
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -95,7 +97,8 @@ executable aoc-2024-02
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -127,7 +130,8 @@ executable aoc-2024-03
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -159,7 +163,8 @@ executable aoc-2024-04
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -191,7 +196,8 @@ executable aoc-2025-01
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -223,7 +229,8 @@ executable aoc-2025-02
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -255,7 +262,8 @@ executable aoc-2025-03
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -287,7 +295,8 @@ executable aoc-2025-04
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -319,7 +328,8 @@ executable aoc-2025-05
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -351,7 +361,8 @@ executable aoc-2025-06
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -383,7 +394,8 @@ executable aoc-2025-07
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -415,7 +427,8 @@ executable aoc-2025-08
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -447,7 +460,8 @@ executable aoc-2025-09
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
@@ -479,7 +493,8 @@ executable aoc-2025-10
       Paths_aoc
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      array
+      MemoTrie
+    , array
     , attoparsec
     , base >=4.7 && <5
     , bytestring
