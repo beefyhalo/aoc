@@ -2,7 +2,6 @@
 
 module Main where
 
-import Control.Arrow ((***))
 import Data.Either (partitionEithers)
 import Data.List (sortOn)
 
@@ -37,12 +36,12 @@ partTwo poly =
     ]
   where
     -- pair up consecutive polygon vertices into horizontal/vertical segments
-    (hSorted, vSorted) = (sortOn fst3 *** sortOn fst3) edges
+    (hSorted, vSorted) = (sortOn fst3 h, sortOn fst3 v)
       where
+        (h, v) = partitionEithers $ zipWith edge poly (tail poly ++ [head poly])
         edge (ax, ay) (bx, by)
           | ax == bx = Right (ax, min ay by, max ay by)
           | otherwise = Left (ay, min ax bx, max ax bx)
-        edges = partitionEithers $ zipWith edge poly (tail poly ++ [head poly])
         fst3 (a, _, _) = a
 
     -- rectangle bounds check
