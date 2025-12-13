@@ -1,29 +1,22 @@
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeApplications #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 module Main where
 
 import Control.Applicative ((<|>))
-import Control.Monad.State.Strict
 import Data.Attoparsec.ByteString.Char8 (Parser, char, decimal, many', many1, parseOnly, sepBy, skipSpace)
-import Data.Bits (Bits (setBit, shiftL, xor, (.|.)))
+import Data.Bits (Bits (setBit, shiftL, testBit, xor, (.|.)))
 import Data.Bool (bool)
 import Data.ByteString.Char8 (ByteString)
 import qualified Data.ByteString.Char8 as B
 import Data.Either (fromRight)
-import Data.Foldable (Foldable (foldMap', foldl'))
-import Data.List (subsequences, unfoldr)
-import qualified Data.List as L
-import qualified Data.Map.Monoidal.Strict as MM
-import qualified Data.Map.Strict as Map
-import Data.Maybe (fromMaybe)
-import Data.Semigroup
-import qualified Data.Sequence as Seq
-import qualified Data.Set as Set
-import qualified Linear.Vector as V
-import Linear hiding (vector)
-import Numeric.LinearAlgebra
+import Data.Foldable (Foldable (foldl'))
+import Data.List (subsequences)
+import qualified Data.Map.Strict as M
+import qualified Data.Vector.Storable as V
+import Numeric.LinearAlgebra (Vector, toList, vector)
 
 data Machine = Machine
   { indicator :: [Bool],
@@ -79,7 +72,7 @@ parse = fromRight (error "failed to parse") . parseOnly machineParser
 solve, partTwo :: [Machine] -> Int
 solve = sum . map minPressesXOR
 -- >>> partTwo example
--- 31
+-- 33
 partTwo = sum . map minPresses
 
 -- >>> map minPressesXOR example
@@ -92,39 +85,39 @@ minPressesXOR machine = minimum valid
     subsets = [combo | combo <- subsequences masks, k <- [1 .. length masks], length combo == k]
     valid = [length combo | combo <- subsets, foldl' xor 0 combo == target]
 
--- >>> map minPresses example
--- [10,11,10]
-minPresses :: Machine -> Int
-minPresses (Machine _ btns target) = search x0 ns
-  where
-    a = buildMatrix btns
-    b = vector $ map fromIntegral target
-    x0 = a <\> b
-    ns = nullspaceBasis a
-
 type Vec = Vector Double
 
-type Mat = Matrix Double
-
-buildMatrix :: [[Int]] -> Mat
-buildMatrix btns =
-  fromColumns [vector [bool 0 1 (i `elem` btn) | i <- [0 .. n]] | btn <- btns]
+-- >>> map minPresses example
+-- [10,12,11]
+minPresses :: Machine -> Int
+minPresses (Machine _ btns joltages) = fst $ go M.empty (V.fromList $ map fromIntegral joltages)
   where
-    n = maximum (concat btns)
+    nBtns = length btns
+    inf = 10 ^ 9 :: Int
 
-nullspaceBasis :: Mat -> [Vec]
-nullspaceBasis a = drop (rank a) (toColumns (tr vt))
-  where
-    (_, _, vt) = svd a
+    -- Pre-generate all subsets (parity patterns) of button indices
+    allSubsets :: [[Int]]
+    allSubsets = map (\x -> filter (testBit x) [0 .. nBtns - 1]) [0 .. (2 ^ nBtns - 1) :: Int]
 
-search :: Vec -> [Vec] -> Int
-search x0 basis = go (ceiling (sumElements x0)) x0
-  where
-    go best cur
-      | minElement cur < 0 = best
-      | sumElements cur >= fromIntegral best = best
+    -- Apply subset to current counters
+    applySubset :: [Int] -> Vec -> Vec
+    applySubset subset =
+      V.imap (\i vi -> vi - fromIntegral (length [j | j <- subset, i `elem` (btns !! j)]))
+
+    -- Recursive memoized function
+    go :: M.Map Vec Int -> Vec -> (Int, M.Map Vec Int)
+    go memo v
+      | V.all (== 0) v = (0, memo)
+      | V.any (< 0) v = (inf, memo)
+      | Just r <- M.lookup v memo = (r, memo)
       | otherwise =
-          foldl'
-            (\b v -> min (go b (cur  + v)) (go b (cur - v)))
-            (floor (sumElements cur))
-            basis
+          let validSubs =
+                [ s | s <- allSubsets, let r = applySubset s v, V.all (>= 0) r, V.all (even @Int . floor) r
+                ]
+              (best, finalMemo) = foldl' process (inf, memo) validSubs
+              process (bestSoFar, m) s =
+                let half = V.map (/ 2) (applySubset s v)
+                    (subCost, m') = go m half
+                    cost = 2 * subCost + length s
+                 in (min bestSoFar cost, m')
+           in (best, M.insert v best finalMemo)
