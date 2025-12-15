@@ -4,15 +4,18 @@ module Main (main) where
 
 import Control.Applicative ((<|>))
 import Data.Attoparsec.ByteString.Char8 (Parser, char, decimal, many', many1, parseOnly, sepBy, skipSpace)
-import Data.Bits (Bits (setBit, shiftL, testBit, xor, (.|.)))
+import Data.Bits (Bits (..))
 import Data.Bool (bool)
 import Data.ByteString.Char8 (ByteString)
 import qualified Data.ByteString.Char8 as B
 import Data.Either (fromRight)
 import Data.Foldable (Foldable (foldl'))
+import Data.IntMap.Strict (IntMap)
+import qualified Data.IntMap.Strict as IM
 import Data.List (subsequences)
 import qualified Data.Map.Strict as M
 import qualified Data.Vector.Storable as V
+import Debug.Trace
 import Numeric.LinearAlgebra (Vector)
 
 data Machine = Machine
@@ -89,15 +92,23 @@ type Vec = Vector Int
 minPresses :: Machine -> Int
 minPresses (Machine _ btns joltages) = fst $ go M.empty (V.fromList joltages)
   where
-    !n = length btns
+    n = 1 + maximum (concat btns)
 
-    -- All subsets (parity patterns) of button indices
-    subsets :: [[Int]]
-    !subsets = map (\x -> filter (testBit x) [0 .. n - 1]) [0 .. 2 ^ n - 1 :: Int]
+    -- For each counter, a bitmask of which buttons affect it
+    counterMasks :: Vec
+    counterMasks = V.generate n $ \i -> foldl' setBit 0 [b | (b, bs) <- zip [0 ..] btns, i `elem` bs]
 
-    -- Apply subset to current counters
-    apply :: [Int] -> Vec -> Vec
-    apply subset = V.imap (\i vi -> vi - length [j | j <- subset, i `elem` (btns !! j)])
+    -- Pre-group subsets by parity signature
+    parityGroups :: IntMap [Int]
+    parityGroups = IM.fromListWith (++) [(sig s, [s]) | s <- [0 .. 1 `shiftL` length btns - 1]]
+      where
+        sig s = foldl' (\acc i -> parityKey acc i (popCount (s .&. counterMasks V.! i))) 0 [0 .. n - 1]
+
+    parityKey acc i vi = if odd vi then setBit acc i else acc
+
+    -- Apply a subset to a vector
+    apply :: Int -> Vec -> Vec
+    apply s = V.imap $ \i -> subtract (popCount (s .&. counterMasks V.! i))
 
     -- Find all subsets where remaining voltages are even, divide by 2 and recurse
     go :: M.Map Vec Int -> Vec -> (Int, M.Map Vec Int)
@@ -106,10 +117,15 @@ minPresses (Machine _ btns joltages) = fst $ go M.empty (V.fromList joltages)
       | Just r <- M.lookup v memo = (r, memo)
       | otherwise = (best, M.insert v best finalMemo)
       where
-        subs = [s | s <- subsets, let r = apply s v, V.all (>= 0) r, V.all even r]
-        (best, finalMemo) = foldl' process (10000000, memo) subs
-        process (bestSoFar, m) s =
-          let half = V.map (`div` 2) (apply s v)
-              (subCost, m') = go m half
-              cost = 2 * subCost + length s
-           in (min bestSoFar cost, m')
+        key = V.ifoldl' parityKey 0 v
+        subs = IM.findWithDefault [] key parityGroups
+        (best, finalMemo) = foldl' step (10000000, memo) subs
+
+        step (!bestSoFar, m) s
+          | V.any (< 0) r = (bestSoFar, m)
+          | otherwise = (min bestSoFar cost, m')
+          where
+            r = apply s v
+            half = V.map (`div` 2) r
+            (subCost, m') = go m half
+            cost = 2 * subCost + popCount s
