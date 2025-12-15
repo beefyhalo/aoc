@@ -15,7 +15,6 @@ import qualified Data.IntMap.Strict as IM
 import Data.List (subsequences)
 import qualified Data.Map.Strict as M
 import qualified Data.Vector.Storable as V
-import Debug.Trace
 import Numeric.LinearAlgebra (Vector)
 
 data Machine = Machine
@@ -38,7 +37,7 @@ indicatorMask (Machine i _ _) = foldr (\b acc -> (acc `shiftL` 1) .|. bool 0 1 b
 
 main :: IO ()
 main = do
-  input <- map Main.parse . B.lines <$> B.readFile "input/2025/10.txt"
+  input <- map parse . B.lines <$> B.readFile "input/2025/10.txt"
   print $ solve input
   print $ partTwo input
 
