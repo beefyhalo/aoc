@@ -163,6 +163,41 @@ executable aoc-2015-04
     , vector-space
   default-language: Haskell2010
 
+executable aoc-2015-05
+  main-is: src/2015/05.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptonite
+    , deepseq
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , memory
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , parsec
+    , recursion-schemes
+    , sized-grid
+    , split
+    , vector
+    , vector-algorithms
+    , vector-space
+  default-language: Haskell2010
+
 executable aoc-2024-01
   main-is: src/2024/01.hs
   other-modules:
