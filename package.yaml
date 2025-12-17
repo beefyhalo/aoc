@@ -28,6 +28,8 @@ dependencies:
   - hmatrix
   - MemoTrie
   - monad-loops
+  - cryptonite
+  - memory
   - containers
   - heap
   - array
@@ -62,6 +64,8 @@ executables:
     main: src/2015/02.hs
   aoc-2015-03:
     main: src/2015/03.hs
+  aoc-2015-04:
+    main: src/2015/04.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:
