@@ -28,5 +28,5 @@ move (x, y) c
 partTwo = S.size . S.fromList . concat . scanl step [(0, 0), (0, 0)] . zip [0 ..]
   where
     step [santa, robo] (i, c)
-      | even i = [move santa c, robo] -- Santa moves
-      | otherwise = [santa, move robo c] -- Robo-Santa moves
+      | even i = [move santa c, robo]
+      | otherwise = [santa, move robo c]
