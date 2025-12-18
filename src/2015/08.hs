@@ -9,15 +9,16 @@ main :: IO ()
 main = do
   input <- lines <$> readFile "input/2015/08.txt"
   print $ solve input
+  print $ partTwo input
 
-solve :: [String] -> Int
-solve input = codeLen - memLen
-  where
-    codeLen = sum (map length input)
-    memLen = sum (map memLength input)
+-- >>> solve example
+-- 12
+solve, partTwo :: [String] -> Int
+solve = sum . map (\s -> length s - memLength s)
+-- >>> partTwo example
+-- 19
+partTwo = sum . map (\s -> length (encode s) - length s)
 
--- >>> map memLength example
--- [0,3,7,1]
 memLength :: String -> Int
 memLength = \case
   [] -> 0
@@ -25,3 +26,10 @@ memLength = \case
   ('\\' : 'x' : _ : _ : xs) -> 1 + memLength xs
   ('\\' : _ : xs) -> 1 + memLength xs
   (_ : xs) -> 1 + memLength xs
+
+encode :: String -> String
+encode s = "\"" ++ concatMap esc s ++ "\""
+  where
+    esc '"' = "\\\""
+    esc '\\' = "\\\\"
+    esc c = [c]
