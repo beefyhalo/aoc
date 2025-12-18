@@ -16,7 +16,6 @@ main = do
 solve, partTwo :: [String] -> Int
 solve = sum . map (\s -> length s - memLength s)
 -- >>> partTwo example
--- 19
 partTwo = sum . map (\s -> length (encode s) - length s)
 
 memLength :: String -> Int
