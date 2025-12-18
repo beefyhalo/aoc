@@ -25,6 +25,9 @@ type Pos = (Int, Int)
 data Op = On Pos Pos | Off Pos Pos | Toggle Pos Pos
   deriving (Show)
 
+-- $setup
+-- >>> example = [On (0,0) (999,999), Off (499,499) (500,500), Toggle (0,0) (999,999)]
+
 main :: IO ()
 main = do
   input <- map parse . lines <$> readFile "input/2015/06.txt"
@@ -41,8 +44,8 @@ parse s
     parseAs f r = let [p1, p2] = map parseCoord $ splitOn " through " r in f p1 p2
     parseCoord str = let (x, _ : y) = break (== ',') str in (read x, read y)
 
--- >>> solve [On (0,0) (999,999), Off (499,499) (500,500)]
--- 999996
+-- >>> solve example
+-- 4
 solve, partTwo :: [Op] -> Int
 solve ops = runST $ do
   g <- MV.replicate (size * rowWords) 0
@@ -69,7 +72,7 @@ partTwo ops = runST $ do
 applyBright :: MV.MVector s Int -> Op -> ST s ()
 applyBright g = \case
   On p1 p2 -> opIntRange (+ 1) p1 p2
-  Off p1 p2 -> opIntRange (\v -> max 0 (v - 1)) p1 p2
+  Off p1 p2 -> opIntRange (max 0 . subtract 1) p1 p2
   Toggle p1 p2 -> opIntRange (+ 2) p1 p2
   where
     opIntRange f (x1, y1) (x2, y2) =
