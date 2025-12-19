@@ -1,15 +1,18 @@
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 module Main (main) where
 
-import Control.Monad.State.Strict (State, evalState, gets, modify)
+import Control.Comonad.Trans.Cofree (CofreeF ((:<)))
+import Control.Monad.State.Strict (MonadState (get), State, evalState, gets, modify)
 import Control.Monad.Trans.Free (FreeF (..))
 import Data.Containers.ListUtils (nubOrd)
 import Data.Fix (refold, refoldM)
 import Data.List (delete, permutations, sortOn)
 import Data.List.Split (splitOn)
 import qualified Data.Map.Strict as M
+import qualified Data.Set as S
 
 type City = String
 
@@ -27,6 +30,10 @@ main = do
 
   print $ solve2 input
   print $ partTwo2 input
+
+  print $ solve3 input
+
+-- print $ partTwo3 input
 
 parse :: String -> [((City, City), Distance)]
 parse s = [((c1, c2), read d), ((c2, c1), read d)]
@@ -92,3 +99,25 @@ partTwo2 dist = refold algMax (expand dist) (mkSeed dist)
     algMax = \case
       Pure d -> d
       Free dists -> maximum dists
+
+-- Now Held–Karp DP
+
+-- >>> solve3 example
+-- 605
+solve3 :: M.Map (City, City) Distance -> Distance
+solve3 dists = evalState (refoldM alg coalg (let (s : rest) = cities dists in (s, rest))) M.empty
+  where
+    alg (_ :< Pure suf) = pure suf
+    alg (key@(cur, remSet) :< Free branches) = do
+      let res = minimum $ zipWith (\c suf -> dists M.! (cur, c) + suf) (S.toList remSet) branches
+      modify (M.insert key res)
+      pure res
+
+    coalg (cur, rem) = do
+      cache <- get
+      let key = (cur, S.fromList rem)
+      pure $
+        key :< case M.lookup key cache of
+          Just suf -> Pure suf
+          Nothing | null rem -> Pure 0
+          Nothing -> Free [(c, delete c rem) | c <- rem]
