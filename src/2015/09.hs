@@ -1,10 +1,10 @@
-{-# LANGUAGE DeriveTraversable #-}
 {-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 module Main (main) where
 
 import Control.Monad.State.Strict (State, evalState, gets, modify)
+import Control.Monad.Trans.Free (FreeF (..))
 import Data.Containers.ListUtils (nubOrd)
 import Data.Fix (refold, refoldM)
 import Data.List (delete, permutations, sortOn)
@@ -45,20 +45,22 @@ solve = minimum . routes
 partTwo = maximum . routes
 
 routes :: M.Map (City, City) Distance -> [Distance]
-routes distances = map routeDistance $ permutations cities
+routes dists = map routeDistance $ permutations (cities dists)
   where
-    cities = nubOrd [c | (c1, c2) <- M.keys distances, c <- [c1, c2]]
-    routeDistance (x : y : xs) = distances M.! (x, y) + routeDistance (y : xs)
+    routeDistance (x : y : xs) = dists M.! (x, y) + routeDistance (y : xs)
     routeDistance _ = 0
+
+cities :: M.Map (City, City) Distance -> [City]
+cities dists = nubOrd [c | (a, b) <- M.keys dists, c <- [a, b]]
 
 -- Alternative solution using structural recursion. Fun!
 
-data TSPF a = Done Distance | Branch [a] deriving (Functor, Foldable, Traversable)
+type TSPF = FreeF [] Distance
 
 type Seed = (Maybe City, [City], Distance)
 
 mkSeed :: M.Map (City, City) Distance -> Seed
-mkSeed dist = (Nothing, nubOrd [c | (a, b) <- M.keys dist, c <- [a, b]], 0)
+mkSeed dist = (Nothing, cities dist, 0)
 
 -- >>> solve2 example
 -- 605
@@ -67,26 +69,26 @@ solve2 dist = evalState (refoldM algMin coalgMin (mkSeed dist)) maxBound
   where
     algMin :: TSPF Distance -> State Distance Distance
     algMin = \case
-      Done d -> d <$ modify (min d)
-      Branch dists -> pure $ minimum dists
+      Pure d -> d <$ modify (min d)
+      Free dists -> pure $ minimum dists
 
     coalgMin :: Seed -> State Distance (TSPF Seed)
     coalgMin seed@(_, _, d) = gets $ \case
       best
-        | d >= best -> Done maxBound
+        | d >= best -> Pure maxBound
         | otherwise -> expand dist seed
 
 expand :: M.Map (City, City) Distance -> Seed -> TSPF Seed
 expand dist = \case
   -- Virtual root
-  (Nothing, allCities, _) -> Branch [(Just c, delete c allCities, 0) | c <- allCities]
-  (Just _, [], d) -> Done d
-  (Just cur, cs, d) -> Branch $ sortOn (\(_, _, c) -> c) [(Just c, delete c cs, d + dist M.! (cur, c)) | c <- cs]
+  (Nothing, allCities, _) -> Free [(Just c, delete c allCities, 0) | c <- allCities]
+  (Just _, [], d) -> Pure d
+  (Just cur, cs, d) -> Free $ sortOn (\(_, _, c) -> c) [(Just c, delete c cs, d + dist M.! (cur, c)) | c <- cs]
 
 -- >>> partTwo2 example
 -- 982
 partTwo2 dist = refold algMax (expand dist) (mkSeed dist)
   where
     algMax = \case
-      Done d -> d
-      Branch dists -> maximum dists
+      Pure d -> d
+      Free dists -> maximum dists
