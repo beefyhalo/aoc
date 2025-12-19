@@ -40,7 +40,9 @@ executable aoc-2015-01
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -75,7 +77,9 @@ executable aoc-2015-02
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -110,7 +114,9 @@ executable aoc-2015-03
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -145,7 +151,9 @@ executable aoc-2015-04
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -180,7 +188,9 @@ executable aoc-2015-05
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -215,7 +225,9 @@ executable aoc-2015-06
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -250,7 +262,9 @@ executable aoc-2015-07
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -285,7 +299,9 @@ executable aoc-2015-08
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -320,7 +336,9 @@ executable aoc-2015-09
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -355,7 +373,9 @@ executable aoc-2024-01
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -390,7 +410,9 @@ executable aoc-2024-02
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -425,7 +447,9 @@ executable aoc-2024-03
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -460,7 +484,9 @@ executable aoc-2024-04
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -495,7 +521,9 @@ executable aoc-2025-01
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -530,7 +558,9 @@ executable aoc-2025-02
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -565,7 +595,9 @@ executable aoc-2025-03
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -600,7 +632,9 @@ executable aoc-2025-04
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -635,7 +669,9 @@ executable aoc-2025-05
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -670,7 +706,9 @@ executable aoc-2025-06
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -705,7 +743,9 @@ executable aoc-2025-07
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -740,7 +780,9 @@ executable aoc-2025-08
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -775,7 +817,9 @@ executable aoc-2025-09
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -810,7 +854,9 @@ executable aoc-2025-10
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -845,7 +891,9 @@ executable aoc-2025-11
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens
@@ -880,7 +928,9 @@ executable aoc-2025-12
     , constraints
     , containers
     , cryptonite
+    , data-fix
     , deepseq
+    , free
     , heap
     , hmatrix
     , lens

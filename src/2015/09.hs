@@ -5,7 +5,11 @@ module Main (main) where
 import Data.Containers.ListUtils (nubOrd)
 import Data.List (permutations)
 import Data.List.Split (splitOn)
-import qualified Data.Map.Lazy as M
+import qualified Data.Map.Strict as M
+
+type City = String
+
+type Distance = Int
 
 -- $setup
 -- >>> input = "London to Dublin = 464\nLondon to Belfast = 518\nDublin to Belfast = 141"
@@ -16,10 +20,6 @@ main = do
   input <- M.fromList . concatMap parse . lines <$> readFile "input/2015/09.txt"
   print $ solve input
   print $ partTwo input
-
-type City = String
-
-type Distance = Int
 
 parse :: String -> [((City, City), Distance)]
 parse s = [((c1, c2), read d), ((c2, c1), read d)]
@@ -38,7 +38,6 @@ partTwo = maximum . routes
 routes :: M.Map (City, City) Distance -> [Distance]
 routes distances = map routeDistance $ permutations cities
   where
-    cities = nubOrd $ concatMap (\(c1, c2) -> [c1, c2]) (M.keys distances)
+    cities = nubOrd [c | (c1, c2) <- M.keys distances, c <- [c1, c2]]
     routeDistance (x : y : xs) = distances M.! (x, y) + routeDistance (y : xs)
-    routeDistance [_] = 0
-    routeDistance [] = 0
+    routeDistance _ = 0

@@ -32,6 +32,8 @@ dependencies:
   - memory
   - containers
   - heap
+  - free
+  - data-fix
   - array
   - monoidal-containers
   - mtl
