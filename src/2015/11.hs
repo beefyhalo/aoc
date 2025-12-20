@@ -1,9 +1,6 @@
-{-# LANGUAGE LambdaCase #-}
-{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
-
 module Main (main) where
 
-import Data.List (group, tails)
+import Data.List (group)
 
 -- $setup
 -- >>> example = ["hijklmmn", "abbceffg", "abbcegjk", "abcdefgh", "ghijklmn"]
@@ -29,8 +26,8 @@ succPwd = snd . foldr step (True, [])
       | otherwise = (False, succ c : acc)
 
 valid :: String -> Bool
-valid s = straight s && noConfusing s && pairs s
+valid s = straight && noConfusing && pairs
   where
-    straight = any ((\case [a, b, c] -> succ a == b && succ b == c; _ -> False) . take 3) . tails
-    noConfusing = all (`notElem` "iol")
-    pairs = (>= 2) . length . filter ((>= 2) . length) . group
+    straight = or $ zipWith3 (\a b c -> succ a == b && succ b == c) s (tail s) (drop 2 s)
+    noConfusing = all (`notElem` "iol") s
+    pairs = length (filter ((>= 2) . length) (group s)) >= 2
