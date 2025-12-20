@@ -32,6 +32,7 @@ executable aoc-2015-01
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -54,8 +55,10 @@ executable aoc-2015-01
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -70,6 +73,7 @@ executable aoc-2015-02
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -92,8 +96,10 @@ executable aoc-2015-02
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -108,6 +114,7 @@ executable aoc-2015-03
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -130,8 +137,10 @@ executable aoc-2015-03
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -146,6 +155,7 @@ executable aoc-2015-04
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -168,8 +178,10 @@ executable aoc-2015-04
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -184,6 +196,7 @@ executable aoc-2015-05
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -206,8 +219,10 @@ executable aoc-2015-05
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -222,6 +237,7 @@ executable aoc-2015-06
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -244,8 +260,10 @@ executable aoc-2015-06
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -260,6 +278,7 @@ executable aoc-2015-07
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -282,8 +301,10 @@ executable aoc-2015-07
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -298,6 +319,7 @@ executable aoc-2015-08
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -320,8 +342,10 @@ executable aoc-2015-08
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -336,6 +360,7 @@ executable aoc-2015-09
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -358,8 +383,10 @@ executable aoc-2015-09
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -374,6 +401,7 @@ executable aoc-2015-10
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -396,8 +424,10 @@ executable aoc-2015-10
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -412,6 +442,7 @@ executable aoc-2015-11
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -434,8 +465,51 @@ executable aoc-2015-11
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
+    , vector
+    , vector-algorithms
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2015-12
+  main-is: src/2015/12.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , aeson
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bitvec
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptonite
+    , data-fix
+    , deepseq
+    , free
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , memory
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , parsec
+    , recursion-schemes
+    , scientific
+    , sized-grid
+    , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -450,6 +524,7 @@ executable aoc-2024-01
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -472,8 +547,10 @@ executable aoc-2024-01
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -488,6 +565,7 @@ executable aoc-2024-02
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -510,8 +588,10 @@ executable aoc-2024-02
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -526,6 +606,7 @@ executable aoc-2024-03
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -548,8 +629,10 @@ executable aoc-2024-03
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -564,6 +647,7 @@ executable aoc-2024-04
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -586,8 +670,10 @@ executable aoc-2024-04
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -602,6 +688,7 @@ executable aoc-2025-01
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -624,8 +711,10 @@ executable aoc-2025-01
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -640,6 +729,7 @@ executable aoc-2025-02
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -662,8 +752,10 @@ executable aoc-2025-02
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -678,6 +770,7 @@ executable aoc-2025-03
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -700,8 +793,10 @@ executable aoc-2025-03
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -716,6 +811,7 @@ executable aoc-2025-04
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -738,8 +834,10 @@ executable aoc-2025-04
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -754,6 +852,7 @@ executable aoc-2025-05
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -776,8 +875,10 @@ executable aoc-2025-05
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -792,6 +893,7 @@ executable aoc-2025-06
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -814,8 +916,10 @@ executable aoc-2025-06
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -830,6 +934,7 @@ executable aoc-2025-07
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -852,8 +957,10 @@ executable aoc-2025-07
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -868,6 +975,7 @@ executable aoc-2025-08
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -890,8 +998,10 @@ executable aoc-2025-08
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -906,6 +1016,7 @@ executable aoc-2025-09
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -928,8 +1039,10 @@ executable aoc-2025-09
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -944,6 +1057,7 @@ executable aoc-2025-10
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -966,8 +1080,10 @@ executable aoc-2025-10
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -982,6 +1098,7 @@ executable aoc-2025-11
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1004,8 +1121,10 @@ executable aoc-2025-11
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space
@@ -1020,6 +1139,7 @@ executable aoc-2025-12
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , aeson
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1042,8 +1162,10 @@ executable aoc-2025-12
     , mtl
     , parsec
     , recursion-schemes
+    , scientific
     , sized-grid
     , split
+    , uniplate
     , vector
     , vector-algorithms
     , vector-space

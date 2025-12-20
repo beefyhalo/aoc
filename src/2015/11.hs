@@ -10,10 +10,10 @@ main = do
   input <- readFile "input/2015/11.txt"
   let res = solve input
   putStrLn res
-  putStrLn $ solve (succPwd res)
+  putStrLn $ solve res
 
 solve :: String -> String
-solve = until valid succPwd
+solve = until valid succPwd . succPwd
 
 -- >>> map succPwd example
 -- ["hijklmmo","abbceffh","abbcegjl","abcdefgi","ghijklmo"]
