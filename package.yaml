@@ -21,7 +21,10 @@ description: Please see the README on GitHub at <https://github.com/githubuser/a
 
 dependencies:
   - base >= 4.7 && < 5
+  - aeson
   - attoparsec
+  - scientific
+  - uniplate
   - lens
   - comonad
   - parsec
@@ -83,6 +86,8 @@ executables:
     main: src/2015/10.hs
   aoc-2015-11:
     main: src/2015/11.hs
+  aoc-2015-12:
+    main: src/2015/12.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:

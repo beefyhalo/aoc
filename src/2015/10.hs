@@ -14,6 +14,8 @@ main = do
   print $ solve 50 input
 
 solve :: Int -> String -> Int
+-- solve n = length . (!! n) . iterate step
+-- solve n = length . last . take (n + 1) . iterate step
 solve n = length . appEndo (stimes n (Endo step))
 
 -- >>> map step example
