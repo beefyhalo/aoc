@@ -4,7 +4,7 @@
 module Main (main) where
 
 import Data.Char (isDigit)
-import Data.List (transpose)
+import Data.List (foldl1', transpose)
 
 data Reindeer = Reindeer {speed, flyTime, restTime :: Int}
 
@@ -33,7 +33,7 @@ reindeerStream (Reindeer v f r) = scanl1 (+) $ cycle (replicate f v ++ replicate
 -- >>> partTwo 1000 example
 -- 689
 partTwo :: Int -> [Reindeer] -> Int
-partTwo n rs = maximum $ foldl1 (zipWith (+)) $ map leaderMask perSecondDists
+partTwo n rs = maximum $ foldl1' (zipWith (+)) $ map leaderMask perSecondDists
   where
     perSecondDists = take n $ transpose $ map reindeerStream rs
 
