@@ -4,6 +4,7 @@ module Main (main) where
 
 import Data.Char (isDigit)
 import Data.Coerce (coerce)
+import Data.Foldable (fold)
 import Data.List (partition, subsequences)
 import Data.Monoid (Sum (..))
 
@@ -34,12 +35,10 @@ games boss = partition (\(_, d, a) -> playerWins (100, d, a) boss) setups
     allLoadouts = [w : a : rs | w <- weapons, a <- armors, rs <- subsequences rings, length rs <= 2]
 
 playerWins :: Player -> Player -> Bool
-playerWins (pHp, pD, pA) (bHp, bD, bA) = turnsToKill bHp pHit <= turnsToKill pHp bHit
+playerWins (pHp, pD, pA) (bHp, bD, bA) = turns pHp (atk bD pA) > turns bHp (atk pD bA)
   where
-    pHit = damagePerHit pD bA
-    bHit = damagePerHit bD pA
-    damagePerHit atk def = max 1 (atk - def)
-    turnsToKill x dmg = (x + dmg - 1) `div` dmg
+    atk atkVal defVal = max 1 (atkVal - defVal)
+    turns hp dmg = (hp + dmg - 1) `div` dmg
 
 -- >>> score [(1, 1, 1), (1, 2, 3)]
 -- (2,3,4)
