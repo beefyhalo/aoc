@@ -32,6 +32,7 @@ executable aoc-2015-01
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -49,11 +50,13 @@ executable aoc-2015-01
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -73,6 +76,7 @@ executable aoc-2015-02
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -90,11 +94,13 @@ executable aoc-2015-02
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -114,6 +120,7 @@ executable aoc-2015-03
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -131,11 +138,13 @@ executable aoc-2015-03
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -155,6 +164,7 @@ executable aoc-2015-04
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -172,11 +182,13 @@ executable aoc-2015-04
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -196,6 +208,7 @@ executable aoc-2015-05
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -213,11 +226,13 @@ executable aoc-2015-05
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -237,6 +252,7 @@ executable aoc-2015-06
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -254,11 +270,13 @@ executable aoc-2015-06
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -278,6 +296,7 @@ executable aoc-2015-07
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -295,11 +314,13 @@ executable aoc-2015-07
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -319,6 +340,7 @@ executable aoc-2015-08
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -336,11 +358,13 @@ executable aoc-2015-08
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -360,6 +384,7 @@ executable aoc-2015-09
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -377,11 +402,13 @@ executable aoc-2015-09
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -401,6 +428,7 @@ executable aoc-2015-10
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -418,11 +446,13 @@ executable aoc-2015-10
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -442,6 +472,7 @@ executable aoc-2015-11
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -459,11 +490,13 @@ executable aoc-2015-11
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -483,6 +516,7 @@ executable aoc-2015-12
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -500,11 +534,13 @@ executable aoc-2015-12
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -524,6 +560,7 @@ executable aoc-2015-13
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -541,11 +578,13 @@ executable aoc-2015-13
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -565,6 +604,7 @@ executable aoc-2015-14
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -582,11 +622,13 @@ executable aoc-2015-14
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -606,6 +648,7 @@ executable aoc-2015-15
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -623,11 +666,13 @@ executable aoc-2015-15
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -647,6 +692,7 @@ executable aoc-2015-16
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -664,11 +710,13 @@ executable aoc-2015-16
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -688,6 +736,7 @@ executable aoc-2015-17
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -705,11 +754,101 @@ executable aoc-2015-17
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
+    , recursion-schemes
+    , scientific
+    , sized-grid
+    , split
+    , uniplate
+    , vector
+    , vector-algorithms
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2015-18
+  main-is: src/2015/18.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , adjunctions
+    , aeson
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bitvec
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptonite
+    , data-fix
+    , deepseq
+    , free
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , list-shuffle
+    , memory
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , parsec
+    , random
+    , recursion-schemes
+    , scientific
+    , sized-grid
+    , split
+    , uniplate
+    , vector
+    , vector-algorithms
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2015-19
+  main-is: src/2015/19.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , adjunctions
+    , aeson
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bitvec
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptonite
+    , data-fix
+    , deepseq
+    , free
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , list-shuffle
+    , memory
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -729,6 +868,7 @@ executable aoc-2024-01
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -746,11 +886,13 @@ executable aoc-2024-01
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -770,6 +912,7 @@ executable aoc-2024-02
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -787,11 +930,13 @@ executable aoc-2024-02
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -811,6 +956,7 @@ executable aoc-2024-03
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -828,11 +974,13 @@ executable aoc-2024-03
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -852,6 +1000,7 @@ executable aoc-2024-04
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -869,11 +1018,13 @@ executable aoc-2024-04
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -893,6 +1044,7 @@ executable aoc-2025-01
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -910,11 +1062,13 @@ executable aoc-2025-01
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -934,6 +1088,7 @@ executable aoc-2025-02
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -951,11 +1106,13 @@ executable aoc-2025-02
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -975,6 +1132,7 @@ executable aoc-2025-03
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -992,11 +1150,13 @@ executable aoc-2025-03
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -1016,6 +1176,7 @@ executable aoc-2025-04
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -1033,11 +1194,13 @@ executable aoc-2025-04
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -1057,6 +1220,7 @@ executable aoc-2025-05
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -1074,11 +1238,13 @@ executable aoc-2025-05
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -1098,6 +1264,7 @@ executable aoc-2025-06
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -1115,11 +1282,13 @@ executable aoc-2025-06
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -1139,6 +1308,7 @@ executable aoc-2025-07
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -1156,11 +1326,13 @@ executable aoc-2025-07
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -1180,6 +1352,7 @@ executable aoc-2025-08
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -1197,11 +1370,13 @@ executable aoc-2025-08
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -1221,6 +1396,7 @@ executable aoc-2025-09
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -1238,11 +1414,13 @@ executable aoc-2025-09
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -1262,6 +1440,7 @@ executable aoc-2025-10
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -1279,11 +1458,13 @@ executable aoc-2025-10
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -1303,6 +1484,7 @@ executable aoc-2025-11
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -1320,11 +1502,13 @@ executable aoc-2025-11
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid
@@ -1344,6 +1528,7 @@ executable aoc-2025-12
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       MemoTrie
+    , adjunctions
     , aeson
     , array
     , attoparsec
@@ -1361,11 +1546,13 @@ executable aoc-2025-12
     , hmatrix
     , lens
     , linear
+    , list-shuffle
     , memory
     , monad-loops
     , monoidal-containers
     , mtl
     , parsec
+    , random
     , recursion-schemes
     , scientific
     , sized-grid

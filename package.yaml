@@ -23,6 +23,7 @@ dependencies:
   - base >= 4.7 && < 5
   - aeson
   - attoparsec
+  - adjunctions
   - scientific
   - uniplate
   - lens
@@ -51,6 +52,8 @@ dependencies:
   - linear
   - vector-algorithms
   - split
+  - random
+  - list-shuffle
 
 ghc-options:
   - -Wall
@@ -98,6 +101,10 @@ executables:
     main: src/2015/16.hs
   aoc-2015-17:
     main: src/2015/17.hs
+  aoc-2015-18:
+    main: src/2015/18.hs
+  aoc-2015-19:
+    main: src/2015/19.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:
