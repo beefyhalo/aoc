@@ -41,7 +41,7 @@ partTwo n = length . filter (== Alive) . toList . (!! n) . iterate (extend stepC
 
 type Rule n = (KnownNat n, 1 <= n) => FocusedGrid '[HardWrap n, HardWrap n] Cell -> Cell
 
-step :: forall n. Rule n
+step :: Rule n
 step fg
   | here == Alive && aliveCount `elem` [2, 3] = Alive
   | here == Dead && aliveCount == 3 = Alive
