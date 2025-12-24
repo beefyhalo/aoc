@@ -1,9 +1,10 @@
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE TupleSections #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 module Main (main) where
 
+import Control.Lens
 import Data.List (unfoldr)
 import qualified Data.List.NonEmpty as NE
 import qualified Data.List.NonEmpty.Zipper as Z
@@ -12,13 +13,9 @@ data Reg = A | B deriving (Eq, Show)
 
 type Regs = (Int, Int)
 
-getR :: Reg -> Regs -> Int
-getR A (a, _) = a
-getR B (_, b) = b
-
-setR :: Reg -> Int -> Regs -> Regs
-setR A v (_, b) = (v, b)
-setR B v (a, _) = (a, v)
+access :: Reg -> Lens' Regs Int
+access A = _1
+access B = _2
 
 data Instr
   = Hlf Reg
@@ -52,31 +49,27 @@ parse = Z.fromNonEmpty . NE.fromList . map parseLine . lines
     parseReg "a" = A
     parseReg "b" = B
 
-solve :: Z.Zipper Instr -> Regs -> Regs
-solve z r = last $ unfoldr (fmap (\next -> (snd next, next)) . uncurry step) (z, r)
-
--- solve = curry $ last . unfoldr (fmap (\next -> (snd next, next)) . uncurry step)
-
 -- >>> solve example (0,0)
 -- >>> solve example (1,0)
 -- (1,0)
 -- (6,0)
+solve :: Z.Zipper Instr -> Regs -> Regs
+solve z r = last $ unfoldr (fmap (\next -> (snd next, next)) . uncurry step) (z, r)
+
 step :: Z.Zipper Instr -> Regs -> Maybe (Z.Zipper Instr, Regs)
 step z regs = (,regs') <$> moveOffset offset z
   where
     instr = Z.current z
     regs' = case instr of
-      Hlf r -> setR r (getR r regs `div` 2) regs
-      Tpl r -> setR r (getR r regs * 3) regs
-      Inc r -> setR r (getR r regs + 1) regs
+      Hlf r -> regs & access r %~ (`div` 2)
+      Tpl r -> regs & access r *~ 3
+      Inc r -> regs & access r +~ 1
       _ -> regs
     offset = case instr of
       Jmp o -> o
-      Jie r o | even (getR r regs) -> o
-      Jio r o | getR r regs == 1 -> o
+      Jie r o | even (regs ^. access r) -> o
+      Jio r o | regs ^. access r == 1 -> o
       _ -> 1
-
-moveOffset :: Int -> Z.Zipper a -> Maybe (Z.Zipper a)
-moveOffset n
-  | n > 0 = Z.rightN (fromIntegral n)
-  | otherwise = Z.leftN (fromIntegral (abs n))
+    moveOffset n
+      | n > 0 = Z.rightN (fromIntegral n)
+      | otherwise = Z.leftN (fromIntegral (abs n))
