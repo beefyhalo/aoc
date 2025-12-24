@@ -24,9 +24,9 @@ main = do
   print $ maximum loses
 
 parse :: String -> Player
-parse s = (read hp, read d, read a)
+parse s = (hp, d, a)
   where
-    [hp, d, a] = filter (all isDigit) (words s)
+    [hp, d, a] = map read $ filter (all isDigit) (words s)
 
 games :: Player -> ([Item], [Item])
 games boss = partition (\(_, d, a) -> playerWins (100, d, a) boss) setups

@@ -3,7 +3,6 @@
 module Main (main) where
 
 import qualified Data.IntMap.Strict as M
-import Data.List (foldl')
 
 -- $setup
 -- >>> example = [20,15,10,5,5]

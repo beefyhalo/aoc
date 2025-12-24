@@ -1,5 +1,4 @@
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
@@ -16,9 +15,7 @@ import Data.Foldable (for_)
 import qualified Data.Heap as H
 import qualified Data.Set as S
 
--- Types
-data Spell = MagicMissile | Drain | Shield | Poison | Recharge
-  deriving (Eq, Ord, Enum, Bounded, Show)
+data Spell = MagicMissile | Drain | Shield | Poison | Recharge deriving (Eq, Ord, Enum, Bounded, Show)
 
 data Player = Player {_hp, _mana, _armor :: Int} deriving (Eq, Show, Ord)
 
@@ -65,9 +62,9 @@ main = do
   print $ solve input {_hardMode = True}
 
 parse :: String -> GameState
-parse s = GameState (Player 50 500 0) (Boss (read bHp) (read bDmg)) [] 0 False
+parse s = GameState (Player 50 500 0) (Boss bHp bDmg) [] 0 False
   where
-    [bHp, bDmg] = filter (all isDigit) (words s)
+    [bHp, bDmg] = map read $ filter (all isDigit) (words s)
 
 -- >>> solve example
 -- 900
@@ -83,7 +80,7 @@ solve start = go (H.singleton (0, start)) S.empty
       where
         newStates = execStateT step st
         st' = st & manaSpent .~ 0 & player . mana .~ 0
-        heap' = foldr (\s h -> H.insert (_manaSpent s, s) h) rest newStates
+        heap' = foldr (\s -> H.insert (_manaSpent s, s)) rest newStates
         seen' = S.insert st' seen
     go _ _ = error "No solution"
 
@@ -129,13 +126,13 @@ castSpell = do
   case s of
     MagicMissile -> boss . bossHP -= 4
     Drain -> boss . bossHP -= 2 >> player . hp += 2
-    _ -> effects <>:= [(s, spellDuration s)]
+    _ -> effects <|= (s, spellDuration s)
 
 bossAttack :: Turn ()
 bossAttack = do
   dmg <- use (boss . bossDamage)
   arm <- use (player . armor)
-  player . hp -= max 1 (dmg - arm)
+  player . hp -= dmg - arm
 
 guardM :: (Monad m, Alternative m) => m Bool -> m ()
 guardM = (guard =<<)
