@@ -1,10 +1,9 @@
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
+{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 module Main (main) where
 
 import Data.Char (isDigit)
 import Data.Coerce (coerce)
-import Data.Foldable (fold)
 import Data.List (partition, subsequences)
 import Data.Monoid (Sum (..))
 
@@ -25,8 +24,9 @@ main = do
   print $ maximum loses
 
 parse :: String -> Player
-parse s = case filter (all isDigit) (words s) of
-  [hp, d, a] -> (read hp, read d, read a)
+parse s = (read hp, read d, read a)
+  where
+    [hp, d, a] = filter (all isDigit) (words s)
 
 games :: Player -> ([Item], [Item])
 games boss = partition (\(_, d, a) -> playerWins (100, d, a) boss) setups

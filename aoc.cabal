@@ -45,6 +45,7 @@ executable aoc-2015-01
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -89,6 +90,7 @@ executable aoc-2015-02
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -133,6 +135,7 @@ executable aoc-2015-03
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -177,6 +180,7 @@ executable aoc-2015-04
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -221,6 +225,7 @@ executable aoc-2015-05
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -265,6 +270,7 @@ executable aoc-2015-06
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -309,6 +315,7 @@ executable aoc-2015-07
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -353,6 +360,7 @@ executable aoc-2015-08
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -397,6 +405,7 @@ executable aoc-2015-09
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -441,6 +450,7 @@ executable aoc-2015-10
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -485,6 +495,7 @@ executable aoc-2015-11
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -529,6 +540,7 @@ executable aoc-2015-12
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -573,6 +585,7 @@ executable aoc-2015-13
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -617,6 +630,7 @@ executable aoc-2015-14
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -661,6 +675,7 @@ executable aoc-2015-15
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -705,6 +720,7 @@ executable aoc-2015-16
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -749,6 +765,7 @@ executable aoc-2015-17
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -793,6 +810,7 @@ executable aoc-2015-18
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -837,6 +855,7 @@ executable aoc-2015-19
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -881,6 +900,7 @@ executable aoc-2015-20
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -925,6 +945,52 @@ executable aoc-2015-21
     , cryptonite
     , data-fix
     , deepseq
+    , extra
+    , free
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , list-shuffle
+    , memory
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , parsec
+    , random
+    , recursion-schemes
+    , scientific
+    , sized-grid
+    , split
+    , uniplate
+    , vector
+    , vector-algorithms
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2015-22
+  main-is: src/2015/22.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , adjunctions
+    , aeson
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bitvec
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptonite
+    , data-fix
+    , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -969,6 +1035,7 @@ executable aoc-2024-01
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1013,6 +1080,7 @@ executable aoc-2024-02
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1057,6 +1125,7 @@ executable aoc-2024-03
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1101,6 +1170,7 @@ executable aoc-2024-04
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1145,6 +1215,7 @@ executable aoc-2025-01
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1189,6 +1260,7 @@ executable aoc-2025-02
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1233,6 +1305,7 @@ executable aoc-2025-03
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1277,6 +1350,7 @@ executable aoc-2025-04
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1321,6 +1395,7 @@ executable aoc-2025-05
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1365,6 +1440,7 @@ executable aoc-2025-06
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1409,6 +1485,7 @@ executable aoc-2025-07
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1453,6 +1530,7 @@ executable aoc-2025-08
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1497,6 +1575,7 @@ executable aoc-2025-09
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1541,6 +1620,7 @@ executable aoc-2025-10
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1585,6 +1665,7 @@ executable aoc-2025-11
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
@@ -1629,6 +1710,7 @@ executable aoc-2025-12
     , cryptonite
     , data-fix
     , deepseq
+    , extra
     , free
     , heap
     , hmatrix
