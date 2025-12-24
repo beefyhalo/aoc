@@ -56,6 +56,7 @@ executable aoc-2015-01
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -101,6 +102,7 @@ executable aoc-2015-02
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -146,6 +148,7 @@ executable aoc-2015-03
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -191,6 +194,7 @@ executable aoc-2015-04
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -236,6 +240,7 @@ executable aoc-2015-05
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -281,6 +286,7 @@ executable aoc-2015-06
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -326,6 +332,7 @@ executable aoc-2015-07
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -371,6 +378,7 @@ executable aoc-2015-08
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -416,6 +424,7 @@ executable aoc-2015-09
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -461,6 +470,7 @@ executable aoc-2015-10
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -506,6 +516,7 @@ executable aoc-2015-11
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -551,6 +562,7 @@ executable aoc-2015-12
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -596,6 +608,7 @@ executable aoc-2015-13
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -641,6 +654,7 @@ executable aoc-2015-14
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -686,6 +700,7 @@ executable aoc-2015-15
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -731,6 +746,7 @@ executable aoc-2015-16
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -776,6 +792,7 @@ executable aoc-2015-17
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -821,6 +838,7 @@ executable aoc-2015-18
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -866,6 +884,7 @@ executable aoc-2015-19
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -911,6 +930,7 @@ executable aoc-2015-20
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -956,6 +976,7 @@ executable aoc-2015-21
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1001,6 +1022,53 @@ executable aoc-2015-22
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
+    , parsec
+    , random
+    , recursion-schemes
+    , scientific
+    , sized-grid
+    , split
+    , uniplate
+    , vector
+    , vector-algorithms
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2015-23
+  main-is: src/2015/23.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , adjunctions
+    , aeson
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bitvec
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptonite
+    , data-fix
+    , deepseq
+    , extra
+    , free
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , list-shuffle
+    , memory
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1046,6 +1114,7 @@ executable aoc-2024-01
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1091,6 +1160,7 @@ executable aoc-2024-02
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1136,6 +1206,7 @@ executable aoc-2024-03
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1181,6 +1252,7 @@ executable aoc-2024-04
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1226,6 +1298,7 @@ executable aoc-2025-01
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1271,6 +1344,7 @@ executable aoc-2025-02
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1316,6 +1390,7 @@ executable aoc-2025-03
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1361,6 +1436,7 @@ executable aoc-2025-04
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1406,6 +1482,7 @@ executable aoc-2025-05
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1451,6 +1528,7 @@ executable aoc-2025-06
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1496,6 +1574,7 @@ executable aoc-2025-07
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1541,6 +1620,7 @@ executable aoc-2025-08
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1586,6 +1666,7 @@ executable aoc-2025-09
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1631,6 +1712,7 @@ executable aoc-2025-10
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1676,6 +1758,7 @@ executable aoc-2025-11
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
@@ -1721,6 +1804,7 @@ executable aoc-2025-12
     , monad-loops
     , monoidal-containers
     , mtl
+    , nonempty-zipper
     , parsec
     , random
     , recursion-schemes
