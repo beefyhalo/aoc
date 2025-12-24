@@ -115,6 +115,8 @@ executables:
     main: src/2015/22.hs
   aoc-2015-23:
     main: src/2015/23.hs
+  aoc-2015-24:
+    main: src/2015/24.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:
