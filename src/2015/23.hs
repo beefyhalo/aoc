@@ -70,6 +70,8 @@ step z regs = (,regs') <$> moveOffset offset z
       Jie r o | even (regs ^. access r) -> o
       Jio r o | regs ^. access r == 1 -> o
       _ -> 1
-    moveOffset n
-      | n > 0 = Z.rightN (fromIntegral n)
-      | otherwise = Z.leftN (fromIntegral (abs n))
+
+moveOffset :: Int -> Z.Zipper a -> Maybe (Z.Zipper a)
+moveOffset n
+  | n > 0 = Z.rightN (fromIntegral n)
+  | otherwise = Z.leftN (fromIntegral (abs n))
