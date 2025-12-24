@@ -9,10 +9,12 @@ import Control.Applicative (Alternative)
 import Control.Lens
 import Control.Monad (guard)
 import Control.Monad.Extra (unlessM, whenM)
-import Control.Monad.State.Strict (StateT, execStateT, lift)
+import Control.Monad.State.Strict (StateT, runStateT)
+import Control.Monad.Writer.Strict (WriterT, execWriterT, lift, tell)
 import Data.Char (isDigit)
 import Data.Foldable (for_)
 import qualified Data.Heap as H
+import Data.Monoid (Sum (..))
 import qualified Data.Set as S
 
 data Spell = MagicMissile | Drain | Shield | Poison | Recharge deriving (Eq, Ord, Enum, Bounded, Show)
@@ -25,7 +27,6 @@ data GameState = GameState
   { _player :: Player,
     _boss :: Boss,
     _effects :: [(Spell, Int)],
-    _manaSpent :: Int,
     _hardMode :: Bool
   }
   deriving (Eq, Show, Ord)
@@ -50,10 +51,10 @@ spellDuration = \case
   Recharge -> 5
   _ -> 0
 
-type Turn = StateT GameState []
+type Turn = WriterT (Sum Int) (StateT GameState [])
 
 -- $setup
--- >>> example = GameState (Player 50 500 0) (Boss 51 9) [] 0 False
+-- >>> example = GameState (Player 50 500 0) (Boss 51 9) [] False
 
 main :: IO ()
 main = do
@@ -62,7 +63,7 @@ main = do
   print $ solve input {_hardMode = True}
 
 parse :: String -> GameState
-parse s = GameState (Player 50 500 0) (Boss bHp bDmg) [] 0 False
+parse s = GameState (Player 50 500 0) (Boss bHp bDmg) [] False
   where
     [bHp, bDmg] = map read $ filter (all isDigit) (words s)
 
@@ -78,9 +79,9 @@ solve start = go (H.singleton (0, start)) S.empty
       | st' `S.member` seen = go rest seen
       | otherwise = go heap' seen'
       where
-        newStates = execStateT step st
-        st' = st & manaSpent .~ 0 & player . mana .~ 0
-        heap' = foldr (\s -> H.insert (_manaSpent s, s)) rest newStates
+        newStates = runStateT (execWriterT step) st
+        st' = set (player . mana) 0 st
+        heap' = foldr (\(Sum cost, s) -> H.insert (ms + cost, s)) rest newStates
         seen' = S.insert st' seen
     go _ _ = error "No solution"
 
@@ -96,31 +97,22 @@ step = do
 
 applyEffects :: Turn ()
 applyEffects = do
-  -- reset transient stats
   player . armor .= 0
-
-  -- apply spell effects based on spell type
   active <- uses effects (map fst)
   for_ active $ \case
     Shield -> player . armor .= 7
     Poison -> boss . bossHP -= 3
     Recharge -> player . mana += 101
     _ -> pure ()
-
-  -- Decrement timers and remove expired
   effects %= filter ((> 0) . snd) . map (_2 -~ 1)
 
 castSpell :: Turn ()
 castSpell = do
-  s <- lift [minBound .. maxBound]
+  s <- lift $ lift [minBound .. maxBound]
   let cost = spellCost s
-
-  -- guard mana and spell not already active
-  guardM $ uses (player . mana) (>= cost)
   guardM $ uses effects (not . any ((== s) . fst))
-
-  -- spend mana
-  manaSpent += cost
+  guardM $ uses (player . mana) (>= cost)
+  tell (Sum cost)
   player . mana -= cost
 
   case s of
