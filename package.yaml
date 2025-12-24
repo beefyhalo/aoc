@@ -26,6 +26,7 @@ dependencies:
   - extra
   - adjunctions
   - scientific
+  - nonempty-zipper
   - uniplate
   - lens
   - comonad
@@ -112,6 +113,8 @@ executables:
     main: src/2015/21.hs
   aoc-2015-22:
     main: src/2015/22.hs
+  aoc-2015-23:
+    main: src/2015/23.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:
