@@ -41,6 +41,7 @@ dependencies:
   - free
   - data-fix
   - bitvec
+  - mod
   - array
   - monoidal-containers
   - mtl

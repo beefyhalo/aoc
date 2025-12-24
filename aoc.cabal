@@ -53,6 +53,7 @@ executable aoc-2015-01
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -99,6 +100,7 @@ executable aoc-2015-02
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -145,6 +147,7 @@ executable aoc-2015-03
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -191,6 +194,7 @@ executable aoc-2015-04
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -237,6 +241,7 @@ executable aoc-2015-05
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -283,6 +288,7 @@ executable aoc-2015-06
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -329,6 +335,7 @@ executable aoc-2015-07
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -375,6 +382,7 @@ executable aoc-2015-08
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -421,6 +429,7 @@ executable aoc-2015-09
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -467,6 +476,7 @@ executable aoc-2015-10
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -513,6 +523,7 @@ executable aoc-2015-11
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -559,6 +570,7 @@ executable aoc-2015-12
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -605,6 +617,7 @@ executable aoc-2015-13
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -651,6 +664,7 @@ executable aoc-2015-14
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -697,6 +711,7 @@ executable aoc-2015-15
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -743,6 +758,7 @@ executable aoc-2015-16
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -789,6 +805,7 @@ executable aoc-2015-17
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -835,6 +852,7 @@ executable aoc-2015-18
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -881,6 +899,7 @@ executable aoc-2015-19
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -927,6 +946,7 @@ executable aoc-2015-20
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -973,6 +993,7 @@ executable aoc-2015-21
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1019,6 +1040,7 @@ executable aoc-2015-22
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1065,6 +1087,7 @@ executable aoc-2015-23
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1111,6 +1134,7 @@ executable aoc-2015-24
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1157,6 +1181,7 @@ executable aoc-2015-25
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1203,6 +1228,7 @@ executable aoc-2024-01
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1249,6 +1275,7 @@ executable aoc-2024-02
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1295,6 +1322,7 @@ executable aoc-2024-03
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1341,6 +1369,7 @@ executable aoc-2024-04
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1387,6 +1416,7 @@ executable aoc-2025-01
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1433,6 +1463,7 @@ executable aoc-2025-02
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1479,6 +1510,7 @@ executable aoc-2025-03
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1525,6 +1557,7 @@ executable aoc-2025-04
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1571,6 +1604,7 @@ executable aoc-2025-05
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1617,6 +1651,7 @@ executable aoc-2025-06
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1663,6 +1698,7 @@ executable aoc-2025-07
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1709,6 +1745,7 @@ executable aoc-2025-08
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1755,6 +1792,7 @@ executable aoc-2025-09
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1801,6 +1839,7 @@ executable aoc-2025-10
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1847,6 +1886,7 @@ executable aoc-2025-11
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
@@ -1893,6 +1933,7 @@ executable aoc-2025-12
     , linear
     , list-shuffle
     , memory
+    , mod
     , monad-loops
     , monoidal-containers
     , mtl
