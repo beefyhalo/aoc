@@ -1,7 +1,5 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-module Main where
-
 import Data.Either (partitionEithers)
 import Data.List (sortOn)
 
@@ -38,7 +36,7 @@ partTwo poly =
     -- pair up consecutive polygon vertices into horizontal/vertical segments
     (hSorted, vSorted) = (sortOn fst3 h, sortOn fst3 v)
       where
-        (h, v) = partitionEithers $ zipWith edge poly (tail poly ++ [head poly])
+        (h, v) = partitionEithers $ zipWith edge poly (drop 1 $ cycle poly)
         edge (ax, ay) (bx, by)
           | ax == bx = Right (ax, min ay by, max ay by)
           | otherwise = Left (ay, min ax bx, max ax bx)

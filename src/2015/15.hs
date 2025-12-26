@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-
 import Data.List (transpose)
 import Data.List.Split (wordsBy)
 
@@ -16,8 +14,7 @@ main = do
   print $ solve (Just 500) input
 
 parse :: String -> Ingredient
-parse s = case map read $ wordsBy (`notElem` "-0123456789") s of
-  [c, d, f, t, a] -> [c, d, f, t, a]
+parse = map read . wordsBy (`notElem` "-0123456789")
 
 -- >>> solve Nothing example
 -- >>> solve (Just 500) example
@@ -27,8 +24,8 @@ solve :: Maybe Int -> [Ingredient] -> Int
 solve mCal ingreds =
   maximum
     [ score amounts ingreds
-      | amounts <- splits (length ingreds) 100,
-        maybe True (== calories amounts ingreds) mCal
+    | amounts <- splits (length ingreds) 100,
+      maybe True (== calories amounts ingreds) mCal
     ]
   where
     calories amounts = sum . zipWith (*) amounts . map last
@@ -36,6 +33,6 @@ solve mCal ingreds =
     score :: [Int] -> [Ingredient] -> Int
     score amounts = product . map (max 0 . sum) . transpose . zipWith (map . (*)) amounts . map init
 
-    splits :: Int -> Int -> [[Int]]
-    splits 1 total = [[total]]
-    splits n total = [x : xs | x <- [0 .. total], xs <- splits (n - 1) (total - x)]
+splits :: Int -> Int -> [[Int]]
+splits 1 total = [[total]]
+splits n total = [x : xs | x <- [0 .. total], xs <- splits (n - 1) (total - x)]

@@ -1,7 +1,5 @@
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
-module Main (main) where
-
 import Data.Array.Unboxed (UArray, accumArray, assocs)
 
 main :: IO ()

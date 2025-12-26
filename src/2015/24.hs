@@ -1,5 +1,3 @@
-module Main (main) where
-
 import Data.List (find, sortOn)
 import Data.Ord (Down (..))
 

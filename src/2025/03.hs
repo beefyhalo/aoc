@@ -4,8 +4,6 @@
 {-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-module Main (main) where
-
 import qualified Data.ByteString.Char8 as B
 import Data.Char (digitToInt)
 import Data.Function (fix)

@@ -1,7 +1,4 @@
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-type-defaults #-}
-
-module Main (main) where
 
 import qualified Data.Set as S
 
@@ -25,8 +22,9 @@ move (x, y) c
 
 -- >>> map partTwo ["^v", "^>v<", "^v^v^v^v^v"]
 -- [3,3,11]
-partTwo = S.size . S.fromList . concat . scanl step [(0, 0), (0, 0)] . zip [0 ..]
+partTwo =
+  S.size . S.fromList . uncurry (++) . unzip . scanl step ((0, 0), (0, 0)) . zip [0 ..]
   where
-    step [santa, robo] (i, c)
-      | even i = [move santa c, robo]
-      | otherwise = [santa, move robo c]
+    step (santa, robo) (i, c)
+      | even i = (move santa c, robo)
+      | otherwise = (santa, move robo c)

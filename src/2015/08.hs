@@ -1,7 +1,5 @@
 {-# LANGUAGE LambdaCase #-}
 
-module Main (main) where
-
 -- $setup
 -- >>> example = ["\"\"", "\"abc\"", "\"aaa\\\"aaa\"", "\"\\x27\""]
 
@@ -12,10 +10,11 @@ main = do
   print $ partTwo input
 
 -- >>> solve example
+-- >>> partTwo example
 -- 12
+-- 19
 solve, partTwo :: [String] -> Int
 solve = sum . map (\s -> length s - memLength s)
--- >>> partTwo example
 partTwo = sum . map (\s -> length (encode s) - length s)
 
 memLength :: String -> Int

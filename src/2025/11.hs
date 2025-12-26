@@ -1,5 +1,3 @@
-module Main (main) where
-
 import Data.Bifunctor (second)
 import qualified Data.Map.Lazy as M
 
@@ -23,7 +21,7 @@ parse :: String -> Graph
 parse = M.fromList . map parseLine . lines
   where
     parseLine :: String -> (String, [String])
-    parseLine = second (words . tail) . splitAt 3
+    parseLine = second (words . drop 1) . splitAt 3
 
 -- >>> solve example "you" "out"
 -- 5

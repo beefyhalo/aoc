@@ -2,8 +2,6 @@
 {-# LANGUAGE TupleSections #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-module Main (main) where
-
 import Control.Lens
 import Data.List (unfoldr)
 import qualified Data.List.NonEmpty as NE

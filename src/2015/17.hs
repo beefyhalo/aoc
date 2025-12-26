@@ -1,13 +1,9 @@
 {-# OPTIONS_GHC -Wno-type-defaults #-}
 
-module Main (main) where
-
 import qualified Data.IntMap.Strict as M
 
 -- $setup
 -- >>> example = [20,15,10,5,5]
-
--- solve n = length . filter ((== n) . sum) . subsequences
 
 main :: IO ()
 main = do
@@ -22,6 +18,8 @@ main = do
 solve, partTwo :: Int -> [Int] -> Int
 solve n = sum . ways n
 partTwo n = snd . M.findMin . ways n
+
+-- solve n = length . filter ((== n) . sum) . subsequences
 
 ways :: Int -> [Int] -> M.IntMap Int
 ways n = (!! n) . foldl' step start

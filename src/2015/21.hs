@@ -1,7 +1,5 @@
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-module Main (main) where
-
 import Data.Char (isDigit)
 import Data.Coerce (coerce)
 import Data.List (partition, subsequences)

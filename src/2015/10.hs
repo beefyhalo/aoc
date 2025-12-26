@@ -1,8 +1,6 @@
-module Main (main) where
+{-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Data.List (group)
-import Data.Monoid (Endo (..))
-import Data.Semigroup (stimes)
 
 -- $setup
 -- >>> example = ["1", "11", "21", "1211", "111221"]
@@ -14,9 +12,9 @@ main = do
   print $ solve 50 input
 
 solve :: Int -> String -> Int
--- solve n = length . (!! n) . iterate step
--- solve n = length . last . take (n + 1) . iterate step
-solve n = length . appEndo (stimes n (Endo step))
+solve n = length . (!! n) . iterate step
+
+-- solve n = length . appEndo (stimes n (Endo step))
 
 -- >>> map step example
 -- ["11","21","1211","111221","312211"]

@@ -11,8 +11,6 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE ViewPatterns #-}
 
-module Main (main) where
-
 -- (over, (&))
 
 import Control.Arrow ((&&&))
@@ -68,14 +66,14 @@ solve = sum . fmap occurences . extend (\s -> if extract s == X then experiment 
         mapMaybe
           (traverse weakenCoord)
           [ Three i j k
-            | dy <- [-1 .. 1],
-              dx <- [-1 .. 1],
-              let d = (dy, dx),
-              d /= (0, 0),
-              let i, j, k :: Coord '[Periodic (n + 1), Periodic (n + 1)]
-                  i = strengthenCoord c .+^ d
-                  j = i .+^ d
-                  k = j .+^ d
+          | dy <- [-1 .. 1],
+            dx <- [-1 .. 1],
+            let d = (dy, dx),
+            d /= (0, 0),
+            let i, j, k :: Coord '[Periodic (n + 1), Periodic (n + 1)]
+                i = strengthenCoord c .+^ d
+                j = i .+^ d
+                k = j .+^ d
           ]
           \\ plusNat @n @1
           \\ leTrans @1 @n @(n + 1)
@@ -95,13 +93,14 @@ partTwo = sum . fmap (bool 0 1 . isXmas) . extend (\s -> if extract s == A then 
   where
     applyContext :: Coord '[Periodic n, Periodic n] -> ContextTwo (Coord '[Periodic n, Periodic n])
     applyContext c' =
-      withDict (plusNat @n @1) . withDict (plusMonotone2 @n @0 @1) $ withDict (leTrans @1 @n @(n + 1)) $
-        let c :: Coord '[Periodic (n + 1), Periodic (n + 1)] = strengthenCoord c'
-          in Compose $
-              traverse weakenCoord $
-                Pair
-                  (Two (c .+^ (-1, -1)) (c .+^ (1, 1)))
-                  (Two (c .+^ (-1, 1)) (c .+^ (1, -1)))
+      withDict (plusNat @n @1) . withDict (plusMonotone2 @n @0 @1) $
+        withDict (leTrans @1 @n @(n + 1)) $
+          let c :: Coord '[Periodic (n + 1), Periodic (n + 1)] = strengthenCoord c'
+           in Compose $
+                traverse weakenCoord $
+                  Pair
+                    (Two (c .+^ (-1, -1)) (c .+^ (1, 1)))
+                    (Two (c .+^ (-1, 1)) (c .+^ (1, -1)))
 
     isXmas :: ContextTwo Cell -> Bool
     isXmas (Compose (Just (Pair l r))) = on (&&) (`elem` [Two M S, Two S M]) l r

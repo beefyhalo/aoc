@@ -1,6 +1,5 @@
+{-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-
-module Main (main) where
 
 import Data.Bits (complement, shiftL, shiftR, (.&.), (.|.))
 import Data.Char (isDigit)
@@ -19,24 +18,26 @@ data Expr
 
 -- $setup
 -- >>> input = "123 -> x\n456 -> y\nx AND y -> d\nx OR y -> e\nx LSHIFT 2 -> f\ny RSHIFT 2 -> g\nNOT x -> h\nNOT y -> i"
--- >>> example = M.fromList $ map parse (lines input)
+-- >>> example = parse input
 
 main :: IO ()
 main = do
-  input <- M.fromList . map parse . lines <$> readFile "input/2015/07.txt"
+  input <- parse <$> readFile "input/2015/07.txt"
   let res = solve input "a"
   print res
-  print $ solve (M.insert "b" (Val res) input) "a"
+  print $ partTwo res input "a"
 
-parse :: String -> (Wire, Expr)
-parse s = case words s of
-  [a, "->", w] -> (w, atom a)
-  ["NOT", a, "->", w] -> (w, Not (atom a))
-  [a, "AND", b, "->", w] -> (w, And (atom a) (atom b))
-  [a, "OR", b, "->", w] -> (w, Or (atom a) (atom b))
-  [a, "LSHIFT", n, "->", w] -> (w, LShift (atom a) (read n))
-  [a, "RSHIFT", n, "->", w] -> (w, RShift (atom a) (read n))
+parse :: String -> M.Map Wire Expr
+parse = M.fromList . map parseLine . lines
   where
+    parseLine s = case words s of
+      [a, "->", w] -> (w, atom a)
+      ["NOT", a, "->", w] -> (w, Not (atom a))
+      [a, "AND", b, "->", w] -> (w, And (atom a) (atom b))
+      [a, "OR", b, "->", w] -> (w, Or (atom a) (atom b))
+      [a, "LSHIFT", n, "->", w] -> (w, LShift (atom a) (read n))
+      [a, "RSHIFT", n, "->", w] -> (w, RShift (atom a) (read n))
+
     atom :: String -> Expr
     atom a
       | all isDigit a = Val (read a)
@@ -51,10 +52,14 @@ solve env w = vals M.! w
     vals = M.map evalExpr env
 
     evalExpr :: Expr -> Int
-    evalExpr (Val n) = n
-    evalExpr (Ref x) = vals M.! x
-    evalExpr (Not a) = complement (evalExpr a) .&. 0xffff
-    evalExpr (And a b) = evalExpr a .&. evalExpr b
-    evalExpr (Or a b) = evalExpr a .|. evalExpr b
-    evalExpr (LShift a n) = evalExpr a `shiftL` n
-    evalExpr (RShift a n) = evalExpr a `shiftR` n
+    evalExpr = \case
+      Val n -> n
+      Ref x -> vals M.! x
+      Not a -> complement (evalExpr a) .&. 0xffff
+      And a b -> evalExpr a .&. evalExpr b
+      Or a b -> evalExpr a .|. evalExpr b
+      LShift a n -> evalExpr a `shiftL` n
+      RShift a n -> evalExpr a `shiftR` n
+
+partTwo :: Int -> M.Map Wire Expr -> Wire -> Int
+partTwo res = solve . M.insert "b" (Val res)
