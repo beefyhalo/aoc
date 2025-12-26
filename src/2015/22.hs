@@ -3,8 +3,6 @@
 {-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-module Main (main) where
-
 import Control.Applicative (Alternative)
 import Control.Lens
 import Control.Monad (guard)

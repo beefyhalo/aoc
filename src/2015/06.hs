@@ -2,8 +2,6 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-module Main (main) where
-
 import Control.Monad.ST (ST, runST)
 import Data.Bit (Bit (Bit), countBits, invertInPlace)
 import Data.Foldable (for_)

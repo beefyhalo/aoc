@@ -1,7 +1,6 @@
 {-# LANGUAGE ViewPatterns #-}
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
-
-module Main (main) where
 
 import Data.Containers.ListUtils (nubOrd)
 import Data.List (permutations)
@@ -28,14 +27,14 @@ parse line = ((p1, p2), val)
     val = if gainStr == "gain" then units else -units
 
 -- >>> solve example
+-- >>> partTwo example
 -- 330
+-- 286
 solve, partTwo :: HappinessMap -> Int
 solve hmap = maximum $ map totalHappiness perms
   where
-    totalHappiness xs = sum $ zipWith (\a b -> h a b + h b a) xs (tail xs ++ [head xs])
+    totalHappiness xs = sum $ zipWith (\a b -> h a b + h b a) xs (drop 1 $ cycle xs)
     h x y = M.findWithDefault 0 (x, y) hmap
     (p : ps) = nubOrd $ concat [[a, b] | (a, b) <- M.keys hmap]
     perms = map (p :) (permutations ps)
--- >>> partTwo example
--- 286
 partTwo = solve . M.insert ("ME", "ME") 0

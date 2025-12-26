@@ -2,10 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-module Main (main) where
-
 import qualified Data.ByteString.Lazy.Char8 as L
-import Data.List (foldl')
 import Data.Maybe (fromJust)
 
 -- $setup
@@ -28,7 +25,7 @@ parse bs = case L.uncons bs of
 
 -- >>> solve example
 -- 3
-solve :: [Int] -> Int
+solve, partTwo :: [Int] -> Int
 solve = snd . foldl' go (50, 0)
   where
     go :: (Int, Int) -> Int -> (Int, Int)
@@ -39,7 +36,6 @@ solve = snd . foldl' go (50, 0)
 
 -- >>> partTwo example
 -- 6
-partTwo :: [Int] -> Int
 partTwo = snd . foldl' go (50, 0)
   where
     go (!pos, !count) move =

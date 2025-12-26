@@ -64,12 +64,12 @@ stepCorners fg
 neighborsOf :: forall n. (KnownNat n, 1 <= n) => Coord '[HardWrap n, HardWrap n] -> [Coord '[HardWrap n, HardWrap n]]
 neighborsOf (r :| c :| _) =
   [ toEnum nr :| toEnum nc :| EmptyCoord
-    | dr <- [-1 .. 1],
-      dc <- [-1 .. 1],
-      (dr, dc) /= (0, 0),
-      let nr = fromEnum r + dr,
-      let nc = fromEnum c + dc,
-      nr >= 0 && nr < nVal && nc >= 0 && nc < nVal -- Only generate if in bounds
+  | dr <- [-1 .. 1],
+    dc <- [-1 .. 1],
+    (dr, dc) /= (0, 0),
+    let nr = fromEnum r + dr,
+    let nc = fromEnum c + dc,
+    nr >= 0 && nr < nVal && nc >= 0 && nc < nVal -- Only generate if in bounds
   ]
   where
     nVal = fromIntegral (natVal (Proxy @n))

@@ -1,7 +1,5 @@
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-module Main (main) where
-
 import Data.Containers.ListUtils (nubOrd)
 import Data.List (inits, stripPrefix, tails, unfoldr)
 import Data.List.Split (splitOn)

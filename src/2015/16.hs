@@ -1,7 +1,5 @@
 {-# LANGUAGE LambdaCase #-}
 
-module Main (main) where
-
 import Data.List (findIndex)
 import Data.List.Split (splitOn)
 import qualified Data.Map.Strict as M

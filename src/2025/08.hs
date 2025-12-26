@@ -2,13 +2,11 @@
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 {-# OPTIONS_GHC -Wno-type-defaults #-}
 
-module Main (main) where
-
 import Data.Function (on)
 import Data.IntMap.Monoidal.Strict (MonoidalIntMap)
 import qualified Data.IntMap.Monoidal.Strict as M
 import qualified Data.IntSet as S
-import Data.List (foldl', sortOn, unfoldr)
+import Data.List (sortOn, unfoldr)
 import Data.List.Split (splitOn)
 import Data.Ord (Down (Down))
 import GHC.Arr (listArray, (!))

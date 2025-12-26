@@ -2,13 +2,11 @@
 {-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-module Main (main) where
-
 import Control.Applicative (Alternative (many), (<|>))
 import Data.Attoparsec.ByteString.Char8 (char, decimal, parseOnly, skipSpace)
 import qualified Data.ByteString.Char8 as BC
 import Data.Foldable (fold)
-import Data.List (foldl', transpose)
+import Data.List (transpose)
 
 -- $setup
 -- >>> input = "123 328  51 64\n45 64  387 23\n6 98  215 314\n*   +   *   +"
@@ -41,8 +39,10 @@ partTwo = fst . foldl' go (0, []) . concatMap parseCol . reverse . transpose
     parseCol :: String -> [Either Int Char]
     parseCol = fold . parseOnly columnParser . BC.pack
       where
-        columnParser = liftA2 (<>)
-          (fmap Left  <$> (skipSpace *> many decimal))
-          (fmap Right <$> (skipSpace *> many op))
+        columnParser =
+          liftA2
+            (<>)
+            (fmap Left <$> (skipSpace *> many decimal))
+            (fmap Right <$> (skipSpace *> many op))
 
         op = char '+' <|> char '*'

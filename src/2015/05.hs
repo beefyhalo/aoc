@@ -1,7 +1,5 @@
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-module Main (main) where
-
 main :: IO ()
 main = do
   input <- lines <$> readFile "input/2015/05.txt"
@@ -13,7 +11,7 @@ solve = length . filter isNice
 partTwo = length . filter isNice2
 
 pairs :: [a] -> [(a, a)]
-pairs = zip <*> tail
+pairs = zip <*> drop 1
 
 -- >>> map isNice ["ugknbfddgicrmopn", "aaa", "jchzalrnumimnmhp", "haegwjzuvuyypxyu", "dvszwmarrgswjxmb"]
 -- [True,True,False,False,False]

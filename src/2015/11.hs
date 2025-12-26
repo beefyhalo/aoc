@@ -1,5 +1,3 @@
-module Main (main) where
-
 import Data.List (group)
 
 -- $setup
@@ -28,6 +26,6 @@ succPwd = snd . foldr step (True, [])
 valid :: String -> Bool
 valid s = straight && noConfusing && pairs
   where
-    straight = or $ zipWith3 (\a b c -> succ a == b && succ b == c) s (tail s) (drop 2 s)
+    straight = or $ zipWith3 (\a b c -> succ a == b && succ b == c) s (drop 1 s) (drop 2 s)
     noConfusing = all (`notElem` "iol") s
     pairs = length (filter ((>= 2) . length) (group s)) >= 2

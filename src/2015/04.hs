@@ -1,12 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
-
-module Main (main) where
+{-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Crypto.Hash (Digest, MD5, hash)
 import Data.Bits ((.&.))
 import qualified Data.ByteArray as BA
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
+import Data.Word (Word8)
 
 main :: IO ()
 main = do
@@ -27,13 +27,13 @@ partTwo key = head [n | n <- [1 ..], hasSixZeros (key <> BC.pack (show n))]
 hasFiveZeros :: B.ByteString -> Bool
 hasFiveZeros bs = b0 == 0 && b1 == 0 && b2 .&. 0xF0 == 0 -- first 16 bits zero and high nibble of 3rd byte zero
   where
-    digest = hash bs :: Digest MD5
-    b0 = BA.index digest 0
-    b1 = BA.index digest 1
-    b2 = BA.index digest 2
+    (b0, b1, b2) = bytes bs
 
 hasSixZeros :: B.ByteString -> Bool
-hasSixZeros bs = b0 == 0 && b1 == 0 && b2 == 0
+hasSixZeros bs = bytes bs == (0, 0, 0)
+
+bytes :: B.ByteString -> (Word8, Word8, Word8)
+bytes bs = (b0, b1, b2)
   where
     digest = hash bs :: Digest MD5
     b0 = BA.index digest 0

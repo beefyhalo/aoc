@@ -1,13 +1,11 @@
 {-# LANGUAGE DataKinds #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-module Main (main) where
-
 import Data.Char (isDigit)
 import Data.List.Split (splitOn)
 import Data.Mod (Mod (..), (^%))
 
--- The modulus as a type-level natura
+-- The modulus as a type-level natural
 startCode, multiplier :: Mod 33554393
 startCode = 20151125
 multiplier = 252533
@@ -18,8 +16,8 @@ multiplier = 252533
 
 main :: IO ()
 main = do
-  (targetRow, targetCol) <- parse <$> readFile "input/2015/25.txt"
-  print $ solve targetRow targetCol
+  (r, c) <- parse <$> readFile "input/2015/25.txt"
+  print $ solve r c
 
 parse :: String -> (Int, Int)
 parse s = (r, c)
@@ -29,13 +27,13 @@ parse s = (r, c)
 -- >>> solve exampleRow exampleCol
 -- 31916031
 solve :: Int -> Int -> Int
-solve row col = fromIntegral . unMod $ startCode * multiplier ^% seqIndex row col
+solve r c = fromIntegral . unMod $ startCode * multiplier ^% seqIndex r c
 
--- solve row col = codes !! seqIndex row col
+-- solve r c = codes !! seqIndex r c
 --   where codes = iterate (\prev -> (prev * multiplier) `mod` modulus) startCode
 
 seqIndex :: Int -> Int -> Int
-seqIndex row col = diagStart + col - 1
+seqIndex r c = diagStart + c - 1
   where
-    n = row + col - 1 -- diagonal number
+    n = r + c - 1 -- diagonal number
     diagStart = (n * (n - 1)) `div` 2 -- total codes before this diagonal

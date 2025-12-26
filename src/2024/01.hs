@@ -2,13 +2,11 @@
 {-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Main (main) where
-
 import Control.Arrow ((***))
 import Data.Attoparsec.ByteString.Char8 (Parser, decimal, endOfLine, parseOnly, sepBy, string)
 import Data.Foldable (Foldable (foldMap'))
-import Data.List (sort)
 import Data.IntMap.Monoidal.Strict qualified as Map
+import Data.List (sort)
 import Data.Monoid (Sum (..))
 import GHC.Exts (fromString)
 
@@ -32,15 +30,13 @@ parser = unzip <$> numParser `sepBy` endOfLine
     numParser = liftA2 (,) (decimal <* string "   ") decimal
 
 -- >>> solve example
+-- >>> partTwo example
 -- 11
-solve :: Input -> Int
+-- 31
+solve, partTwo :: Input -> Int
 solve = sum . uncurry (zipWith distance) . (sort *** sort)
   where
     distance = fmap abs . (-)
-
--- >>> partTwo example
--- 31
-partTwo :: Input -> Int
 partTwo = getSum . Map.foldMapWithKey ((*) . Sum) . uncurry (Map.intersectionWith (*)) . (counts *** counts)
   where
     counts = foldMap' (`Map.singleton` 1)

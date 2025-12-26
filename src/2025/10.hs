@@ -1,7 +1,5 @@
 {-# LANGUAGE BangPatterns #-}
 
-module Main (main) where
-
 import Control.Applicative ((<|>))
 import Data.Attoparsec.ByteString.Char8 (Parser, char, decimal, many', many1, parseOnly, sepBy, skipSpace)
 import Data.Bits (Bits (..))
@@ -9,7 +7,6 @@ import Data.Bool (bool)
 import Data.ByteString.Char8 (ByteString)
 import qualified Data.ByteString.Char8 as B
 import Data.Either (fromRight)
-import Data.Foldable (Foldable (foldl'))
 import Data.IntMap.Strict (IntMap)
 import qualified Data.IntMap.Strict as IM
 import Data.List (subsequences)

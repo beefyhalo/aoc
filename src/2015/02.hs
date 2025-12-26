@@ -1,7 +1,4 @@
-{-# LANGUAGE ViewPatterns #-}
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-
-module Main (main) where
+{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Data.List (sort)
 import Data.List.Split (splitOn)
@@ -17,8 +14,9 @@ main = do
   print $ partTwo input
 
 parse :: String -> (Int, Int, Int)
-parse s = case splitOn "x" s of
-  (sort . map read -> [l, w, h]) -> (l, w, h)
+parse s = (l, w, h)
+  where
+    [l, w, h] = sort $ map read $ splitOn "x" s
 
 -- >>> solve example
 -- 101

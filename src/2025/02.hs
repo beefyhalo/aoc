@@ -1,9 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ViewPatterns #-}
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-
-module Main (main) where
+{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Set as S
@@ -11,8 +9,8 @@ import qualified Data.Set as S
 type Range = (Integer, Integer)
 
 -- $setup
--- >>> import qualified Data.ByteString.Char8 as B
 -- >>> input = B.split ',' "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124"
+-- >>> example = map parse input
 
 main :: IO ()
 main = do
@@ -20,14 +18,12 @@ main = do
   print $ solve input
   print $ partTwo input
 
--- $setup
--- >>> example = map parse input
-
 -- >>> parse "11-22"
 -- (11,22)
 parse :: B.ByteString -> Range
-parse bs = case B.split '-' bs of
-  [B.readInteger -> Just (a, _), B.readInteger -> Just (b, _)] -> (a, b)
+parse bs = (a, b)
+  where
+    [B.readInteger -> Just (a, _), B.readInteger -> Just (b, _)] = B.split '-' bs
 
 -- >>> digits 123
 -- 3
@@ -39,7 +35,6 @@ digits = go 0
       | x < 10 = c + 1
       | otherwise = go (c + 1) (x `div` 10)
 
--- | Sum over all ranges
 -- >>> solve example
 -- >>> partTwo example
 -- 1227775554

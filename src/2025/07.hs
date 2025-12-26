@@ -2,8 +2,6 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-module Main (main) where
-
 import Data.Bifunctor (second)
 import Data.Bool (bool)
 import Data.List (elemIndex, unfoldr, zipWith4)
@@ -46,7 +44,7 @@ partTwo (firstRow : restRows) = final !! startCol
     go row cur = zipWith4 update row left cur right
       where
         left = 1 : cur
-        right = tail cur ++ [1]
+        right = drop 1 cur ++ [1]
 
         update '^' x _ z = x + z
         update _ _ y _ = y

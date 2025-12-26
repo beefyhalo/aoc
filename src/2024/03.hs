@@ -2,8 +2,6 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Main (main) where
-
 import Control.Applicative ((<|>))
 import Control.Monad.State.Strict (evalState, gets, put)
 import Data.Attoparsec.ByteString.Char8 (Parser, anyChar, char, choice, decimal, many1, parseOnly, string, try)

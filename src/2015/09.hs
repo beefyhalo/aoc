@@ -2,8 +2,6 @@
 {-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-module Main (main) where
-
 import Control.Comonad.Trans.Cofree (CofreeF ((:<)))
 import Control.Monad.State.Strict (MonadState (get), State, evalState, gets, modify)
 import Control.Monad.Trans.Free (FreeF (..))
@@ -44,11 +42,11 @@ parse s = [((c1, c2), read d), ((c2, c1), read d)]
 -- Brute-force solution
 
 -- >>> solve example
+-- >>> partTwo example
 -- 605
+-- 982
 solve, partTwo :: M.Map (City, City) Distance -> Int
 solve = minimum . routes
--- >>> partTwo example
--- 982
 partTwo = maximum . routes
 
 routes :: M.Map (City, City) Distance -> [Distance]
@@ -113,11 +111,11 @@ solve3 dists = evalState (refoldM alg coalg (let (s : rest) = cities dists in (s
       modify (M.insert key res)
       pure res
 
-    coalg (cur, rem) = do
+    coalg (cur, rest) = do
       cache <- get
-      let key = (cur, S.fromList rem)
+      let key = (cur, S.fromList rest)
       pure $
         key :< case M.lookup key cache of
           Just suf -> Pure suf
-          Nothing | null rem -> Pure 0
-          Nothing -> Free [(c, delete c rem) | c <- rem]
+          Nothing | null rest -> Pure 0
+          Nothing -> Free [(c, delete c rest) | c <- rest]
