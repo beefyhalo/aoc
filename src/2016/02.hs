@@ -5,7 +5,7 @@
 
 import Control.Comonad.Store (extract, seeks)
 import Data.AffineSpace ((.+^))
-import Data.Maybe (catMaybes, fromJust, isNothing)
+import Data.Maybe (fromJust, isNothing, mapMaybe)
 import GHC.TypeLits (KnownNat, type (<=))
 import SizedGrid (FocusedGrid (..), HardWrap, gridFromList)
 
@@ -41,7 +41,7 @@ parse = map parseMove
 -- "1985"
 -- "5DB3"
 solve :: (KnownNat n, 1 <= n) => FocusedGrid '[HardWrap n, HardWrap n] (Maybe Char) -> [[Move]] -> String
-solve start = catMaybes . map extract . drop 1 . scanl (foldl' move) start
+solve start = mapMaybe extract . drop 1 . scanl (foldl' move) start
   where
     move fg c =
       let next = seeks (.+^ delta c) fg
