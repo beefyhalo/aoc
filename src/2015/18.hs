@@ -69,7 +69,7 @@ neighborsOf (r :| c :| _) =
     (dr, dc) /= (0, 0),
     let nr = fromEnum r + dr,
     let nc = fromEnum c + dc,
-    nr >= 0 && nr < nVal && nc >= 0 && nc < nVal -- Only generate if in bounds
+    nr >= 0 && nr < nVal && nc >= 0 && nc < nVal
   ]
   where
     nVal = fromIntegral (natVal (Proxy @n))
