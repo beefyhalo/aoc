@@ -4,7 +4,6 @@
 
 import Control.Monad.ST (ST, runST)
 import Data.Bit (Bit (Bit), countBits)
-import Data.Bool (bool)
 import Data.Foldable (for_)
 import Data.List.Split (splitOn)
 import qualified Data.Vector.Unboxed as V
@@ -42,7 +41,7 @@ apply g = \case
   RotCol x n -> rotate height (V.generate height $ \y -> y * width + x) n
   where
     rotate len idxs n = do
-      snapshot <- V.mapM (MV.read g) idxs
+      snapshot <- V.forM idxs (MV.read g)
       let rotated = V.generate len $ \i -> snapshot V.! ((i - n) `mod` len)
       V.zipWithM_ (MV.write g) idxs rotated
 
@@ -50,4 +49,4 @@ render :: V.Vector Bit -> String
 render = V.foldMap step . V.indexed
   where
     step (i, Bit b) =
-      bool ' ' '#' b : if i `mod` width == width - 1 then "\n" else ""
+      if b then "#" else "." ++ if i `mod` width == width - 1 then "\n" else ""
