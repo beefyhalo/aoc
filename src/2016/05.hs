@@ -1,35 +1,39 @@
+{-# LANGUAGE NumericUnderscores #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE BangPatterns #-}
 
+import Control.Lens (ix, none, (&), (.~))
+import Control.Parallel.Strategies (parBuffer, rseq, using)
 import Crypto.Hash (Digest, MD5, hash)
 import Data.Bits (shiftR, (.&.))
 import qualified Data.ByteArray as BA
 import qualified Data.ByteString.Char8 as BC
-import qualified Data.IntMap.Strict as M
-import Data.List (find)
+import Data.List (find, scanl')
+import Data.List.Split (chunksOf)
 import Data.Maybe (fromJust)
 import Data.Word (Word8)
 
+-- $setup
+-- >>> example = candidates "abc"
+
 main :: IO ()
 main = do
-  input <- BC.readFile "input/2016/05.txt"
+  input <- candidates <$> BC.readFile "input/2016/05.txt"
   putStrLn $ solve input
   putStrLn $ partTwo input
 
--- >>> solve "abc"
--- >>> partTwo "abc"
+-- >>> solve example
+-- >>> partTwo example
 -- "18f47a30"
 -- "05ace8e3"
-solve, partTwo :: BC.ByteString -> String
-solve key = take 8 [hex (BA.index d 2) | n <- [0 ..], let d = getHash key n, isValid d]
-partTwo key = M.elems $ fromJust $ find ((== 8) . M.size) $ scanl step M.empty [0 ..]
+solve, partTwo :: [Digest MD5] -> String
+solve keys = take 8 [hex (BA.index d 2) | d <- keys]
+partTwo = fromJust . find (none (== '_')) . scanl' step (replicate 8 '_')
   where
-    step :: M.IntMap Char -> Int -> M.IntMap Char
-    step !m n
-      | isValid d && pos < 8 && M.notMember pos m = M.insert pos val m
-      | otherwise = m
+    step :: String -> Digest MD5 -> String
+    step out d
+      | pos < 8 && out !! pos == '_' = out & ix pos .~ val
+      | otherwise = out
       where
-        d = getHash key n
         pos = fromIntegral (BA.index d 2)
         val = hex (BA.index d 3 `shiftR` 4)
 
@@ -41,3 +45,12 @@ isValid d = BA.index d 0 == 0 && BA.index d 1 == 0 && BA.index d 2 .&. 0xF0 == 0
 
 hex :: Word8 -> Char
 hex n = "0123456789abcdef" !! fromIntegral n
+
+-- Generate infinite list of valid hashes in parallel chunks
+candidates :: BC.ByteString -> [Digest MD5]
+candidates key = concatMap mine indexChunks `using` parBuffer parBuff rseq
+  where
+    chunkSize = 100_000
+    parBuff = 16
+    indexChunks = chunksOf chunkSize [0 ..]
+    mine ns = [d | n <- ns, let d = getHash key n, isValid d]

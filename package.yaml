@@ -54,6 +54,8 @@ dependencies:
   - vector
   - linear
   - vector-algorithms
+  - vector-sized
+  - parallel
   - split
   - random
   - list-shuffle
@@ -130,6 +132,8 @@ executables:
     main: src/2016/04.hs
   aoc-2016-05:
     main: src/2016/05.hs
+  aoc-2016-06:
+    main: src/2016/06.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:
