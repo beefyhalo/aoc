@@ -12,4 +12,4 @@ parse = map count . lines
     count l = length [() | w : _ <- drop 4 (words l), w `elem` "gm"]
 
 solve :: [Int] -> Int
-solve xs = sum [if c == 0 then 0 else 2 * c - 1 | c <- init $ scanl (+) 0 xs]
+solve xs = sum [2 * c - 1 | c <- init $ scanl1 (+) xs]

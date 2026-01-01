@@ -6,6 +6,7 @@ import Control.Lens
 import Data.List (unfoldr)
 import qualified Data.List.NonEmpty as NE
 import qualified Data.List.NonEmpty.Zipper as Z
+import Data.List.Split (wordsBy)
 
 data Reg = A | B deriving (Eq, Show)
 
@@ -37,7 +38,7 @@ main = do
 parse :: String -> Z.Zipper Instr
 parse = Z.fromNonEmpty . NE.fromList . map parseLine . lines
   where
-    parseLine s = case words $ filter (`notElem` ",+") s of
+    parseLine s = case wordsBy (`elem` " ,+") s of
       ["hlf", r] -> Hlf (parseReg r)
       ["tpl", r] -> Tpl (parseReg r)
       ["inc", r] -> Inc (parseReg r)

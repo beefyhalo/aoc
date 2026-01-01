@@ -2,9 +2,9 @@ name: aoc
 version: 0.1.0.0
 github: "githubuser/aoc"
 license: BSD-3-Clause
-author: "Author name here"
+author: "Kevin Horlick"
 maintainer: "example@example.com"
-copyright: "2024 Author name here"
+copyright: "2024 Kevin Horlick"
 
 extra-source-files:
   - README.md
@@ -144,6 +144,8 @@ executables:
     main: src/2016/10.hs
   aoc-2016-11:
     main: src/2016/11.hs
+  aoc-2016-12:
+    main: src/2016/12.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:
