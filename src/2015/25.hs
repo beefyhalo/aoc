@@ -36,4 +36,4 @@ seqIndex :: Int -> Int -> Int
 seqIndex r c = diagStart + c - 1
   where
     n = r + c - 1 -- diagonal number
-    diagStart = (n * (n - 1)) `div` 2 -- total codes before this diagonal
+    diagStart = n * (n - 1) `div` 2 -- total codes before this diagonal

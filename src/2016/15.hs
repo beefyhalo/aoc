@@ -1,5 +1,7 @@
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
+import Data.Char (isDigit)
+import Data.List.Split (wordsBy)
 import Data.Maybe (fromJust)
 import Math.NumberTheory.Moduli (SomeMod, chineseSomeMod, modulo)
 
@@ -20,9 +22,9 @@ main = do
   print $ partTwo input
 
 parse :: String -> CRT
-parse s = C $ -(p + i) `modulo` fromIntegral n
+parse s = C $ -(p + i) `modulo` fromInteger n
   where
-    [i, n, _, p] = map read $ words $ filter (`elem` "0123456789 ") s
+    [i, n, _, p] = map read $ wordsBy (not . isDigit) s
 
 -- >>> solve example
 -- >>> partTwo example

@@ -24,6 +24,7 @@ dependencies:
   - aeson
   - attoparsec
   - arithmoi
+  - semirings
   - extra
   - cryptohash-md5
   - adjunctions
