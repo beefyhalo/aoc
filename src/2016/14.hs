@@ -1,6 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeApplications #-}
+{-# OPTIONS_GHC -Wno-type-defaults #-}
 
+import Control.Parallel.Strategies (parBuffer, rdeepseq, using)
 import Crypto.Hash (MD5, hash)
 import Data.ByteArray.Encoding (Base (Base16), convertToBase)
 import qualified Data.ByteString.Char8 as B
@@ -13,7 +15,6 @@ main = do
   print $ partTwo input
 
 -- >>> solve "abc"
--- >>> partTwo "abc"
 -- 22728
 -- 22551
 solve, partTwo :: B.ByteString -> Int
@@ -28,10 +29,13 @@ findKeys salt n =
     any (hasQuintuplet c) (take 1000 $ drop (i + 1) hashes)
   ]
   where
-    hashes = [iterate md5 (md5 (salt <> B.pack (show i))) !! n | i <- [0 ..]]
+    hashes = [stretch n (md5 (salt <> B.pack (show i))) | i <- [0 ..]] `using` parBuffer 512 rdeepseq
 
 md5 :: B.ByteString -> B.ByteString
 md5 = convertToBase Base16 . hash @_ @MD5
+
+stretch :: Int -> B.ByteString -> B.ByteString
+stretch n = (!! n) . iterate md5
 
 firstTriplet :: B.ByteString -> Maybe Char
 firstTriplet s = listToMaybe [B.head g | g <- B.group s, B.length g >= 3]
