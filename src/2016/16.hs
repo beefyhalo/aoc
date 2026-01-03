@@ -1,26 +1,31 @@
-{-# LANGUAGE OverloadedStrings #-}
+import Data.Bit (Bit (..), invertBits, reverseBits)
+import Data.Char (intToDigit)
+import qualified Data.Vector.Unboxed as V
 
-import qualified Data.ByteString.Char8 as B
+-- $setup
+-- >>> input = "110010110100"
+-- >>> example = parse input
 
 main :: IO ()
 main = do
-  input <- B.readFile "input/2016/16.txt"
-  B.putStrLn $ solve 272 input
-  B.putStrLn $ solve 35651584 input
+  input <- parse <$> readFile "input/2016/16.txt"
+  putStrLn $ solve 272 input
+  putStrLn $ solve 35651584 input
 
-solve :: Int -> B.ByteString -> B.ByteString
-solve n = checksum . B.take n . dragon n
+parse :: String -> V.Vector Bit
+parse = V.fromList . map (Bit . (== '1'))
 
-dragon :: Int -> B.ByteString -> B.ByteString
-dragon n = until ((>= n) . B.length) dragonStep
+solve :: Int -> V.Vector Bit -> String
+solve n bits = intToDigit . fromEnum <$> V.toList result
   where
-    invert = B.map (\c -> if c == '0' then '1' else '0')
-    dragonStep a = a <> "0" <> B.reverse (invert a)
+    filledData = V.take n $ until ((>= n) . V.length) dragon bits
+    result = until (odd . V.length) checksum filledData
 
--- >>> checksum "110010110100"
--- "100"
-checksum :: B.ByteString -> B.ByteString
-checksum = until (odd . B.length) (B.pack . pairCheck . B.unpack)
-  where
-    pairCheck (a : b : xs) = (if a == b then '1' else '0') : pairCheck xs
-    pairCheck _ = ""
+-- >>> checksum $ checksum example
+-- [1,0,0]
+dragon, checksum :: V.Vector Bit -> V.Vector Bit
+dragon x = x <> V.singleton (Bit False) <> invertBits (reverseBits x)
+checksum v = V.generate (V.length v `div` 2) $ \i ->
+  let a = v V.! (2 * i)
+      b = v V.! (2 * i + 1)
+   in Bit (a == b)
