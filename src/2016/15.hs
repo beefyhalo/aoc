@@ -1,6 +1,7 @@
+{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
+
 import Data.Maybe (fromJust)
-import Math.NumberTheory.Moduli (SomeMod, modulo)
-import Math.NumberTheory.Moduli.Chinese (chineseSomeMod)
+import Math.NumberTheory.Moduli (SomeMod, chineseSomeMod, modulo)
 
 newtype CRT = C {unCRT :: SomeMod} deriving (Show)
 
@@ -19,12 +20,9 @@ main = do
   print $ partTwo input
 
 parse :: String -> CRT
-parse s = C $ (toInteger n - (p + i)) `modulo` n
+parse s = C $ -(p + i) `modulo` fromIntegral n
   where
-    ws = words s
-    i = read (drop 1 (ws !! 1))
-    n = read (ws !! 3)
-    p = read (init (ws !! 11))
+    [i, n, _, p] = map read $ words $ filter (`elem` "0123456789 ") s
 
 -- >>> solve example
 -- >>> partTwo example
@@ -34,4 +32,4 @@ solve, partTwo :: [CRT] -> SomeMod
 solve = unCRT . mconcat
 partTwo d = solve (extra : d)
   where
-    extra = C $ 11 - (toInteger $ length d + 1) `modulo` 11
+    extra = C $ -toInteger (length d + 1) `modulo` 11
