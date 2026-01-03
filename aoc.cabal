@@ -34,6 +34,7 @@ executable aoc-2015-01
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -84,6 +85,7 @@ executable aoc-2015-02
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -134,6 +136,7 @@ executable aoc-2015-03
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -184,6 +187,7 @@ executable aoc-2015-04
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -234,6 +238,7 @@ executable aoc-2015-05
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -284,6 +289,7 @@ executable aoc-2015-06
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -334,6 +340,7 @@ executable aoc-2015-07
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -384,6 +391,7 @@ executable aoc-2015-08
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -434,6 +442,7 @@ executable aoc-2015-09
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -484,6 +493,7 @@ executable aoc-2015-10
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -534,6 +544,7 @@ executable aoc-2015-11
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -584,6 +595,7 @@ executable aoc-2015-12
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -634,6 +646,7 @@ executable aoc-2015-13
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -684,6 +697,7 @@ executable aoc-2015-14
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -734,6 +748,7 @@ executable aoc-2015-15
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -784,6 +799,7 @@ executable aoc-2015-16
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -834,6 +850,7 @@ executable aoc-2015-17
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -884,6 +901,7 @@ executable aoc-2015-18
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -934,6 +952,7 @@ executable aoc-2015-19
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -984,6 +1003,7 @@ executable aoc-2015-20
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1034,6 +1054,7 @@ executable aoc-2015-21
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1084,6 +1105,7 @@ executable aoc-2015-22
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1134,6 +1156,7 @@ executable aoc-2015-23
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1184,6 +1207,7 @@ executable aoc-2015-24
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1234,6 +1258,7 @@ executable aoc-2015-25
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1284,6 +1309,7 @@ executable aoc-2016-01
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1334,6 +1360,7 @@ executable aoc-2016-02
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1384,6 +1411,7 @@ executable aoc-2016-03
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1434,6 +1462,7 @@ executable aoc-2016-04
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1484,6 +1513,7 @@ executable aoc-2016-05
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1534,6 +1564,7 @@ executable aoc-2016-06
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1584,6 +1615,7 @@ executable aoc-2016-07
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1634,6 +1666,7 @@ executable aoc-2016-08
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1684,6 +1717,7 @@ executable aoc-2016-09
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1734,6 +1768,7 @@ executable aoc-2016-10
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1784,6 +1819,7 @@ executable aoc-2016-11
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1834,6 +1870,7 @@ executable aoc-2016-12
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1884,6 +1921,7 @@ executable aoc-2016-13
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1934,6 +1972,7 @@ executable aoc-2016-14
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -1984,6 +2023,7 @@ executable aoc-2016-15
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2034,6 +2074,7 @@ executable aoc-2024-01
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2084,6 +2125,7 @@ executable aoc-2024-02
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2134,6 +2176,7 @@ executable aoc-2024-03
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2184,6 +2227,7 @@ executable aoc-2024-04
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2234,6 +2278,7 @@ executable aoc-2025-01
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2284,6 +2329,7 @@ executable aoc-2025-02
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2334,6 +2380,7 @@ executable aoc-2025-03
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2384,6 +2431,7 @@ executable aoc-2025-04
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2434,6 +2482,7 @@ executable aoc-2025-05
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2484,6 +2533,7 @@ executable aoc-2025-06
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2534,6 +2584,7 @@ executable aoc-2025-07
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2584,6 +2635,7 @@ executable aoc-2025-08
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2634,6 +2686,7 @@ executable aoc-2025-09
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2684,6 +2737,7 @@ executable aoc-2025-10
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2734,6 +2788,7 @@ executable aoc-2025-11
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5
@@ -2784,6 +2839,7 @@ executable aoc-2025-12
       MemoTrie
     , adjunctions
     , aeson
+    , arithmoi
     , array
     , attoparsec
     , base >=4.7 && <5

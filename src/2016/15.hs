@@ -1,11 +1,16 @@
-{-# LANGUAGE LambdaCase #-}
-{-# OPTIONS_GHC -Wno-x-partial #-}
+import Data.Maybe (fromJust)
+import Math.NumberTheory.Moduli (SomeMod, modulo)
+import Math.NumberTheory.Moduli.Chinese (chineseSomeMod)
+
+newtype CRT = C {unCRT :: SomeMod} deriving (Show)
+
+instance Semigroup CRT where C x <> C y = C $ fromJust $ chineseSomeMod x y
+
+instance Monoid CRT where mempty = C (0 `modulo` 1)
 
 -- $setup
 -- >>> input = "Disc #1 has 5 positions; at time=0, it is at position 4.\nDisc #2 has 2 positions; at time=0, it is at position 1."
 -- >>> example = map parse (lines input)
-
-type Congruence = (Int, Int) -- (modulus, remainder)
 
 main :: IO ()
 main = do
@@ -13,11 +18,11 @@ main = do
   print $ solve input
   print $ partTwo input
 
-parse :: String -> Congruence
-parse s = (n, (n - (p + i) `mod` n))
+parse :: String -> CRT
+parse s = C $ (toInteger n - (p + i)) `modulo` n
   where
     ws = words s
-    i = read (tail (ws !! 1))
+    i = read (drop 1 (ws !! 1))
     n = read (ws !! 3)
     p = read (init (ws !! 11))
 
@@ -25,16 +30,8 @@ parse s = (n, (n - (p + i) `mod` n))
 -- >>> partTwo example
 -- 5
 -- 85
-solve, partTwo :: [Congruence] -> Int
-solve = snd . foldl' combine (1, 0)
+solve, partTwo :: [CRT] -> SomeMod
+solve = unCRT . mconcat
 partTwo d = solve (extra : d)
   where
-    extra = (11, (11 - (length d + 1) `mod` 11))
-
--- Combine two congruences:
---   x ≡ a (mod m)
---   x ≡ b (mod n)
-combine :: Congruence -> Congruence -> Congruence
-combine (m, a) (n, b) = (lcm m n, x `mod` lcm m n)
-  where
-    x = head [a + k * m | k <- [0 ..], (a + k * m) `mod` n == b]
+    extra = C $ 11 - (toInteger $ length d + 1) `modulo` 11
