@@ -42,6 +42,7 @@ executable aoc-2015-01
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -91,6 +92,7 @@ executable aoc-2015-02
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -140,6 +142,7 @@ executable aoc-2015-03
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -189,6 +192,7 @@ executable aoc-2015-04
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -238,6 +242,7 @@ executable aoc-2015-05
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -287,6 +292,7 @@ executable aoc-2015-06
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -336,6 +342,7 @@ executable aoc-2015-07
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -385,6 +392,7 @@ executable aoc-2015-08
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -434,6 +442,7 @@ executable aoc-2015-09
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -483,6 +492,7 @@ executable aoc-2015-10
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -532,6 +542,7 @@ executable aoc-2015-11
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -581,6 +592,7 @@ executable aoc-2015-12
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -630,6 +642,7 @@ executable aoc-2015-13
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -679,6 +692,7 @@ executable aoc-2015-14
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -728,6 +742,7 @@ executable aoc-2015-15
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -777,6 +792,7 @@ executable aoc-2015-16
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -826,6 +842,7 @@ executable aoc-2015-17
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -875,6 +892,7 @@ executable aoc-2015-18
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -924,6 +942,7 @@ executable aoc-2015-19
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -973,6 +992,7 @@ executable aoc-2015-20
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1022,6 +1042,7 @@ executable aoc-2015-21
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1071,6 +1092,7 @@ executable aoc-2015-22
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1120,6 +1142,7 @@ executable aoc-2015-23
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1169,6 +1192,7 @@ executable aoc-2015-24
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1218,6 +1242,7 @@ executable aoc-2015-25
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1267,6 +1292,7 @@ executable aoc-2016-01
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1316,6 +1342,7 @@ executable aoc-2016-02
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1365,6 +1392,7 @@ executable aoc-2016-03
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1414,6 +1442,7 @@ executable aoc-2016-04
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1463,6 +1492,7 @@ executable aoc-2016-05
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1512,6 +1542,7 @@ executable aoc-2016-06
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1561,6 +1592,7 @@ executable aoc-2016-07
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1610,6 +1642,7 @@ executable aoc-2016-08
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1659,6 +1692,7 @@ executable aoc-2016-09
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1708,6 +1742,7 @@ executable aoc-2016-10
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1757,6 +1792,7 @@ executable aoc-2016-11
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1806,6 +1842,7 @@ executable aoc-2016-12
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1855,6 +1892,57 @@ executable aoc-2016-13
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
+    , cryptonite
+    , data-fix
+    , deepseq
+    , extra
+    , free
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , list-shuffle
+    , memory
+    , mod
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , nonempty-zipper
+    , parallel
+    , parsec
+    , random
+    , recursion-schemes
+    , scientific
+    , sized-grid
+    , split
+    , uniplate
+    , vector
+    , vector-algorithms
+    , vector-sized
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2016-14
+  main-is: src/2016/14.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , adjunctions
+    , aeson
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bitvec
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1904,6 +1992,7 @@ executable aoc-2024-01
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -1953,6 +2042,7 @@ executable aoc-2024-02
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2002,6 +2092,7 @@ executable aoc-2024-03
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2051,6 +2142,7 @@ executable aoc-2024-04
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2100,6 +2192,7 @@ executable aoc-2025-01
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2149,6 +2242,7 @@ executable aoc-2025-02
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2198,6 +2292,7 @@ executable aoc-2025-03
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2247,6 +2342,7 @@ executable aoc-2025-04
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2296,6 +2392,7 @@ executable aoc-2025-05
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2345,6 +2442,7 @@ executable aoc-2025-06
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2394,6 +2492,7 @@ executable aoc-2025-07
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2443,6 +2542,7 @@ executable aoc-2025-08
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2492,6 +2592,7 @@ executable aoc-2025-09
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2541,6 +2642,7 @@ executable aoc-2025-10
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2590,6 +2692,7 @@ executable aoc-2025-11
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
@@ -2639,6 +2742,7 @@ executable aoc-2025-12
     , comonad
     , constraints
     , containers
+    , cryptohash-md5
     , cryptonite
     , data-fix
     , deepseq
