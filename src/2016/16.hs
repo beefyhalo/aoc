@@ -18,8 +18,8 @@ parse = V.fromList . map (Bit . (== '1'))
 solve :: Int -> V.Vector Bit -> String
 solve n bits = intToDigit . fromEnum <$> V.toList result
   where
-    filledData = V.take n $ until ((>= n) . V.length) dragon bits
-    result = until (odd . V.length) checksum filledData
+    filled = V.take n $ until ((>= n) . V.length) dragon bits
+    result = until (odd . V.length) checksum filled
 
 -- >>> checksum $ checksum example
 -- [1,0,0]
