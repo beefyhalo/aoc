@@ -1,5 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeApplications #-}
+{-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Crypto.Hash (MD5, hash)
 import qualified Data.ByteArray.Encoding as BA
