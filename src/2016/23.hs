@@ -80,13 +80,18 @@ ixRel n f z = case moveOffset n z of
      in fromMaybe z . back . (`Z.replace` focused) <$> f (Z.current focused)
 
 step :: Z.Zipper Ins -> Regs -> Maybe (Z.Zipper Ins, Regs)
-step z regs =
-  optimize z regs <|> case Z.current z of
-    Cpy src (R dst) -> (,regs & access dst .~ get regs src) <$> Z.right z
-    Inc r -> (,regs & access r +~ 1) <$> Z.right z
-    Dec r -> (,regs & access r -~ 1) <$> Z.right z
-    Tgl arg -> (,regs) <$> Z.right (z & ixRel (get regs arg) %~ toggle)
-    Jnz x y -> (,regs) <$> moveOffset (if get regs x /= 0 then get regs y else 1) z
+step z regs = optimize z regs <|> fmap (,regs') z'
+  where
+    instr = Z.current z
+    regs' = case instr of
+      Cpy src (R dst) -> regs & access dst .~ get regs src
+      Inc r -> regs & access r +~ 1
+      Dec r -> regs & access r -~ 1
+      _ -> regs
+    z' = case instr of
+      Tgl arg -> Z.right (z & ixRel (get regs arg) %~ toggle)
+      Jnz x y -> moveOffset (if get regs x /= 0 then get regs y else 1) z
+      _ -> Z.right z
 
 -- detect a += b * d pattern
 -- Pattern: inc a, dec c, jnz c -2, dec d, jnz d -5
