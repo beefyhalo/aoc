@@ -8,7 +8,6 @@ import Control.Applicative ((<|>))
 import Control.Lens
 import qualified Data.List.NonEmpty as NE
 import qualified Data.List.NonEmpty.Zipper as Z
-import Data.List.Split (wordsBy)
 import Data.Maybe (fromMaybe)
 import Text.Read (readMaybe)
 
@@ -47,7 +46,7 @@ parse :: String -> Z.Zipper Ins
 parse = Z.fromNonEmpty . NE.fromList . map parseLine . lines
   where
     parseArg s = maybe (R (head s)) V (readMaybe s)
-    parseLine s = case wordsBy (`elem` " ,+") s of
+    parseLine s = case words s of
       ["cpy", x, [y]] -> Cpy (parseArg x) (R y)
       ["inc", [x]] -> Inc x
       ["dec", [x]] -> Dec x
