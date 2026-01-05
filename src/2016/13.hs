@@ -28,8 +28,8 @@ bfs stop maxDist start n = go (Seq.singleton (start, 0)) (Set.singleton start)
     go ((here, dist) Seq.:<| rest) seen
       | stop here = (Just dist, seen)
       | dist >= maxDist = go rest seen
-      | otherwise =
-          let next = [p | p <- neighbors here, isOpen n p, p `Set.notMember` seen, p >= (0, 0)]
-              rest' = rest <> Seq.fromList [(p, dist + 1) | p <- next]
-              seen' = foldr Set.insert seen next
-           in go rest' seen'
+      | otherwise = go rest' seen'
+      where
+        next = [p | p <- neighbors here, isOpen n p, Set.notMember p seen, p >= (0, 0)]
+        rest' = rest <> Seq.fromList [(p, dist + 1) | p <- next]
+        seen' = foldr Set.insert seen next
