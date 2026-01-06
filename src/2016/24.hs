@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
-import Data.Array
-import Data.Bits
+import Data.Array (Array, array, assocs, bounds, inRange, listArray, (!))
+import Data.Bits (bit, clearBit, shiftL, testBit)
 import Data.Char (digitToInt, isDigit)
 import Data.Sequence (Seq (..))
 import qualified Data.Sequence as Q
@@ -10,7 +10,7 @@ import qualified Data.Set as S
 type Coord = (Int, Int)
 
 inf :: Int
-inf = 10 ^ (6 :: Int)
+inf = maxBound `div` 2
 
 -- $setup
 -- >>> input = "###########\n#0.1.....2#\n#.#######.#\n#4.......3#\n###########"
@@ -28,13 +28,6 @@ parse s = listArray ((0, 0), (h - 1, w - 1)) (concat rows)
     rows = lines s
     (h, w) = (length rows, length (head rows))
 
-allDists :: Array Coord Char -> (Int, Array Coord Int)
-allDists grid = (n, dists)
-  where
-    pois = [(digitToInt c, p) | (p, c) <- assocs grid, isDigit c]
-    n = maximum (map fst pois)
-    dists = array ((0, 0), (n, n)) [((i, j), bfs grid p1 p2) | (i, p1) <- pois, (j, p2) <- pois]
-
 -- Held-Karp TSP
 -- >>> solve False grid
 -- >>> solve True grid
@@ -44,7 +37,7 @@ solve :: Bool -> Array Coord Char -> Int
 solve returnToStart grid = minimum [dp ! (fullMask, i) + endCost i | i <- [0 .. n]]
   where
     (n, dists) = allDists grid
-    fullMask = (1 `shiftL` (n + 1)) - 1
+    fullMask = 1 `shiftL` (n + 1) - 1
 
     dp :: Array Coord Int
     dp = array ((1, 0), (fullMask, n)) [((m, l), cost m l) | m <- [1 .. fullMask], l <- [0 .. n]]
@@ -57,6 +50,13 @@ solve returnToStart grid = minimum [dp ! (fullMask, i) + endCost i | i <- [0 .. 
            in minimum (inf : candidates)
 
     endCost i = if returnToStart then dists ! (i, 0) else 0
+
+allDists :: Array Coord Char -> (Int, Array Coord Int)
+allDists grid = (n, dists)
+  where
+    pois = [(digitToInt c, p) | (p, c) <- assocs grid, isDigit c]
+    n = maximum (map fst pois)
+    dists = array ((0, 0), (n, n)) [((i, j), bfs grid p1 p2) | (i, p1) <- pois, (j, p2) <- pois]
 
 bfs :: Array Coord Char -> Coord -> Coord -> Int
 bfs grid start end = go (Q.singleton (start, 0)) (S.singleton start)
