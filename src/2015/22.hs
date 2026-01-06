@@ -78,7 +78,7 @@ solve start = go (H.singleton (0, start)) S.empty
       | otherwise = go heap' seen'
       where
         newStates = runStateT (execWriterT step) st
-        st' = set (player . mana) 0 st
+        st' = st & player . mana .~ 0
         heap' = foldr (\(Sum cost, s) -> H.insert (ms + cost, s)) rest newStates
         seen' = S.insert st' seen
     go _ _ = error "No solution"

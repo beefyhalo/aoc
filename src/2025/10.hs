@@ -64,11 +64,11 @@ parse = fromRight (error "failed to parse") . parseOnly machineParser
     joltageParser = char '{' *> decimal `sepBy` char ',' <* char '}'
 
 -- >>> solve example
+-- >>> partTwo example
 -- 7
+-- 33
 solve, partTwo :: [Machine] -> Int
 solve = sum . map minPressesXOR
--- >>> partTwo example
--- 33
 partTwo = sum . map minPresses
 
 -- >>> map minPressesXOR example
