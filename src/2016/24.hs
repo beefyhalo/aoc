@@ -9,6 +9,10 @@ import qualified Data.Set as S
 
 type Coord = (Int, Int)
 
+data Cell = Free | Wall | POI Int deriving (Eq)
+
+type Grid = Array Coord Cell
+
 inf :: Int
 inf = maxBound `div` 2
 
@@ -22,18 +26,23 @@ main = do
   print $ solve False input
   print $ solve True input
 
-parse :: String -> Array Coord Char
-parse s = listArray ((0, 0), (h - 1, w - 1)) (concat rows)
+parse :: String -> Grid
+parse s = listArray ((0, 0), (h - 1, w - 1)) [parseCell c | c <- concat rows]
   where
     rows = lines s
     (h, w) = (length rows, length (head rows))
+    parseCell '#' = Wall
+    parseCell '.' = Free
+    parseCell c
+      | isDigit c = POI (digitToInt c)
+      | otherwise = error "invalid input"
 
 -- Held-Karp TSP
 -- >>> solve False grid
 -- >>> solve True grid
 -- 14
 -- 20
-solve :: Bool -> Array Coord Char -> Int
+solve :: Bool -> Grid -> Int
 solve returnToStart grid = minimum [dp ! (fullMask, i) + endCost i | i <- [0 .. n]]
   where
     (n, dists) = allDists grid
@@ -51,14 +60,14 @@ solve returnToStart grid = minimum [dp ! (fullMask, i) + endCost i | i <- [0 .. 
 
     endCost i = if returnToStart then dists ! (i, 0) else 0
 
-allDists :: Array Coord Char -> (Int, Array Coord Int)
+allDists :: Grid -> (Int, Array Coord Int)
 allDists grid = (n, dists)
   where
-    pois = [(digitToInt c, p) | (p, c) <- assocs grid, isDigit c]
+    pois = [(i, pos) | (pos, POI i) <- assocs grid]
     n = maximum (map fst pois)
     dists = array ((0, 0), (n, n)) [((i, j), bfs grid p1 p2) | (i, p1) <- pois, (j, p2) <- pois]
 
-bfs :: Array Coord Char -> Coord -> Coord -> Int
+bfs :: Grid -> Coord -> Coord -> Int
 bfs grid start end = go (Q.singleton (start, 0)) (S.singleton start)
   where
     go Empty _ = error "no path found!"
@@ -66,7 +75,7 @@ bfs grid start end = go (Q.singleton (start, 0)) (S.singleton start)
       | curr == end = d
       | otherwise = go rest' seen'
       where
-        next = [p | p <- neighbors curr, inRange (bounds grid) p, grid ! p /= '#', S.notMember p seen]
+        next = [p | p <- neighbors curr, inRange (bounds grid) p, grid ! p /= Wall, S.notMember p seen]
         seen' = foldr S.insert seen next
         rest' = rest <> Q.fromList [(p, d + 1) | p <- next]
         neighbors (x, y) = [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
