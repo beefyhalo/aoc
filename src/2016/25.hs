@@ -50,8 +50,8 @@ parse = Z.fromNonEmpty . NE.fromList . map parseLine . lines
 solve :: Z.Zipper Ins -> Int
 solve prog = head [a | a <- [0 ..], good (outs prog (a, 0, 0, 0))]
   where
-    good = and . zipWith (==) (cycle [0, 1])
-    outs z rs = take 10 [o | Just o <- unfoldr (uncurry step) (z, rs)]
+    good xs = take 10 xs == take 10 (cycle [0, 1])
+    outs z rs = [o | Just o <- unfoldr (uncurry step) (z, rs)]
 
 step :: Z.Zipper Ins -> Regs -> Maybe (Maybe Int, (Z.Zipper Ins, Regs))
 step z regs = (out,) . (,regs') <$> z'
