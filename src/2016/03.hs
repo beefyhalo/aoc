@@ -9,9 +9,8 @@ main = do
 
 solve, partTwo :: [[Int]] -> Int
 solve = length . filter isTriangle
+partTwo = solve . concatMap transpose . chunksOf 3
 
 isTriangle :: [Int] -> Bool
 isTriangle [a, b, c] = a + b > c && a + c > b && b + c > a
 isTriangle _ = False
-
-partTwo = solve . concatMap transpose . chunksOf 3

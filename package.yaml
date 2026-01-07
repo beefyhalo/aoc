@@ -177,6 +177,8 @@ executables:
     main: src/2016/25.hs
   aoc-2017-01:
     main: src/2017/01.hs
+  aoc-2017-02:
+    main: src/2017/02.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:
