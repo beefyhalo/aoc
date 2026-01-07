@@ -23,6 +23,7 @@ partTwo n = head [v | v <- spiral, v > n]
 dirs :: [(Int, Int)]
 dirs = concat $ zipWith replicate lengths (cycle [(1, 0), (0, 1), (-1, 0), (0, -1)])
   where
+    -- Step lengths increase every 2 turns
     lengths = concatMap (replicate 2) [1 ..]
 
 spiral :: [Int]
