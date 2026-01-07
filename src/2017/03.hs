@@ -29,8 +29,8 @@ spiral :: [Int]
 spiral = [v | (_, _, v) <- scanl step ((0, 0), M.singleton (0, 0) 1, 1) dirs]
   where
     step ((x, y), m, _) (dx, dy) =
-      let newPos = (x + dx, y + dy)
-          val = sum [M.findWithDefault 0 n m | n <- neighbors newPos]
-       in (newPos, M.insert newPos val m, val)
+      let pos = (x + dx, y + dy)
+          v = sum [M.findWithDefault 0 n m | n <- neighbors pos]
+       in (pos, M.insert pos v m, v)
 
     neighbors (x, y) = [(x + dx, y + dy) | dx <- [-1 .. 1], dy <- [-1 .. 1], (dx, dy) /= (0, 0)]
