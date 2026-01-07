@@ -4,11 +4,10 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
-import Control.Applicative ((<|>))
 import Control.Lens
+import Data.List (unfoldr)
 import qualified Data.List.NonEmpty as NE
 import qualified Data.List.NonEmpty.Zipper as Z
-import Data.Maybe (fromMaybe)
 import Text.Read (readMaybe)
 
 type Reg = Char
@@ -29,7 +28,6 @@ data Ins
   | Inc Reg
   | Dec Reg
   | Jnz Arg Arg
-  | Tgl Arg
   | Out Arg
   deriving (Show)
 
@@ -47,58 +45,34 @@ parse = Z.fromNonEmpty . NE.fromList . map parseLine . lines
       ["inc", [x]] -> Inc x
       ["dec", [x]] -> Dec x
       ["jnz", x, y] -> Jnz (parseArg x) (parseArg y)
-      ["tgl", x] -> Tgl (parseArg x)
       ["out", x] -> Out (parseArg x)
 
 solve :: Z.Zipper Ins -> Int
 solve prog = head [a | a <- [0 ..], good (outs prog (a, 0, 0, 0))]
   where
-    good xs = and $ zipWith (==) (cycle [0, 1]) (take 10 xs)
+    good = and . zipWith (==) (cycle [0, 1])
+    outs z rs = take 10 [o | Just o <- unfoldr (uncurry step) (z, rs)]
 
-outs :: Z.Zipper Ins -> Regs -> [Int]
-outs z rs = case step z rs of
-  Nothing -> []
-  Just (z', rs', Just o) -> o : outs z' rs'
-  Just (z', rs', Nothing) -> outs z' rs'
-
-get :: Regs -> Arg -> Int
-get rs = \case
-  V n -> n
-  R r -> rs ^. access r
-
-toggle :: Ins -> Ins
-toggle = \case
-  Inc r -> Dec r
-  Dec r -> Inc r
-  Tgl (R r) -> Inc r
-  Jnz x y -> Cpy x y
-  Cpy x y -> Jnz x y
-
-ixRel :: Int -> Traversal' (Z.Zipper a) a
-ixRel n f z = case moveOffset n z of
-  Nothing -> pure z
-  Just focused ->
-    let back = moveOffset (-n)
-     in fromMaybe z . back . (`Z.replace` focused) <$> f (Z.current focused)
-
-step :: Z.Zipper Ins -> Regs -> Maybe (Z.Zipper Ins, Regs, Maybe Int)
-step z regs = (,regs',out) <$> z'
+step :: Z.Zipper Ins -> Regs -> Maybe (Maybe Int, (Z.Zipper Ins, Regs))
+step z regs = (out,) . (,regs') <$> z'
   where
     instr = Z.current z
 
+    val (V i) = i
+    val (R r) = regs ^. access r
+
     out = case instr of
-      Out x -> Just (get regs x)
+      Out x -> Just (val x)
       _ -> Nothing
 
     regs' = case instr of
-      Cpy src (R dst) -> regs & access dst .~ get regs src
+      Cpy src (R dst) -> regs & access dst .~ val src
       Inc r -> regs & access r +~ 1
       Dec r -> regs & access r -~ 1
       _ -> regs
 
     z' = case instr of
-      Tgl arg -> Z.right (z & ixRel (get regs arg) %~ toggle)
-      Jnz x y -> moveOffset (if get regs x /= 0 then get regs y else 1) z
+      Jnz x y | val x /= 0 -> moveOffset (val y) z
       _ -> Z.right z
 
 moveOffset :: Int -> Z.Zipper a -> Maybe (Z.Zipper a)

@@ -4,7 +4,6 @@
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Control.Lens
-import Data.List (unfoldr)
 import qualified Data.List.NonEmpty as NE
 import qualified Data.List.NonEmpty.Zipper as Z
 import Text.Read (readMaybe)
@@ -19,13 +18,13 @@ access 'b' = _2
 access 'c' = _3
 access 'd' = _4
 
-data Val = VInt Int | VReg Reg deriving (Eq, Show)
+data Arg = R Reg | V Int deriving (Eq, Show)
 
 data Instr
-  = Cpy Val Reg
+  = Cpy Arg Reg
   | Inc Reg
   | Dec Reg
-  | Jnz Val Val
+  | Jnz Arg Arg
   deriving (Eq, Show)
 
 -- $setup
@@ -46,20 +45,20 @@ parse = Z.fromNonEmpty . NE.fromList . map parseLine . lines
       ["inc", [x]] -> Inc x
       ["dec", [x]] -> Dec x
       ["jnz", x, y] -> Jnz (parseVal x) (parseVal y)
-    parseVal s = maybe (VReg (head s)) VInt (readMaybe s)
+    parseVal s = maybe (R (head s)) V (readMaybe s)
 
 -- >>> solve example (0,0,0,0)
 -- (42,0,0,0)
 solve :: Z.Zipper Instr -> Regs -> Regs
-solve z r = last $ unfoldr (fmap (\next -> (snd next, next)) . uncurry step) (z, r)
+solve z r = maybe r (uncurry solve) (step z r)
 
 step :: Z.Zipper Instr -> Regs -> Maybe (Z.Zipper Instr, Regs)
 step z regs = (,regs') <$> moveOffset offset z
   where
     instr = Z.current z
 
-    val (VInt i) = i
-    val (VReg r) = regs ^. access r
+    val (V i) = i
+    val (R r) = regs ^. access r
 
     regs' = case instr of
       Cpy v r -> regs & access r .~ val v
