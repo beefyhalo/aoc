@@ -4,7 +4,7 @@
 import Data.Either (fromLeft)
 import Data.List (group, sort, sortOn)
 import Data.List.Split (wordsBy)
-import qualified Data.Map as M
+import qualified Data.Map.Strict as M
 import Data.Tree (Tree (Node, rootLabel), unfoldTree)
 
 type Prog = (Int, [String])
@@ -32,12 +32,12 @@ partTwo root input = fromLeft 0 $ findBad tree
     tree = unfoldTree (\name -> let (w, children) = input M.! name in ((name, w), children)) root
 
 findBad :: Tree (String, Int) -> Either Int Int
-findBad (Node (_, weight) children) = do
+findBad (Node (_, w) children) = do
   childWeights <- traverse findBad children
   case sortOn length (group $ sort childWeights) of
-    [[wrongWeight], rightWeight : _] -> Left (diff + badWeight)
+    [[wrongWeight], rightWeight : _] -> Left (badWeight + diff)
       where
         diff = rightWeight - wrongWeight
         Just badIndex = lookup wrongWeight (zip childWeights [0 ..])
         (_, badWeight) = rootLabel (children !! badIndex)
-    _ -> Right (weight + sum childWeights) -- Subtree is balanced
+    _ -> Right (w + sum childWeights) -- Subtree is balanced
