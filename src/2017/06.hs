@@ -8,7 +8,7 @@ main = do
   print $ solve input
 
 -- >>> solve (V.fromList [0,2,7,0])
--- (5,4)
+-- index out of bounds (4,4)
 solve :: Vector Int -> (Int, Int)
 solve = go M.empty 0
   where
