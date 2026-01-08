@@ -19,11 +19,11 @@ parse line = (r, delta, cr, co, read cv)
     delta = if op == "inc" then read v else -read v
 
 solve :: [Instr] -> (Int, Int)
-solve instrs = (maximum final, maximum maxes)
+solve instrs = (final, maximum maxes)
   where
     regss = scanl step MM.empty instrs
-    final = last regss
     maxes = [maximum regs | regs <- regss, not $ null regs]
+    final = last maxes
 
 step :: Regs -> Instr -> Regs
 step regs (r, delta, cr, co, cv)
