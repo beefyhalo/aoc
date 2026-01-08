@@ -1,6 +1,6 @@
 import qualified Data.Map.Strict as M
-import Data.Vector (Vector, (!), (//))
-import qualified Data.Vector as V
+import Data.Vector.Unboxed (Vector, (!), (//))
+import qualified Data.Vector.Unboxed as V
 
 main :: IO ()
 main = do
@@ -20,19 +20,19 @@ solve = go M.empty 0
 step :: Vector Int -> Vector Int
 step banks = V.accum (+) (banks // [(maxI, 0)]) updates
   where
-    len = V.length banks
+    n = V.length banks
     maxI = V.maxIndex banks
     val = banks ! maxI
-    updates = [((maxI + i) `mod` len, 1) | i <- [1 .. val]]
+    updates = [((maxI + i) `mod` n, 1) | i <- [1 .. val]]
 
--- O(len)
+-- O(n)
 -- step :: Vector Int -> Vector Int
--- step banks = V.generate len update
+-- step banks = V.generate n update
 --   where
---     len = V.length banks
+--     n = V.length banks
 --     maxI = V.maxIndex banks
 --     val = banks ! maxI
---     (q, r) = val `divMod` len
+--     (q, r) = val `divMod` n
 --     update i = (if i == maxI then 0 else banks ! i) + q + extra
 --       where
---         extra = if (i - maxI + len - 1) `mod` len + 1 <= r then 1 else 0
+--         extra = if (i - maxI + n - 1) `mod` n + 1 <= r then 1 else 0

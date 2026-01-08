@@ -2935,6 +2935,58 @@ executable aoc-2017-06
     , vector-space
   default-language: Haskell2010
 
+executable aoc-2017-07
+  main-is: src/2017/07.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , adjunctions
+    , aeson
+    , arithmoi
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bitvec
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptohash-md5
+    , cryptonite
+    , data-fix
+    , deepseq
+    , extra
+    , free
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , list-shuffle
+    , memory
+    , mod
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , nonempty-zipper
+    , parallel
+    , parsec
+    , random
+    , recursion-schemes
+    , scientific
+    , semirings
+    , sized-grid
+    , split
+    , uniplate
+    , vector
+    , vector-algorithms
+    , vector-sized
+    , vector-space
+  default-language: Haskell2010
+
 executable aoc-2024-01
   main-is: src/2024/01.hs
   other-modules:
