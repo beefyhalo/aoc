@@ -1,46 +1,37 @@
-{-# LANGUAGE BangPatterns #-}
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# OPTIONS_GHC -Wno-name-shadowing #-}
-{-# OPTIONS_GHC -Wno-unused-do-bind #-}
+{-# LANGUAGE RecordWildCards #-}
 
-import Control.Applicative
-import Data.Attoparsec.ByteString.Char8 (Parser, anyChar, char, endOfInput, parseOnly, sepBy)
-import Data.Attoparsec.Combinator (lookAhead)
 import qualified Data.ByteString.Char8 as B
 
-type Result = (Int, Int)
+data State = Normal | Garbage | Canceled deriving (Show)
+
+data Context = Context
+  { depth, score, garbage :: !Int,
+    mode :: State
+  }
+  deriving (Show)
 
 main :: IO ()
 main = do
   input <- B.readFile "input/2017/09.txt"
-  print $ parseOnly stream input
+  print $ solve input
 
--- >>> map (parseOnly stream) ["{{{},{},{{}}}}", "{{<ab>},{<ab>},{<ab>},{<ab>}}"]
--- [Right (16,0),Right (9,8)]
-stream :: Parser Result
-stream = group 1 <* endOfInput
+-- >>> map solve ["{{{},{},{{}}}}", "{{<ab>},{<ab>},{<ab>},{<ab>}}"]
+-- [(16,0),(9,8)]
+solve :: B.ByteString -> (Int, Int)
+solve input = (score, garbage)
+  where
+    Context {..} = B.foldl' step (Context 0 0 0 Normal) input
 
-group :: Int -> Parser Result
-group depth = do
-  char '{'
-  rs <- sepBy (element (depth + 1)) (char ',')
-  char '}'
-  let (scores, garbage) = unzip rs
-  pure (depth + sum scores, sum garbage)
-
-element :: Int -> Parser Result
-element depth = group depth <|> garbage
-
-garbage :: Parser Result
-garbage = do
-  char '<'
-  n <- garbageChars 0
-  char '>'
-  pure (0, n)
-
-garbageChars :: Int -> Parser Int
-garbageChars !n =
-  (char '!' *> anyChar *> garbageChars n)
-    <|> (lookAhead (char '>') *> pure n)
-    <|> (anyChar *> garbageChars (n + 1))
+step :: Context -> Char -> Context
+step ctx@Context {..} c = case mode of
+  Canceled -> ctx {mode = Garbage}
+  Garbage -> case c of
+    '!' -> ctx {mode = Canceled}
+    '>' -> ctx {mode = Normal}
+    _ -> ctx {garbage = garbage + 1}
+  Normal -> case c of
+    '<' -> ctx {mode = Garbage}
+    '{' -> ctx {depth = depth + 1}
+    '}' -> ctx {score = score + depth, depth = depth - 1}
+    _ -> ctx
