@@ -11,6 +11,7 @@ import Data.List (find, scanl')
 import Data.List.Split (chunksOf)
 import Data.Maybe (fromJust)
 import Data.Word (Word8)
+import Text.Printf (printf)
 
 -- $setup
 -- >>> example = candidates "abc"
@@ -27,7 +28,8 @@ main = do
 -- "05ace8e3"
 solve, partTwo :: [Digest MD5] -> String
 solve keys = take 8 [hex (BA.index d 2) | d <- keys]
-partTwo = fromJust . find (none (== '_')) . scanl' step (replicate 8 '_')
+partTwo keys = head [h | h <- scanl' step (replicate 8 '_') keys, none (== '_') h]
+-- partTwo keys = fromJust . find (none (== '_')) . scanl' step (replicate 8 '_')
   where
     step :: String -> Digest MD5 -> String
     step out d
@@ -44,7 +46,7 @@ isValid :: Digest MD5 -> Bool
 isValid d = BA.index d 0 == 0 && BA.index d 1 == 0 && BA.index d 2 .&. 0xF0 == 0
 
 hex :: Word8 -> Char
-hex n = "0123456789abcdef" !! fromIntegral n
+hex = head . printf "%x"
 
 -- Generate infinite list of valid hashes in parallel chunks
 candidates :: BC.ByteString -> [Digest MD5]
