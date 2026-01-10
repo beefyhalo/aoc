@@ -27,13 +27,11 @@ parse s = (read a, read <$> splitOn ", " b)
 -- 2
 solve, partTwo :: Graph -> Int
 solve g = IS.size $ dfs g 0
-partTwo g = go $ IM.keysSet g
+partTwo g = fst $ IS.foldl' go (0, IS.empty) (IM.keysSet g)
   where
-    go r
-      | IS.null r = 0
-      | otherwise =
-          let c = dfs g (IS.findMin r)
-           in 1 + go (r IS.\\ c)
+    go (n, seen) x
+      | IS.member x seen = (n, seen)
+      | otherwise = (n + 1, IS.union seen (dfs g x))
 
 dfs :: Graph -> Int -> IS.IntSet
 dfs g = go IS.empty
