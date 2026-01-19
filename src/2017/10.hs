@@ -1,4 +1,4 @@
-import Control.Monad (foldM_, forM_)
+import Control.Monad (foldM_)
 import Control.Monad.ST (ST)
 import Data.Bits (xor)
 import Data.Char (ord)
@@ -6,6 +6,7 @@ import Data.List.Split (splitOn)
 import qualified Data.Vector.Unboxed as V
 import qualified Data.Vector.Unboxed.Mutable as MV
 import Text.Printf (printf)
+import Data.Foldable (for_)
 
 main :: IO ()
 main = do
@@ -39,7 +40,7 @@ runKnot lengths rounds size =
 
 rev :: MV.MVector s Int -> Int -> Int -> ST s ()
 rev v p l =
-  forM_ [0 .. l `div` 2 - 1] $ \i ->
+  for_ [0 .. l `div` 2 - 1] $ \i ->
     MV.swap v ((p + i) `mod` n) ((p + l - 1 - i) `mod` n)
   where
     n = MV.length v
