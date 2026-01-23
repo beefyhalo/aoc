@@ -17,9 +17,8 @@ data Inst = Snd Val | Set Char Val | Add Char Val | Mul Char Val | Mod Char Val 
 data Machine = Machine
   { _ip :: Int,
     _regs :: Map Char Int,
-    _lastSnd :: Int,
     _inbox :: [Int],
-    _out :: Int
+    _out :: [Int]
   }
 
 makeLenses ''Machine
@@ -34,7 +33,7 @@ reg c = regs . at c . non 0
 main :: IO ()
 main = do
   input <- parse <$> readFile "input/2017/18.txt"
-  let m = Machine 0 M.empty 0 [] 0
+  let m = Machine 0 M.empty [] []
   print $ solve input m
   print $ partTwo input (m & reg 'p' .~ 0, m & reg 'p' .~ 1)
 
@@ -51,19 +50,19 @@ parse = V.fromList . map parseLine . lines
       ["jgz", x, y] -> Jgz (parseVal x) (parseVal y)
     parseVal s = maybe (R $ head s) L (readMaybe s)
 
--- >>> solve example (Machine 0 M.empty 0 [] 0)
+-- >>> solve example (Machine 0 M.empty [] [])
 -- 4
 solve :: Vector Inst -> Machine -> Int
-solve prog = _lastSnd . until recovered (fst . step prog)
+solve prog = head . _out . until recovered (fst . step prog)
   where
     recovered m = case prog !? (m ^. ip) of
       Just (Rcv c) -> m ^. reg c /= 0
       _ -> False
 
--- >>> partTwo example (Machine 0 M.empty 0 [] 0) (Machine 0 M.empty 0 [] 0)
+-- >>> partTwo example (Machine 0 M.empty [] [], Machine 0 M.empty [] [])
 -- 1
 partTwo :: Vector Inst -> (Machine, Machine) -> Int
-partTwo prog = _out . snd . until blocked go
+partTwo prog = length . _out . snd . until blocked go
   where
     go (a, b) =
       let (a', sa) = step prog a
@@ -85,7 +84,7 @@ step prog m = case prog !? (m ^. ip) of
     Add r x -> (m & reg r +~ val x & ip +~ 1, Nothing)
     Mul r x -> (m & reg r *~ val x & ip +~ 1, Nothing)
     Mod r x -> (m & reg r %~ (`mod` val x) & ip +~ 1, Nothing)
-    Snd x -> let v = val x in (m & lastSnd .~ v & out +~ 1 & ip +~ 1, Just v)
+    Snd x -> let v = val x in (m & out <>:~ [v] & ip +~ 1, Just v)
     Jgz x y -> (m & ip +~ if val x > 0 then val y else 1, Nothing)
     Rcv r -> case m ^. inbox of
       (v : vs) -> (m & reg r .~ v & inbox .~ vs & ip +~ 1, Nothing)
