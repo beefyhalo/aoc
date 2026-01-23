@@ -2,7 +2,7 @@
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Data.Either (fromLeft)
-import Data.List (group, sort, sortOn)
+import Data.List (elemIndex, group, sort, sortOn)
 import Data.List.Split (wordsBy)
 import qualified Data.Map.Strict as M
 import Data.Tree (Tree (Node, rootLabel), unfoldTree)
@@ -13,7 +13,7 @@ main :: IO ()
 main = do
   input <- M.fromList . map parse . lines <$> readFile "input/2017/07.txt"
   let root = solve input
-  putStrLn $ root
+  putStrLn root
   print $ partTwo root input
 
 parse :: String -> (String, Prog)
@@ -38,6 +38,6 @@ findBad (Node (_, w) children) = do
     [[wrongWeight], rightWeight : _] -> Left (badWeight + diff)
       where
         diff = rightWeight - wrongWeight
-        Just badIndex = lookup wrongWeight (zip childWeights [0 ..])
+        Just badIndex = elemIndex wrongWeight childWeights
         (_, badWeight) = rootLabel (children !! badIndex)
     _ -> Right (w + sum childWeights) -- Subtree is balanced

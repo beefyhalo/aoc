@@ -7,9 +7,8 @@ import Crypto.Hash (Digest, MD5, hash)
 import Data.Bits (shiftR, (.&.))
 import qualified Data.ByteArray as BA
 import qualified Data.ByteString.Char8 as BC
-import Data.List (find, scanl')
+import Data.List (scanl')
 import Data.List.Split (chunksOf)
-import Data.Maybe (fromJust)
 import Data.Word (Word8)
 import Text.Printf (printf)
 
@@ -29,7 +28,6 @@ main = do
 solve, partTwo :: [Digest MD5] -> String
 solve keys = take 8 [hex (BA.index d 2) | d <- keys]
 partTwo keys = head [h | h <- scanl' step (replicate 8 '_') keys, none (== '_') h]
--- partTwo keys = fromJust . find (none (== '_')) . scanl' step (replicate 8 '_')
   where
     step :: String -> Digest MD5 -> String
     step out d

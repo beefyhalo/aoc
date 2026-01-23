@@ -1,6 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE NumericUnderscores #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
+{- HLINT ignore "Use underscore" -}
 
 import Control.Arrow ((***))
 import Data.Bits (xor, (.&.))
@@ -26,7 +27,7 @@ check :: Int -> Int -> Int -> (Int, Int) -> Int
 check mult1 mult2 limit start =
   sum
     [ 1
-    | (a, b) <- take limit $ iterate ((next 16807 mult1) *** (next 48271 mult2)) start,
+    | (a, b) <- take limit $ iterate (next 16807 mult1 *** next 48271 mult2) start,
       (a `xor` b) .&. 0xFFFF == 0
     ]
 

@@ -1,3 +1,4 @@
+{-# LANGUAGE BangPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import qualified Data.IntMap.Strict as IM
@@ -29,7 +30,7 @@ solve, partTwo :: Graph -> Int
 solve g = IS.size $ dfs g 0
 partTwo g = fst $ IS.foldl' go (0, IS.empty) (IM.keysSet g)
   where
-    go (n, seen) x
+    go (!n, !seen) x
       | IS.member x seen = (n, seen)
       | otherwise = (n + 1, IS.union seen (dfs g x))
 
