@@ -22,7 +22,7 @@ main = do
   print $ partTwo input
 
 parse :: String -> CRT
-parse s = C $ -(p + i) `modulo` fromInteger n
+parse s = C $ -((p + i) `modulo` fromInteger n)
   where
     [i, n, _, p] = map read $ wordsBy (not . isDigit) s
 
@@ -34,4 +34,4 @@ solve, partTwo :: [CRT] -> SomeMod
 solve = unCRT . mconcat
 partTwo d = solve (extra : d)
   where
-    extra = C $ -toInteger (length d + 1) `modulo` 11
+    extra = C $ -(toInteger (length d + 1) `modulo` 11)

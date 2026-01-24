@@ -1,5 +1,6 @@
 {-# LANGUAGE NumericUnderscores #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Control.Lens (ix, none, (&), (.~))
 import Control.Parallel.Strategies (parBuffer, rseq, using)
