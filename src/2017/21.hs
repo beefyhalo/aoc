@@ -11,11 +11,12 @@
 {-# OPTIONS_GHC -fplugin GHC.TypeLits.KnownNat.Solver #-}
 {-# OPTIONS_GHC -fplugin GHC.TypeLits.Normalise #-}
 
+import Data.AffineSpace (AffineSpace (..))
 import Data.Constraint (Dict (Dict), withDict)
 import Data.Foldable (toList)
 import Data.Functor.Rep (index, tabulate)
-import Data.List (intercalate)
-import Data.List.Split (splitOn)
+import Data.List (intercalate, transpose)
+import Data.List.Split (chunksOf, splitOn)
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as M
 import Data.Proxy (Proxy (Proxy))
@@ -27,14 +28,37 @@ import Unsafe.Coerce (unsafeCoerce)
 type G n = Grid '[HardWrap n, HardWrap n] Char
 
 data RuleMaps = RM
-  { rules23 :: Map String (G 3),
-    rules34 :: Map String (G 4)
+  { _rules23 :: Map String (G 3),
+    _rules34 :: Map String (G 4)
   }
 
 data SomeGrid where
   SomeGrid :: (KnownNat n, 1 <= n, KnownNat (n GHC.* n)) => G n -> SomeGrid
 
--- | Generates all 8 symmetries (4 rotations x 2 flips)
+
+main :: IO ()
+main = do
+  input <- parse <$> readFile "input/2017/21.txt"
+  let Just start = gridFromList @'[HardWrap 3, HardWrap 3] [".#.", "..#", "###"]
+  print $ solve input start
+
+parse :: String -> RuleMaps
+parse s = RM (mk @2 @3) (mk @3 @4)
+  where
+    raw = [(splitOn "/" a, splitOn "/" b) | [a, "=>", b] <- words <$> lines s]
+    mk :: forall n m. (KnownNat n, KnownNat m, KnownNat (n GHC.* n), KnownNat (m GHC.* m), 1 <= n) => Map String (G m)
+    mk = M.fromList $ do
+      (lhs, rhs) <- raw
+      case (gridFromList @'[HardWrap n, HardWrap n] lhs, gridFromList @'[HardWrap m, HardWrap m] rhs) of
+        (Just i, Just o) -> [(keyGrid v, o) | v <- variants @n i]
+        _ -> []
+
+solve :: (KnownNat n, 1 <= n) => RuleMaps -> G n -> (Int, Int)
+solve input start = (countOn (iters !! 5), countOn (iters !! 18))
+  where
+    iters = iterate (stepSome input) (SomeGrid start)
+    countOn (SomeGrid g) = length $ filter (== '#') (toList g)
+
 variants :: forall n. (KnownNat n, 1 <= n) => G n -> [G n]
 variants g = take 4 (iterate rotate g) ++ take 4 (iterate rotate (flipX g))
   where
@@ -48,7 +72,6 @@ variants g = take 4 (iterate rotate g) ++ take 4 (iterate rotate (flipX g))
 keyGrid :: (KnownNat n, KnownNat (n GHC.* n)) => G n -> String
 keyGrid = intercalate "/" . collapseGrid
 
--- | Tiling: Reshapes a 2D grid into a 2D grid of smaller 2D blocks
 bundle ::
   forall n k.
   (KnownNat n, KnownNat k, KnownNat (n GHC.* k), 1 <= k, 1 <= n, 1 <= n GHC.* k) =>
@@ -63,7 +86,7 @@ bundle g = tabulate $ \(rk :| ck :| EmptyCoord) ->
 -- | Stitching: Flatten nested blocks back into a single 2D grid
 unbundle ::
   forall m k.
-  (KnownNat m, KnownNat k, KnownNat (m GHC.* k), 1 <= k, 1 <= m, 1 <= m GHC.* k) =>
+  (KnownNat m, KnownNat k, KnownNat (m GHC.* k), 1 <= m, 1 <= k, 1 <= m GHC.* k) =>
   Grid '[HardWrap k, HardWrap k] (G m) -> G (m GHC.* k)
 unbundle blocks = tabulate $ \(i :| j :| EmptyCoord) ->
   let mVal = fromIntegral (natVal (Proxy @m))
@@ -83,8 +106,8 @@ step ::
     1 <= n,
     1 <= k,
     1 <= m,
-    1 <= m GHC.* k,
-    1 <= n GHC.* k
+    1 <= n GHC.* k,
+    1 <= m GHC.* k
   ) =>
   Map String (G m) -> G (n GHC.* k) -> G (m GHC.* k)
 step rules = unbundle @m @k . fmap apply . bundle @n @k
@@ -96,43 +119,9 @@ withTrust = withDict (unsafeCoerce (Dict @(1 <= 1)) :: Dict c)
 
 stepSome :: RuleMaps -> SomeGrid -> SomeGrid
 stepSome (RM r23 r34) (SomeGrid (g :: G n))
-  | even size =
-      let k_val = size `div` 2
-       in case GHC.someNatVal (fromIntegral k_val) of
-            SomeNat (Proxy :: Proxy k) ->
-              -- Tell GHC: Trust me, n == 2*k
-              withTrust @(n ~ 2 GHC.* k) $
-                SomeGrid (step @2 r23 g)
-  | otherwise =
-      let k_val = size `div` 3
-       in case GHC.someNatVal (fromIntegral k_val) of
-            SomeNat (Proxy :: Proxy k) ->
-              -- Tell GHC: Trust me, n == 3*k
-              withTrust @(n ~ 3 GHC.* k) $
-                SomeGrid (step @3 r34 g)
+  | even size = case GHC.someNatVal (size `div` 2) of
+      SomeNat (Proxy :: Proxy k) -> withTrust @(n ~ 2 GHC.* k) $ SomeGrid (step @2 r23 g)
+  | otherwise = case GHC.someNatVal (size `div` 3) of
+      SomeNat (Proxy :: Proxy k) -> withTrust @(n ~ 3 GHC.* k) $ SomeGrid (step @3 r34 g)
   where
-    size = fromIntegral $ natVal (Proxy @n)
-
--- | Parser and Map builder
-buildRuleMaps :: String -> RuleMaps
-buildRuleMaps s = RM (mk @2 @3) (mk @3 @4)
-  where
-    raw = [(splitOn "/" a, splitOn "/" b) | [a, "=>", b] <- words <$> lines s]
-    mk :: forall n m. (KnownNat n, KnownNat m, KnownNat (n GHC.* n), KnownNat (m GHC.* m), 1 <= n) => Map String (G m)
-    mk = M.fromList $ do
-      (lhs, rhs) <- raw
-      case (gridFromList @'[HardWrap n, HardWrap n] lhs, gridFromList @'[HardWrap m, HardWrap m] rhs) of
-        (Just i, Just o) -> [(keyGrid v, o) | v <- variants @n i]
-        _ -> []
-
-main :: IO ()
-main = do
-  input <- readFile "input/2017/21.txt"
-  let rm = buildRuleMaps input
-      Just start = gridFromList @'[HardWrap 3, HardWrap 3] [".#.", "..#", "###"]
-      iters = iterate (stepSome rm) (SomeGrid start)
-
-  putStrLn $ "Part 1: " ++ show (countOn (iters !! 5))
-  putStrLn $ "Part 2: " ++ show (countOn (iters !! 18))
-  where
-    countOn (SomeGrid g) = length $ filter (== '#') (toList g)
+    size = natVal (Proxy @n)
