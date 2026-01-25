@@ -63,6 +63,8 @@ dependencies:
   - split
   - random
   - list-shuffle
+  - ghc-typelits-natnormalise
+  - ghc-typelits-knownnat
 
 ghc-options:
   - -Wall
@@ -216,6 +218,8 @@ executables:
     main: src/2017/19.hs
   aoc-2017-20:
     main: src/2017/20.hs
+  aoc-2017-21:
+    main: src/2017/21.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:

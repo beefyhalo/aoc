@@ -49,6 +49,8 @@ executable aoc-2015-01
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -102,6 +104,8 @@ executable aoc-2015-02
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -155,6 +159,8 @@ executable aoc-2015-03
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -208,6 +214,8 @@ executable aoc-2015-04
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -261,6 +269,8 @@ executable aoc-2015-05
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -314,6 +324,8 @@ executable aoc-2015-06
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -367,6 +379,8 @@ executable aoc-2015-07
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -420,6 +434,8 @@ executable aoc-2015-08
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -473,6 +489,8 @@ executable aoc-2015-09
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -526,6 +544,8 @@ executable aoc-2015-10
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -579,6 +599,8 @@ executable aoc-2015-11
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -632,6 +654,8 @@ executable aoc-2015-12
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -685,6 +709,8 @@ executable aoc-2015-13
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -738,6 +764,8 @@ executable aoc-2015-14
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -791,6 +819,8 @@ executable aoc-2015-15
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -844,6 +874,8 @@ executable aoc-2015-16
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -897,6 +929,8 @@ executable aoc-2015-17
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -950,6 +984,8 @@ executable aoc-2015-18
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1003,6 +1039,8 @@ executable aoc-2015-19
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1056,6 +1094,8 @@ executable aoc-2015-20
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1109,6 +1149,8 @@ executable aoc-2015-21
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1162,6 +1204,8 @@ executable aoc-2015-22
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1215,6 +1259,8 @@ executable aoc-2015-23
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1268,6 +1314,8 @@ executable aoc-2015-24
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1321,6 +1369,8 @@ executable aoc-2015-25
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1374,6 +1424,8 @@ executable aoc-2016-01
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1427,6 +1479,8 @@ executable aoc-2016-02
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1480,6 +1534,8 @@ executable aoc-2016-03
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1533,6 +1589,8 @@ executable aoc-2016-04
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1586,6 +1644,8 @@ executable aoc-2016-05
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1639,6 +1699,8 @@ executable aoc-2016-06
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1692,6 +1754,8 @@ executable aoc-2016-07
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1745,6 +1809,8 @@ executable aoc-2016-08
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1798,6 +1864,8 @@ executable aoc-2016-09
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1851,6 +1919,8 @@ executable aoc-2016-10
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1904,6 +1974,8 @@ executable aoc-2016-11
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -1957,6 +2029,8 @@ executable aoc-2016-12
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2010,6 +2084,8 @@ executable aoc-2016-13
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2063,6 +2139,8 @@ executable aoc-2016-14
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2116,6 +2194,8 @@ executable aoc-2016-15
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2169,6 +2249,8 @@ executable aoc-2016-16
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2222,6 +2304,8 @@ executable aoc-2016-17
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2275,6 +2359,8 @@ executable aoc-2016-18
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2328,6 +2414,8 @@ executable aoc-2016-19
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2381,6 +2469,8 @@ executable aoc-2016-20
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2434,6 +2524,8 @@ executable aoc-2016-21
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2487,6 +2579,8 @@ executable aoc-2016-22
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2540,6 +2634,8 @@ executable aoc-2016-23
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2593,6 +2689,8 @@ executable aoc-2016-24
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2646,6 +2744,8 @@ executable aoc-2016-25
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2699,6 +2799,8 @@ executable aoc-2017-01
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2752,6 +2854,8 @@ executable aoc-2017-02
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2805,6 +2909,8 @@ executable aoc-2017-03
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2858,6 +2964,8 @@ executable aoc-2017-04
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2911,6 +3019,8 @@ executable aoc-2017-05
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -2964,6 +3074,8 @@ executable aoc-2017-06
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3017,6 +3129,8 @@ executable aoc-2017-07
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3070,6 +3184,8 @@ executable aoc-2017-08
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3123,6 +3239,8 @@ executable aoc-2017-09
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3176,6 +3294,8 @@ executable aoc-2017-10
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3229,6 +3349,8 @@ executable aoc-2017-11
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3282,6 +3404,8 @@ executable aoc-2017-12
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3335,6 +3459,8 @@ executable aoc-2017-13
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3388,6 +3514,8 @@ executable aoc-2017-14
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3441,6 +3569,8 @@ executable aoc-2017-15
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3494,6 +3624,8 @@ executable aoc-2017-16
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3547,6 +3679,8 @@ executable aoc-2017-17
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3600,6 +3734,8 @@ executable aoc-2017-18
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3653,6 +3789,8 @@ executable aoc-2017-19
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3706,6 +3844,63 @@ executable aoc-2017-20
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , list-shuffle
+    , memory
+    , mod
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , nonempty-zipper
+    , parallel
+    , parsec
+    , random
+    , recursion-schemes
+    , scientific
+    , semirings
+    , sized-grid
+    , split
+    , uniplate
+    , unordered-containers
+    , vector
+    , vector-algorithms
+    , vector-sized
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2017-21
+  main-is: src/2017/21.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , adjunctions
+    , aeson
+    , arithmoi
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bitvec
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptohash-md5
+    , cryptonite
+    , data-fix
+    , deepseq
+    , extra
+    , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3759,6 +3954,8 @@ executable aoc-2024-01
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3812,6 +4009,8 @@ executable aoc-2024-02
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3865,6 +4064,8 @@ executable aoc-2024-03
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3918,6 +4119,8 @@ executable aoc-2024-04
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -3971,6 +4174,8 @@ executable aoc-2025-01
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4024,6 +4229,8 @@ executable aoc-2025-02
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4077,6 +4284,8 @@ executable aoc-2025-03
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4130,6 +4339,8 @@ executable aoc-2025-04
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4183,6 +4394,8 @@ executable aoc-2025-05
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4236,6 +4449,8 @@ executable aoc-2025-06
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4289,6 +4504,8 @@ executable aoc-2025-07
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4342,6 +4559,8 @@ executable aoc-2025-08
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4395,6 +4614,8 @@ executable aoc-2025-09
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4448,6 +4669,8 @@ executable aoc-2025-10
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4501,6 +4724,8 @@ executable aoc-2025-11
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
@@ -4554,6 +4779,8 @@ executable aoc-2025-12
     , deepseq
     , extra
     , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
     , heap
     , hmatrix
     , lens
