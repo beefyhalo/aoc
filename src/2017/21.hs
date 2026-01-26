@@ -27,14 +27,14 @@ parse = makeRules . map parseRule . lines
         m = M.fromList [(k', v) | (k, v) <- rs, k' <- variants k]
 
 -- >>> iterations = iterate (step example) [".#.", "..#", "###"]
--- >>> length $ filter (== '#') $ concat (iterations !! 2)
+-- >>> sum [1 | g <- iterations !! 2, '#' <- g]
 -- 12
 solve :: (Grid -> Grid) -> (Int, Int)
 solve rules = (countOn 5, countOn 18)
   where
     iterations = iterate (step rules) start
     start = [".#.", "..#", "###"]
-    countOn n = length $ filter (== '#') $ concat (iterations !! n)
+    countOn n = sum [1 | g <- iterations !! n, '#' <- g]
 
 step :: (Grid -> Grid) -> Grid -> Grid
 step f g = g & partitioned n . traverse . traverse %~ f
@@ -44,10 +44,7 @@ step f g = g & partitioned n . traverse . traverse %~ f
 partitioned :: Int -> Iso' Grid [[Grid]]
 partitioned n = iso split join
   where
-    split :: Grid -> [[Grid]]
     split = map (transpose . map (chunksOf n)) . chunksOf n
-
-    join :: [[Grid]] -> Grid
     join = concatMap (map concat . transpose)
 
 variants :: Grid -> [Grid]
