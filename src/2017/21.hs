@@ -26,18 +26,18 @@ parse = makeRules . map parseRule . lines
       where
         m = M.fromList [(k', v) | (k, v) <- rs, k' <- variants k]
 
--- >>> iterations = iterate (step example) [".#.", "..#", "###"]
+-- >>> iterations = iterate (over subSquares example) [".#.", "..#", "###"]
 -- >>> sum [1 | g <- iterations !! 2, '#' <- g]
 -- 12
 solve :: (Grid -> Grid) -> (Int, Int)
 solve rules = (countOn 5, countOn 18)
   where
-    iterations = iterate (step rules) start
+    iterations = iterate (over subSquares rules) start
     start = [".#.", "..#", "###"]
     countOn n = sum [1 | g <- iterations !! n, '#' <- g]
 
-step :: (Grid -> Grid) -> Grid -> Grid
-step f g = g & partitioned n . traverse . traverse %~ f
+subSquares :: Traversal' Grid Grid
+subSquares f g = (partitioned n . traverse . traverse) f g
   where
     n = if even (length g) then 2 else 3
 
