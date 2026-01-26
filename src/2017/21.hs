@@ -1,127 +1,56 @@
-{-# LANGUAGE AllowAmbiguousTypes #-}
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE GADTs #-}
 {-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeAbstractions #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE TypeOperators #-}
-{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
-{-# OPTIONS_GHC -fplugin GHC.TypeLits.KnownNat.Solver #-}
-{-# OPTIONS_GHC -fplugin GHC.TypeLits.Normalise #-}
+{-# LANGUAGE ViewPatterns #-}
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-import Data.AffineSpace (AffineSpace (..))
-import Data.Constraint (Dict (Dict), withDict)
-import Data.Foldable (toList)
-import Data.Functor.Rep (index, tabulate)
-import Data.List (intercalate, transpose)
+import Control.Lens
+import Data.List (transpose)
 import Data.List.Split (chunksOf, splitOn)
-import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as M
-import Data.Proxy (Proxy (Proxy))
-import GHC.TypeNats (KnownNat, SomeNat (SomeNat), natVal, type (<=))
-import qualified GHC.TypeNats as GHC
-import SizedGrid
-import Unsafe.Coerce (unsafeCoerce)
 
-type G n = Grid '[HardWrap n, HardWrap n] Char
+type Grid = [String]
 
-data RuleMaps = RM
-  { _rules23 :: Map String (G 3),
-    _rules34 :: Map String (G 4)
-  }
-
-data SomeGrid where
-  SomeGrid :: (KnownNat n, 1 <= n, KnownNat (n GHC.* n)) => G n -> SomeGrid
-
+-- $setup
+-- >>> input = "../.# => ##./#../...\n.#./..#/### => #..#/..../..../#..#"
+-- >>> example = parse input
 
 main :: IO ()
 main = do
   input <- parse <$> readFile "input/2017/21.txt"
-  let Just start = gridFromList @'[HardWrap 3, HardWrap 3] [".#.", "..#", "###"]
-  print $ solve input start
+  print $ solve input
 
-parse :: String -> RuleMaps
-parse s = RM (mk @2 @3) (mk @3 @4)
+parse :: String -> (Grid -> Grid)
+parse = makeRules . map parseRule . lines
   where
-    raw = [(splitOn "/" a, splitOn "/" b) | [a, "=>", b] <- words <$> lines s]
-    mk :: forall n m. (KnownNat n, KnownNat m, KnownNat (n GHC.* n), KnownNat (m GHC.* m), 1 <= n) => Map String (G m)
-    mk = M.fromList $ do
-      (lhs, rhs) <- raw
-      case (gridFromList @'[HardWrap n, HardWrap n] lhs, gridFromList @'[HardWrap m, HardWrap m] rhs) of
-        (Just i, Just o) -> [(keyGrid v, o) | v <- variants @n i]
-        _ -> []
+    parseRule (words -> [a, "=>", b]) = (splitOn "/" a, splitOn "/" b)
+    makeRules rs = (m M.!)
+      where
+        m = M.fromList [(k', v) | (k, v) <- rs, k' <- variants k]
 
-solve :: (KnownNat n, 1 <= n) => RuleMaps -> G n -> (Int, Int)
-solve input start = (countOn (iters !! 5), countOn (iters !! 18))
+-- >>> iterations = iterate (step example) [".#.", "..#", "###"]
+-- >>> length $ filter (== '#') $ concat (iterations !! 2)
+-- 12
+solve :: (Grid -> Grid) -> (Int, Int)
+solve rules = (countOn 5, countOn 18)
   where
-    iters = iterate (stepSome input) (SomeGrid start)
-    countOn (SomeGrid g) = length $ filter (== '#') (toList g)
+    iterations = iterate (step rules) start
+    start = [".#.", "..#", "###"]
+    countOn n = length $ filter (== '#') $ concat (iterations !! n)
 
-variants :: forall n. (KnownNat n, 1 <= n) => G n -> [G n]
-variants g = take 4 (iterate rotate g) ++ take 4 (iterate rotate (flipX g))
+step :: (Grid -> Grid) -> Grid -> Grid
+step f g = g & partitioned n . traverse . traverse %~ f
   where
-    flipX, rotate :: G n -> G n
-    flipX gr = tabulate $ \(x :| y :| EmptyCoord) ->
-      let nVal = fromIntegral (natVal (Proxy @n)) - 1
-       in index gr (toEnum (nVal - fromEnum x) :| y :| EmptyCoord)
-    rotate = transposeGrid . flipX
+    n = if even (length g) then 2 else 3
 
--- | Converts a grid to the "a/b/c" string format used as Map keys
-keyGrid :: (KnownNat n, KnownNat (n GHC.* n)) => G n -> String
-keyGrid = intercalate "/" . collapseGrid
-
-bundle ::
-  forall n k.
-  (KnownNat n, KnownNat k, KnownNat (n GHC.* k), 1 <= k, 1 <= n, 1 <= n GHC.* k) =>
-  G (n GHC.* k) -> Grid '[HardWrap k, HardWrap k] (G n)
-bundle g = tabulate $ \(rk :| ck :| EmptyCoord) ->
-  tabulate $ \(ri :| ci :| EmptyCoord) ->
-    let nVal = fromIntegral (natVal (Proxy @n))
-        r = fromEnum rk * nVal + fromEnum ri
-        c = fromEnum ck * nVal + fromEnum ci
-     in index g (toEnum r :| toEnum c :| EmptyCoord)
-
--- | Stitching: Flatten nested blocks back into a single 2D grid
-unbundle ::
-  forall m k.
-  (KnownNat m, KnownNat k, KnownNat (m GHC.* k), 1 <= m, 1 <= k, 1 <= m GHC.* k) =>
-  Grid '[HardWrap k, HardWrap k] (G m) -> G (m GHC.* k)
-unbundle blocks = tabulate $ \(i :| j :| EmptyCoord) ->
-  let mVal = fromIntegral (natVal (Proxy @m))
-      (bR, iR) = fromEnum i `divMod` mVal
-      (bC, iC) = fromEnum j `divMod` mVal
-   in index (index blocks (toEnum bR :| toEnum bC :| EmptyCoord)) (toEnum iR :| toEnum iC :| EmptyCoord)
-
--- | The core iteration logic
-step ::
-  forall n k m.
-  ( KnownNat n,
-    KnownNat k,
-    KnownNat m,
-    KnownNat (n GHC.* n),
-    KnownNat (n GHC.* k),
-    KnownNat (m GHC.* k),
-    1 <= n,
-    1 <= k,
-    1 <= m,
-    1 <= n GHC.* k,
-    1 <= m GHC.* k
-  ) =>
-  Map String (G m) -> G (n GHC.* k) -> G (m GHC.* k)
-step rules = unbundle @m @k . fmap apply . bundle @n @k
+partitioned :: Int -> Iso' Grid [[Grid]]
+partitioned n = iso split join
   where
-    apply = (rules M.!) . keyGrid
+    split :: Grid -> [[Grid]]
+    split = map (transpose . map (chunksOf n)) . chunksOf n
 
-withTrust :: forall c r. ((c) => r) -> r
-withTrust = withDict (unsafeCoerce (Dict @(1 <= 1)) :: Dict c)
+    join :: [[Grid]] -> Grid
+    join = concatMap (map concat . transpose)
 
-stepSome :: RuleMaps -> SomeGrid -> SomeGrid
-stepSome (RM r23 r34) (SomeGrid (g :: G n))
-  | even size = case GHC.someNatVal (size `div` 2) of
-      SomeNat (Proxy :: Proxy k) -> withTrust @(n ~ 2 GHC.* k) $ SomeGrid (step @2 r23 g)
-  | otherwise = case GHC.someNatVal (size `div` 3) of
-      SomeNat (Proxy :: Proxy k) -> withTrust @(n ~ 3 GHC.* k) $ SomeGrid (step @3 r34 g)
+variants :: Grid -> [Grid]
+variants g = [f r | r <- take 4 (iterate rotateCCW g), f <- [id, reverse]]
   where
-    size = natVal (Proxy @n)
+    rotateCCW = reverse . transpose
