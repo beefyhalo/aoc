@@ -66,6 +66,7 @@ executable aoc-2015-01
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -121,6 +122,7 @@ executable aoc-2015-02
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -176,6 +178,7 @@ executable aoc-2015-03
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -231,6 +234,7 @@ executable aoc-2015-04
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -286,6 +290,7 @@ executable aoc-2015-05
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -341,6 +346,7 @@ executable aoc-2015-06
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -396,6 +402,7 @@ executable aoc-2015-07
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -451,6 +458,7 @@ executable aoc-2015-08
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -506,6 +514,7 @@ executable aoc-2015-09
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -561,6 +570,7 @@ executable aoc-2015-10
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -616,6 +626,7 @@ executable aoc-2015-11
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -671,6 +682,7 @@ executable aoc-2015-12
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -726,6 +738,7 @@ executable aoc-2015-13
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -781,6 +794,7 @@ executable aoc-2015-14
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -836,6 +850,7 @@ executable aoc-2015-15
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -891,6 +906,7 @@ executable aoc-2015-16
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -946,6 +962,7 @@ executable aoc-2015-17
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1001,6 +1018,7 @@ executable aoc-2015-18
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1056,6 +1074,7 @@ executable aoc-2015-19
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1111,6 +1130,7 @@ executable aoc-2015-20
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1166,6 +1186,7 @@ executable aoc-2015-21
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1221,6 +1242,7 @@ executable aoc-2015-22
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1276,6 +1298,7 @@ executable aoc-2015-23
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1331,6 +1354,7 @@ executable aoc-2015-24
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1386,6 +1410,7 @@ executable aoc-2015-25
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1441,6 +1466,7 @@ executable aoc-2016-01
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1496,6 +1522,7 @@ executable aoc-2016-02
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1551,6 +1578,7 @@ executable aoc-2016-03
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1606,6 +1634,7 @@ executable aoc-2016-04
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1661,6 +1690,7 @@ executable aoc-2016-05
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1716,6 +1746,7 @@ executable aoc-2016-06
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1771,6 +1802,7 @@ executable aoc-2016-07
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1826,6 +1858,7 @@ executable aoc-2016-08
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1881,6 +1914,7 @@ executable aoc-2016-09
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1936,6 +1970,7 @@ executable aoc-2016-10
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -1991,6 +2026,7 @@ executable aoc-2016-11
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2046,6 +2082,7 @@ executable aoc-2016-12
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2101,6 +2138,7 @@ executable aoc-2016-13
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2156,6 +2194,7 @@ executable aoc-2016-14
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2211,6 +2250,7 @@ executable aoc-2016-15
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2266,6 +2306,7 @@ executable aoc-2016-16
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2321,6 +2362,7 @@ executable aoc-2016-17
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2376,6 +2418,7 @@ executable aoc-2016-18
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2431,6 +2474,7 @@ executable aoc-2016-19
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2486,6 +2530,7 @@ executable aoc-2016-20
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2541,6 +2586,7 @@ executable aoc-2016-21
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2596,6 +2642,7 @@ executable aoc-2016-22
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2651,6 +2698,7 @@ executable aoc-2016-23
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2706,6 +2754,7 @@ executable aoc-2016-24
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2761,6 +2810,7 @@ executable aoc-2016-25
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2816,6 +2866,7 @@ executable aoc-2017-01
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2871,6 +2922,7 @@ executable aoc-2017-02
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2926,6 +2978,7 @@ executable aoc-2017-03
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -2981,6 +3034,7 @@ executable aoc-2017-04
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3036,6 +3090,7 @@ executable aoc-2017-05
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3091,6 +3146,7 @@ executable aoc-2017-06
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3146,6 +3202,7 @@ executable aoc-2017-07
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3201,6 +3258,7 @@ executable aoc-2017-08
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3256,6 +3314,7 @@ executable aoc-2017-09
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3311,6 +3370,7 @@ executable aoc-2017-10
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3366,6 +3426,7 @@ executable aoc-2017-11
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3421,6 +3482,7 @@ executable aoc-2017-12
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3476,6 +3538,7 @@ executable aoc-2017-13
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3531,6 +3594,7 @@ executable aoc-2017-14
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3586,6 +3650,7 @@ executable aoc-2017-15
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3641,6 +3706,7 @@ executable aoc-2017-16
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3696,6 +3762,7 @@ executable aoc-2017-17
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3751,6 +3818,7 @@ executable aoc-2017-18
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3806,6 +3874,7 @@ executable aoc-2017-19
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3861,6 +3930,7 @@ executable aoc-2017-20
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3916,6 +3986,7 @@ executable aoc-2017-21
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -3971,6 +4042,7 @@ executable aoc-2017-22
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4026,6 +4098,7 @@ executable aoc-2017-23
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4081,6 +4154,7 @@ executable aoc-2017-24
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4136,6 +4210,7 @@ executable aoc-2017-25
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4191,6 +4266,7 @@ executable aoc-2018-01
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4246,6 +4322,63 @@ executable aoc-2018-02
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
+    , scientific
+    , semirings
+    , sized-grid
+    , split
+    , uniplate
+    , unordered-containers
+    , vector
+    , vector-algorithms
+    , vector-sized
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2018-03
+  main-is: src/2018/03.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , adjunctions
+    , aeson
+    , arithmoi
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bitvec
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptohash-md5
+    , cryptonite
+    , data-fix
+    , deepseq
+    , extra
+    , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , list-shuffle
+    , memory
+    , mod
+    , monad-loops
+    , monoidal-containers
+    , mtl
+    , nonempty-zipper
+    , parallel
+    , parsec
+    , random
+    , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4301,6 +4434,7 @@ executable aoc-2024-01
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4356,6 +4490,7 @@ executable aoc-2024-02
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4411,6 +4546,7 @@ executable aoc-2024-03
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4466,6 +4602,7 @@ executable aoc-2024-04
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4521,6 +4658,7 @@ executable aoc-2025-01
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4576,6 +4714,7 @@ executable aoc-2025-02
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4631,6 +4770,7 @@ executable aoc-2025-03
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4686,6 +4826,7 @@ executable aoc-2025-04
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4741,6 +4882,7 @@ executable aoc-2025-05
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4796,6 +4938,7 @@ executable aoc-2025-06
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4851,6 +4994,7 @@ executable aoc-2025-07
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4906,6 +5050,7 @@ executable aoc-2025-08
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -4961,6 +5106,7 @@ executable aoc-2025-09
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -5016,6 +5162,7 @@ executable aoc-2025-10
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -5071,6 +5218,7 @@ executable aoc-2025-11
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid
@@ -5126,6 +5274,7 @@ executable aoc-2025-12
     , parsec
     , random
     , recursion-schemes
+    , regex-tdfa
     , scientific
     , semirings
     , sized-grid

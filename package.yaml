@@ -25,6 +25,7 @@ dependencies:
   - attoparsec
   - arithmoi
   - semirings
+  - regex-tdfa
   - extra
   - cryptohash-md5
   - adjunctions
@@ -232,6 +233,8 @@ executables:
     main: src/2018/01.hs
   aoc-2018-02:
     main: src/2018/02.hs
+  aoc-2018-03:
+    main: src/2018/03.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:
