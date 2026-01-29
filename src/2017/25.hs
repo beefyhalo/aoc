@@ -1,17 +1,16 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 import Control.Applicative ((<|>))
-import Control.Monad (replicateM, replicateM_)
-import Control.Monad.State.Strict (State, execState, get, put, state)
-import Data.Attoparsec.ByteString.Char8 (Parser, anyChar, char, decimal, endOfLine, many', parseOnly, sepBy, skipSpace, string)
+import Control.Monad (replicateM_)
+import Control.Monad.State.Strict (State, execState, state)
+import Data.Attoparsec.ByteString.Char8 (Parser, anyChar, char, decimal, endOfLine, parseOnly, sepBy, skipSpace, string)
 import qualified Data.ByteString.Char8 as B
 import Data.Either (fromRight)
 import qualified Data.List.NonEmpty as NE
 import Data.List.NonEmpty.Zipper (Zipper)
 import qualified Data.List.NonEmpty.Zipper as Z
 import qualified Data.Map.Strict as M
-import Data.Maybe (fromJust, fromMaybe)
-import Debug.Trace (traceShowId)
+import Data.Maybe (fromJust)
 
 type StateName = Char
 
@@ -29,8 +28,8 @@ type Machine = M.Map StateName (Action, Action)
 type TM = (StateName, Zipper Int)
 
 moveLeft, moveRight :: Zipper Int -> Zipper Int
-moveLeft z = fromJust $ Z.left $ if Z.isStart z then Z.push 0 z else z
-moveRight z = fromJust $ Z.right $ if Z.isEnd z then Z.unshift 0 z else z
+moveLeft z = fromJust . Z.left $ if Z.isStart z then Z.push 0 z else z
+moveRight z = fromJust . Z.right $ if Z.isEnd z then Z.unshift 0 z else z
 
 -- $setup
 -- >>> input = "Begin in state A.\nPerform a diagnostic checksum after 6 steps.\n\nIn state A:\n  If the current value is 0:\n    - Write the value 1.\n    - Move one slot to the right.\n    - Continue with state B.\n  If the current value is 1:\n    - Write the value 0.\n    - Move one slot to the left.\n    - Continue with state B.\n\nIn state B:\n  If the current value is 0:\n    - Write the value 1.\n    - Move one slot to the left.\n    - Continue with state A.\n  If the current value is 1:\n    - Write the value 1.\n    - Move one slot to the right.\n    - Continue with state A."
