@@ -22,7 +22,7 @@ parse input = sleepMap
     step (g, s, m) line
       | "Guard" `isInfixOf` line = (parseID line, s, m)
       | "falls" `isInfixOf` line = (g, parseMin line, m)
-      | "wakes" `isInfixOf` line = (g, 0, M.singleton g [s .. parseMin line - 1] <> m)
+      | "wakes" `isInfixOf` line = (g, 0, M.insertWith (<>) g [s .. parseMin line - 1] m)
       | otherwise = (g, s, m)
 
     parseID = read . takeWhile (/= ' ') . drop 1 . dropWhile (/= '#')
@@ -34,7 +34,6 @@ solve :: M.MonoidalIntMap [Minute] -> (Int, Int)
 solve sleepMap = (g1 * m1, g2 * m2)
   where
     stats = M.toList $ fmap (\ms -> (length ms, getPeak ms)) sleepMap
-
     (g1, (_, (_, m1))) = maximumBy (comparing (fst . snd)) stats
     (g2, (_, (_, m2))) = maximumBy (comparing (fst . snd . snd)) stats
 
