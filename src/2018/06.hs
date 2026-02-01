@@ -19,9 +19,7 @@ import SizedGrid
 
 manhattan ::
   (KnownNat w, KnownNat h, 1 <= w, 1 <= h) =>
-  Coord '[HardWrap w, HardWrap h] ->
-  Coord '[HardWrap w, HardWrap h] ->
-  Int
+  Coord '[HardWrap w, HardWrap h] -> Coord '[HardWrap w, HardWrap h] -> Int
 manhattan c1 c2 = fromIntegral $ sum [dx1, dx2, dy1, dy2]
   where
     (dx1, dy1) = c1 .-. c2
@@ -44,7 +42,7 @@ parse = map (toCoord . splitOn ", ") . lines
 -- >>> solve @9 @10 example
 -- (17,90)
 solve :: forall w h. (KnownNat w, KnownNat h, 1 <= w, 1 <= h) => [Coord '[HardWrap w, HardWrap h]] -> (Int, Int)
-solve targets = (largestArea, regionSum)
+solve targets = (maximum areas, sum regions)
   where
     ownerGrid :: Grid '[HardWrap w, HardWrap h] (Maybe Int)
     ownerGrid = tabulate (closestIndex targets)
@@ -68,8 +66,9 @@ solve targets = (largestArea, regionSum)
               [x :| y :| EmptyCoord | x <- [minBound, maxBound], y <- [minBound .. maxBound]]
             ]
 
-    largestArea = maximum $ M.fromListWith (+) [(pos, 1) | Just pos <- toList ownerGrid, S.notMember pos inf]
+    areas = M.fromListWith (+) [(pos, 1) | Just pos <- toList ownerGrid, S.notMember pos inf]
 
-    regionSum = sum (tabulate checkSafe :: Grid '[HardWrap w, HardWrap h] Int)
+    regions :: Grid '[HardWrap w, HardWrap h] Int
+    regions = tabulate checkSafe
       where
         checkSafe c = fromEnum $ sum (manhattan c <$> targets) < 10000
