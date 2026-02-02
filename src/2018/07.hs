@@ -1,6 +1,5 @@
 {-# LANGUAGE TupleSections #-}
 
-import Data.List (partition)
 import qualified Data.Map.Strict as M
 import qualified Data.Set as S
 
@@ -16,7 +15,7 @@ main :: IO ()
 main = do
   input <- parse . lines <$> readFile "input/2018/07.txt"
   putStrLn $ solve input
-  print $ partTwo 5 60 input 
+  print $ partTwo 5 60 input
 
 parse :: [String] -> Graph
 parse xs = M.fromListWith (<>) edges <> initGraph
@@ -35,24 +34,22 @@ solve g
     (n, _) = M.findMin (M.filter null g)
     g' = S.delete n <$> M.delete n g
 
--- >>> partTwo 2 15 example
--- 21
+-- >>> partTwo 2 0 example
+-- 15
 partTwo :: Int -> Int -> Graph -> Int
-partTwo limit base = step 0 []
+partTwo limit base = step 0 M.empty
   where
     cost n = base + fromEnum n - fromEnum 'A' + 1
 
-    step t busy graph
-      | null graph && null busy = t
-      -- Can we put someone to work?
-      | length busy < limit && not (null available) = step t ((n, t + cost n) : busy) graph
-      -- No one else can start, so we must advance time.
-      | otherwise = step t' working graph'
+    step t busy g
+      | null g && null busy = t
+      -- Fill worker slots
+      | length busy < limit && not (null ready) = step t (M.insert n (t + cost n) busy) g
+      -- Advance time
+      | otherwise = step t' working g'
       where
-        available = [n | (n, deps) <- M.toList graph, S.null deps, n `notElem` map fst busy]
-        n = minimum available
-        t' = minimum (map snd busy)
-        (done, working) = partition ((== t') . snd) busy
-        doneNodes = S.fromList (map fst done)
-
-        graph' = (S.\\ doneNodes) <$> foldr M.delete graph doneNodes
+        ready = M.filter null (M.difference g busy)
+        (n, _) = M.findMin ready
+        t' = minimum busy
+        (done, working) = M.partition (== t') busy
+        g' = (S.\\ M.keysSet done) <$> M.difference g done
