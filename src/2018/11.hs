@@ -2,46 +2,55 @@
 {-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-import Control.Comonad (extend)
-import Control.Comonad.Store (experiment, peek)
-import Data.Functor.Rep (tabulate)
-import Data.List (maximumBy)
-import Data.Ord (comparing)
+import Data.AffineSpace ((.+^))
+import Data.Functor.Identity (Identity (..))
+import Data.Functor.Rep (index, tabulate)
+import Data.List.Extra (maximumOn)
+import Data.Tuple.Extra (thd3)
+import qualified Data.Vector as V
 import SizedGrid
 
--- $setup
--- >>> let test serial = let g = fuelGrid serial in solve g
+type Dims = '[HardWrap 300, HardWrap 300]
 
--- >>> test 18
--- >>> test 42
--- (Coord [HardWrap {unHardWrap = Ordinal (45/300)}, HardWrap {unHardWrap = Ordinal (33/300)}],29)
--- (Coord [HardWrap {unHardWrap = Ordinal (61/300)}, HardWrap {unHardWrap = Ordinal (21/300)}],30)
+power :: Int -> Coord Dims -> Int
+power serial ((fromEnum -> y) :| (fromEnum -> x) :| _) =
+  ((rack * y + serial) * rack `div` 100) `mod` 10 - 5
+  where
+    rack = x + 10
 
 main :: IO ()
 main = do
-  input <- fuelGrid . read <$> readFile "input/2018/11.txt"
-  print $ solve input
+  input <- makeSAT . read <$> readFile "input/2018/11.txt"
+  print $ solve 3 input
+  print $ partTwo input
 
-power :: Int -> Coord '[HardWrap 300, HardWrap 300] -> Int
-power serial (r :| c :| _) = pl - 5
+makeSAT :: Int -> Grid Dims Int
+makeSAT = transposeGrid . rowPrefix . transposeGrid . rowPrefix . tabulate . power
   where
-    x = fromEnum c + 1
-    y = fromEnum r + 1
-    rack = x + 10
-    pl = ((rack * y + serial) * rack `div` 100) `mod` 10
+    rowPrefix = runIdentity . mapLowerDim (Identity . prefixSum1D)
+    prefixSum1D = Grid . V.scanl1' (+) . unGrid
 
-fuelGrid :: Int -> FocusedGrid '[HardWrap 300, HardWrap 300] Int
-fuelGrid serial =
-  FocusedGrid
-    { focusedGrid = tabulate (power serial),
-      focusedGridPosition = zeroCoord
-    }
+-- >>> solve 3 (makeSAT 18)
+-- ((33,45),29)
+solve :: Int -> Grid Dims Int -> ((Int, Int), Int)
+solve size sat =
+  maximumOn
+    snd
+    [ ((c, r), squareSumSAT size p sat)
+    | p@((fromEnum -> r) :| (fromEnum -> c) :| _) <- allCoord,
+      r + size <= 300,
+      c + size <= 300
+    ]
 
-square3Sum :: FocusedGrid '[HardWrap 300, HardWrap 300] Int -> Int
-square3Sum = sum . experiment (moorePoints 1)
+-- >>> partTwo (makeSAT 18)
+-- ((90,269),16,113)
+partTwo :: Grid Dims Int -> ((Int, Int), Int, Int)
+partTwo sat =
+  maximumOn thd3 [(c, size, v) | size <- [1 .. 16], let (c, v) = solve size sat]
 
-solve :: FocusedGrid '[HardWrap 300, HardWrap 300] Int -> (Coord '[HardWrap 300, HardWrap 300], Int)
-solve fg = maximumBy (comparing snd) candidates
+squareSumSAT :: Int -> Coord Dims -> Grid Dims Int -> Int
+squareSumSAT size p sat =
+  sum [s * index sat (p .+^ off) | (off, s) <- corners]
   where
-    sums = extend square3Sum fg
-    candidates = [(c, peek c sums) | c <- allCoord]
+    d = fromIntegral (size - 1)
+    corners = [((d, d), 1), ((-1, d), -1), ((d, -1), -1), ((-1, -1), 1)]
