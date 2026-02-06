@@ -36,8 +36,8 @@ partTwo pass = dfs ((0, 0), "")
 neighbors :: B.ByteString -> (Pos, Path) -> [(Pos, Path)]
 neighbors pass ((x, y), path) =
   [ (pos, path <> B.singleton d)
-  | ((d, pos), True) <- zip moves (openDoors $ pass <> path),
-    x >= 0 && x <= 3 && y >= 0 && y <= 3
+  | x >= 0 && x <= 3 && y >= 0 && y <= 3,
+    ((d, pos), True) <- zip moves (openDoors $ pass <> path)
   ]
   where
     moves = [('U', (x, y - 1)), ('D', (x, y + 1)), ('L', (x - 1, y)), ('R', (x + 1, y))]

@@ -4,7 +4,6 @@
 import Data.List (mapAccumL)
 import qualified Data.Map.Strict as M
 import Data.Maybe (catMaybes)
-import qualified Data.Set as S
 import Data.Tuple (swap)
 
 type Point = (Int, Int)
@@ -48,19 +47,19 @@ solve :: (M.Map Point Char, M.Map Point Cart) -> (Point, Point)
 solve (track, initialCarts) = (swap crashPoint, swap lastCartPoint)
   where
     states = iterate (tick track . fst) (initialCarts, [])
-    crashPoint = head [p | (_, cs@(_ : _)) <- states, p <- cs]
+    crashPoint = head [p | (_, cs) <- states, p <- cs]
     lastCartPoint = head [p | (cs, _) <- states, M.size cs == 1, let (p, _) = head (M.toAscList cs)]
 
 tick :: M.Map Point Char -> M.Map Point Cart -> (M.Map Point Cart, [Point])
 tick track carts = (finalMap, catMaybes crashes)
   where
-    ps = S.toList $ M.keysSet carts
+    ps = M.keys carts
     (finalMap, crashes) = mapAccumL step carts ps
 
     step m p = case M.updateLookupWithKey (\_ _ -> Nothing) p m of
       (Nothing, _) -> (m, Nothing)
-      (Just ct, m')
-        | p' `M.member` m' -> (M.delete p' m', Just p')
-        | otherwise -> (M.insert p' ct' m', Nothing)
+      (Just ct, m') -> case M.insertLookupWithKey (\_ _ old -> old) p' ct' m' of
+        (Nothing, m'') -> (m'', Nothing)
+        (Just _, m'') -> (M.delete p' m'', Just p')
         where
           (p', ct') = move track p ct

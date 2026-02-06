@@ -1,6 +1,6 @@
 import qualified Data.IntMap.Monoidal.Strict as M
-import Data.List (isInfixOf, maximumBy, sort)
-import Data.Ord (comparing)
+import Data.List (isInfixOf, sort)
+import Data.List.Extra (maximumOn)
 import Data.Semigroup (Sum (..))
 
 type Minute = Int
@@ -34,8 +34,8 @@ solve :: M.MonoidalIntMap [Minute] -> (Int, Int)
 solve sleepMap = (g1 * m1, g2 * m2)
   where
     stats = M.toList $ fmap (\ms -> (length ms, getPeak ms)) sleepMap
-    (g1, (_, (_, m1))) = maximumBy (comparing (fst . snd)) stats
-    (g2, (_, (_, m2))) = maximumBy (comparing (fst . snd . snd)) stats
+    (g1, (_, (_, m1))) = maximumOn (fst . snd) stats
+    (g2, (_, (_, m2))) = maximumOn (fst . snd . snd) stats
 
 getPeak :: [Int] -> (Int, Int)
 getPeak ms = M.foldrWithKey' go (0, 0) freqs

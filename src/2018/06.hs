@@ -61,10 +61,8 @@ solve targets = (maximum areas, sum regions)
     inf = S.fromList $ mapMaybe (index ownerGrid) border
       where
         border =
-          concat
-            [ [x :| y :| EmptyCoord | x <- [minBound .. maxBound], y <- [minBound, maxBound]],
-              [x :| y :| EmptyCoord | x <- [minBound, maxBound], y <- [minBound .. maxBound]]
-            ]
+          [x :| y :| EmptyCoord | x <- [minBound .. maxBound], y <- [minBound, maxBound]] ++
+          [x :| y :| EmptyCoord | x <- [minBound, maxBound], y <- [minBound .. maxBound]]
 
     areas = M.fromListWith (+) [(pos, 1) | Just pos <- toList ownerGrid, S.notMember pos inf]
 
