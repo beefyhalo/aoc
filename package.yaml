@@ -39,7 +39,6 @@ dependencies:
   - hmatrix
   - MemoTrie
   - monad-loops
-  - cryptonite
   - memory
   - containers
   - heap
@@ -254,6 +253,8 @@ executables:
     main: src/2018/11.hs
   aoc-2018-12:
     main: src/2018/12.hs
+  aoc-2018-13:
+    main: src/2018/13.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:
