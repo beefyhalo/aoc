@@ -31,6 +31,7 @@ dependencies:
   - adjunctions
   - scientific
   - nonempty-zipper
+  - mono-traversable
   - uniplate
   - lens
   - comonad
@@ -251,6 +252,8 @@ executables:
     main: src/2018/10.hs
   aoc-2018-11:
     main: src/2018/11.hs
+  aoc-2018-12:
+    main: src/2018/12.hs
   aoc-2024-01:
     main: src/2024/01.hs
   aoc-2024-02:

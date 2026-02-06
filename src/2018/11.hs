@@ -36,7 +36,7 @@ solve :: Int -> Grid Dims Int -> ((Int, Int), Int)
 solve size sat =
   maximumOn
     snd
-    [ ((c, r), squareSumSAT size p sat)
+    [ ((c, r), squareSum size p sat)
     | p@((fromEnum -> r) :| (fromEnum -> c) :| _) <- allCoord,
       r + size <= 300,
       c + size <= 300
@@ -48,8 +48,8 @@ partTwo :: Grid Dims Int -> ((Int, Int), Int, Int)
 partTwo sat =
   maximumOn thd3 [(c, size, v) | size <- [1 .. 16], let (c, v) = solve size sat]
 
-squareSumSAT :: Int -> Coord Dims -> Grid Dims Int -> Int
-squareSumSAT size p sat =
+squareSum :: Int -> Coord Dims -> Grid Dims Int -> Int
+squareSum size p sat =
   sum [s * index sat (p .+^ off) | (off, s) <- corners]
   where
     d = fromIntegral (size - 1)
