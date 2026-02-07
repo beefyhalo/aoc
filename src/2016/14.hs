@@ -1,9 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeApplications #-}
 {-# OPTIONS_GHC -Wno-type-defaults #-}
 
 import Control.Parallel.Strategies (parBuffer, rdeepseq, using)
-import Crypto.Hash (MD5, hash)
+import Crypto.Hash.MD5 (hash)
 import Data.ByteArray.Encoding (Base (Base16), convertToBase)
 import qualified Data.ByteString.Char8 as B
 import Data.Maybe (listToMaybe)
@@ -15,6 +14,7 @@ main = do
   print $ partTwo input
 
 -- >>> solve "abc"
+-- >>> partTwo "abc"
 -- 22728
 -- 22551
 solve, partTwo :: B.ByteString -> Int
@@ -32,7 +32,7 @@ findKeys salt n =
     hashes = [stretch n (md5 (salt <> B.pack (show i))) | i <- [0 ..]] `using` parBuffer 512 rdeepseq
 
 md5 :: B.ByteString -> B.ByteString
-md5 = convertToBase Base16 . hash @_ @MD5
+md5 = convertToBase Base16 . hash
 
 stretch :: Int -> B.ByteString -> B.ByteString
 stretch n = (!! n) . iterate md5

@@ -4,9 +4,10 @@
 
 import Control.Lens (ix, none, (&), (.~))
 import Control.Parallel.Strategies (parBuffer, rseq, using)
-import Crypto.Hash (Digest, MD5, hash)
+import Crypto.Hash.MD5 (hash)
 import Data.Bits (shiftR, (.&.))
 import qualified Data.ByteArray as BA
+import Data.ByteString.Char8 (ByteString)
 import qualified Data.ByteString.Char8 as BC
 import Data.List (scanl')
 import Data.List.Split (chunksOf)
@@ -26,11 +27,11 @@ main = do
 -- >>> partTwo example
 -- "18f47a30"
 -- "05ace8e3"
-solve, partTwo :: [Digest MD5] -> String
+solve, partTwo :: [ByteString] -> String
 solve keys = take 8 [hex (BA.index d 2) | d <- keys]
 partTwo keys = head [h | h <- scanl' step (replicate 8 '_') keys, none (== '_') h]
   where
-    step :: String -> Digest MD5 -> String
+    step :: String -> ByteString -> String
     step out d
       | pos < 8 && out !! pos == '_' = out & ix pos .~ val
       | otherwise = out
@@ -38,17 +39,17 @@ partTwo keys = head [h | h <- scanl' step (replicate 8 '_') keys, none (== '_') 
         pos = fromIntegral (BA.index d 2)
         val = hex (BA.index d 3 `shiftR` 4)
 
-getHash :: BC.ByteString -> Int -> Digest MD5
+getHash :: ByteString -> Int -> ByteString
 getHash key n = hash (key <> BC.pack (show n))
 
-isValid :: Digest MD5 -> Bool
+isValid :: ByteString -> Bool
 isValid d = BA.index d 0 == 0 && BA.index d 1 == 0 && BA.index d 2 .&. 0xF0 == 0
 
 hex :: Word8 -> Char
 hex = head . printf "%x"
 
 -- Generate infinite list of valid hashes in parallel chunks
-candidates :: BC.ByteString -> [Digest MD5]
+candidates :: ByteString -> [ByteString]
 candidates key = concatMap mine indexChunks `using` parBuffer parBuff rseq
   where
     chunkSize = 100_000

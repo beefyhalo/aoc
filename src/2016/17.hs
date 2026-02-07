@@ -1,8 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeApplications #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
-import Crypto.Hash (MD5, hash)
+import Crypto.Hash.MD5 (hash)
 import qualified Data.ByteArray.Encoding as BA
 import qualified Data.ByteString.Char8 as B
 
@@ -45,4 +44,4 @@ neighbors pass ((x, y), path) =
 openDoors :: B.ByteString -> [Bool]
 openDoors bs = take 4 $ (`B.elem` "bcdef") <$> B.unpack hex
   where
-    hex = BA.convertToBase BA.Base16 (hash @_ @MD5 bs)
+    hex = BA.convertToBase BA.Base16 (hash bs)
