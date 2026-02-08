@@ -24,7 +24,7 @@ solve target = (concatMap show slice, idx)
     scores = fst3 <$> iterate step (Seq.fromList [3, 7], 0, 1)
     recipes = head [b | b <- scores, Seq.length b >= n + 10]
     slice = Seq.take 10 $ Seq.drop n recipes
-    digits = 3 : 7 : [d | (s, s') <- zip scores (tail scores), d <- toList $ Seq.drop (length s) s']
+    digits = 3 : 7 : concatMap toList (zipWith (Seq.drop . length) scores (tail scores))
     Just idx = findIndex (isPrefixOf target) (tails digits)
 
 step :: (Seq Int, Int, Int) -> (Seq Int, Int, Int)
