@@ -1,12 +1,14 @@
+{-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
+{-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Control.Monad (guard)
 import Data.Function (on)
 import Data.List (find)
 import Data.List.Extra (minimumOn)
 import qualified Data.Map.Strict as M
-import Data.Maybe (fromMaybe)
+import Data.Maybe (fromMaybe, mapMaybe)
 import qualified Data.Sequence as Q
 import Data.Set ((\\))
 import qualified Data.Set as S
@@ -36,6 +38,7 @@ main :: IO ()
 main = do
   input <- parse . lines <$> readFile "input/2018/15.txt"
   print $ solve input
+  print $ partTwo input
 
 parse :: [String] -> World
 parse ls = W (S.fromList ws) (M.fromList us)
@@ -46,13 +49,22 @@ parse ls = W (S.fromList ws) (M.fromList us)
     us = [(p, Unit i (if c == 'E' then E else G) 200 3) | (i, (p, c)) <- zip [0 ..] usOrdered]
 
 -- >>> solve example
--- (47,590,27730)
-solve :: World -> (Int, Int, Int)
-solve input = (r, hpLeft, outcome)
+-- >>> partTwo example
+-- 27730
+-- 4988
+solve, partTwo :: World -> Int
+solve w = let (r, w') = simulate w in r * sum (hp <$> units w')
+partTwo w =
+  head
+    [ solve w'
+    | ap <- [4 ..],
+      let w' = setElfAp ap,
+      countElves w' == countElves w,
+      countElves (snd (simulate w')) == countElves w
+    ]
   where
-    (r, w) = simulate input
-    hpLeft = sum $ hp <$> units w
-    outcome = r * hpLeft
+    countElves = M.size . M.filter ((== E) . team) . units
+    setElfAp ap = w {units = (\u -> if team u == E then u {ap} else u) <$> units w}
 
 simulate :: World -> (Int, World)
 simulate w0 = (r - 1, w')
@@ -75,7 +87,7 @@ turn pos w@(W {..}) = case M.lookup pos units of
     [] -> (w, True)
     foes -> (attack step w {units = units'}, False)
       where
-        adjFoe = any (maybe False (isEnemy u) . flip M.lookup units) (neigh pos)
+        adjFoe = any (isEnemy u) $ mapMaybe (`M.lookup` units) (neigh pos)
         inRange = S.fromList (concatMap neigh foes) \\ walls \\ M.keysSet units
         step = fromMaybe pos $ firstStep w pos inRange <* guard (not adjFoe)
         units' = if step == pos then units else M.insert step u (M.delete pos units) -- move
