@@ -1,11 +1,14 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
+import Control.Monad (guard)
+import Data.Function (on)
 import Data.List (find)
 import Data.List.Extra (minimumOn)
 import qualified Data.Map.Strict as M
 import Data.Maybe (fromMaybe)
 import qualified Data.Sequence as Q
+import Data.Set ((\\))
 import qualified Data.Set as S
 
 type P = (Int, Int)
@@ -19,8 +22,11 @@ data World = W {walls :: S.Set P, units :: M.Map P Unit}
 neigh :: P -> [P]
 neigh (y, x) = [(y - 1, x), (y, x - 1), (y, x + 1), (y + 1, x)]
 
-enemies :: Team -> World -> [P]
-enemies t W {..} = [p | (p, u) <- M.toList units, team u /= t]
+enemies :: Unit -> World -> [P]
+enemies u W {..} = [p | (p, v) <- M.toList units, isEnemy u v]
+
+isEnemy :: Unit -> Unit -> Bool
+isEnemy = on (/=) team
 
 -- $setup
 -- >>> input = "#######\n#.G...#\n#...EG#\n#.#.#G#\n#..G#E#\n#.....#\n#######"
@@ -65,20 +71,20 @@ simulate w0 = (r - 1, w')
 turn :: P -> World -> (World, Bool)
 turn pos w@(W {..}) = case M.lookup pos units of
   Nothing -> (w, False)
-  Just u -> case enemies (team u) w of
+  Just u -> case enemies u w of
     [] -> (w, True)
     foes -> (attack step w {units = units'}, False)
       where
-        adjFoe = any (\p -> maybe False ((/= team u) . team) (M.lookup p units)) (neigh pos)
-        inRange = S.fromList [q | fp <- foes, q <- neigh fp, S.notMember q walls, M.notMember q units]
-        step = if adjFoe then pos else fromMaybe pos (firstStep w pos inRange)
+        adjFoe = any (maybe False (isEnemy u) . flip M.lookup units) (neigh pos)
+        inRange = S.fromList (concatMap neigh foes) \\ walls \\ M.keysSet units
+        step = fromMaybe pos $ firstStep w pos inRange <* guard (not adjFoe)
         units' = if step == pos then units else M.insert step u (M.delete pos units) -- move
 
 attack :: P -> World -> World
 attack p w@(W {..}) = case M.lookup p units of
   Nothing -> w
   Just u ->
-    case [(q, v) | q <- neigh p, Just v <- [M.lookup q units], team v /= team u] of
+    case [(q, v) | q <- neigh p, Just v <- [M.lookup q units], isEnemy u v] of
       [] -> w
       foes -> w {units = M.alter upd victimPos units}
         where
@@ -91,10 +97,10 @@ firstStep W {..} start targets
   | S.null targets = Nothing
   | otherwise = bfs (Q.fromList [(n, n) | n <- neigh start, free n]) (S.singleton start)
   where
-    free p = not (S.member p walls) && (p == start || not (M.member p units))
+    free p = S.notMember p walls && (p == start || M.notMember p units)
 
     bfs q vis
-      | Q.null q = Nothing
+      | null q = Nothing
       | not (null hits) = Just (snd $ minimum hits)
       | otherwise = uncurry bfs $ foldl expand (Q.empty, vis) q
       where
@@ -104,4 +110,4 @@ firstStep W {..} start targets
       | S.member p v = (acc, v)
       | otherwise = (acc <> next, S.insert p v)
       where
-        next = Q.fromList [(n, f) | n <- neigh p, free n, not (S.member n v)]
+        next = Q.fromList [(n, f) | n <- neigh p, free n, S.notMember n v]
