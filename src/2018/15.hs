@@ -17,7 +17,7 @@ type P = (Int, Int)
 
 data Team = E | G deriving (Eq)
 
-data Unit = Unit {uid :: Int, team :: Team, hp :: Int, ap :: Int}
+data Unit = Unit {uid, hp, ap :: Int, team :: Team}
 
 data World = W {walls :: S.Set P, units :: M.Map P Unit}
 
@@ -25,7 +25,7 @@ neigh :: P -> [P]
 neigh (y, x) = [(y - 1, x), (y, x - 1), (y, x + 1), (y + 1, x)]
 
 enemies :: Unit -> World -> [P]
-enemies u W {..} = [p | (p, v) <- M.toList units, isEnemy u v]
+enemies u = M.keys . M.filter (isEnemy u) . units
 
 isEnemy :: Unit -> Unit -> Bool
 isEnemy = on (/=) team
@@ -46,7 +46,7 @@ parse ls = W (S.fromList ws) (M.fromList us)
     coords = [((y, x), c) | (y, row) <- zip [0 ..] ls, (x, c) <- zip [0 ..] row]
     ws = [p | (p, '#') <- coords]
     usOrdered = [(p, c) | (p, c) <- coords, c == 'E' || c == 'G']
-    us = [(p, Unit i (if c == 'E' then E else G) 200 3) | (i, (p, c)) <- zip [0 ..] usOrdered]
+    us = [(p, Unit i 200 3 (if c == 'E' then E else G)) | (i, (p, c)) <- zip [0 ..] usOrdered]
 
 -- >>> solve example
 -- >>> partTwo example
@@ -81,19 +81,19 @@ simulate w0 = (r - 1, w')
           | otherwise = (world, False)
 
 turn :: P -> World -> (World, Bool)
-turn pos w@(W {..}) = case M.lookup pos units of
+turn pos w@W {..} = case M.lookup pos units of
   Nothing -> (w, False)
   Just u -> case enemies u w of
     [] -> (w, True)
     foes -> (attack step w {units = units'}, False)
       where
         adjFoe = any (isEnemy u) $ mapMaybe (`M.lookup` units) (neigh pos)
-        inRange = S.fromList (concatMap neigh foes) \\ walls \\ M.keysSet units
-        step = fromMaybe pos $ firstStep w pos inRange <* guard (not adjFoe)
+        range = S.fromList (concatMap neigh foes) \\ walls \\ M.keysSet units
+        step = fromMaybe pos $ findMove w pos range <* guard (not adjFoe)
         units' = if step == pos then units else M.insert step u (M.delete pos units) -- move
 
 attack :: P -> World -> World
-attack p w@(W {..}) = case M.lookup p units of
+attack p w@W {..} = case M.lookup p units of
   Nothing -> w
   Just u ->
     case [(q, v) | q <- neigh p, Just v <- [M.lookup q units], isEnemy u v] of
@@ -104,8 +104,8 @@ attack p w@(W {..}) = case M.lookup p units of
           upd (Just v) | hp v > ap u = Just v {hp = hp v - ap u}
           upd _ = Nothing
 
-firstStep :: World -> P -> S.Set P -> Maybe P
-firstStep W {..} start targets
+findMove :: World -> P -> S.Set P -> Maybe P
+findMove W {..} start targets
   | S.null targets = Nothing
   | otherwise = bfs (Q.fromList [(n, n) | n <- neigh start, free n]) (S.singleton start)
   where
