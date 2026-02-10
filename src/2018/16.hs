@@ -7,7 +7,7 @@ import Data.Char (isDigit)
 import qualified Data.IntMap as IM
 import Data.IntSet (IntSet)
 import qualified Data.IntSet as S
-import Data.List (find)
+import Data.List (find, findIndices)
 import Data.List.Split (chunksOf, splitOn, wordsBy)
 
 type Regs = [Int]
@@ -69,7 +69,7 @@ solve (samples, program) = (overThree, head finalRegs)
     finalRegs = runProg mapping program
 
 matchingOps :: (Regs, Instr, Regs) -> IntSet
-matchingOps (before, (_, a, b, c), after) = S.fromList [i | (i, f) <- zip [0 ..] ops, f before a b c == after]
+matchingOps (before, (_, a, b, c), after) = S.fromList $ findIndices (\f -> f before a b c == after) ops
 
 -- deduce mapping
 buildPoss :: [(Regs, Instr, Regs)] -> IM.IntMap IntSet
@@ -87,7 +87,7 @@ resolve = go IM.empty
         poss' = S.delete val <$> IM.delete op poss
 
 runProg :: IM.IntMap Int -> [Instr] -> Regs
-runProg mapping = foldl' step [0, 0, 0, 0]
+runProg mappingIdx = foldl' step [0, 0, 0, 0]
   where
-    step regs (op, a, b, c) =
-      let f = ops !! (mapping IM.! op) in f regs a b c
+    step regs (op, a, b, c) = (mapping IM.! op) regs a b c
+    mapping = IM.map (ops !!) mappingIdx

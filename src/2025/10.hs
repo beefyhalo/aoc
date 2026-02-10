@@ -9,7 +9,7 @@ import qualified Data.ByteString.Char8 as B
 import Data.Either (fromRight)
 import Data.IntMap.Strict (IntMap)
 import qualified Data.IntMap.Strict as IM
-import Data.List (subsequences)
+import Data.List (findIndices, subsequences)
 import qualified Data.Map.Strict as M
 import qualified Data.Vector.Storable as V
 import Numeric.LinearAlgebra (Vector)
@@ -92,7 +92,7 @@ minPresses (Machine _ btns joltages) = fst $ go M.empty (V.fromList joltages)
 
     -- For each counter, a bitmask of which buttons affect it
     counterMasks :: Vec
-    counterMasks = V.generate n $ \i -> foldl' setBit 0 [b | (b, bs) <- zip [0 ..] btns, i `elem` bs]
+    counterMasks = V.generate n $ \i -> foldl' setBit 0 (findIndices (elem i) btns)
 
     -- Pre-group subsets by parity signature
     parityGroups :: IntMap [Int]
