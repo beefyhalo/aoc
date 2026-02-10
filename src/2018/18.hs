@@ -10,16 +10,19 @@ import Control.Comonad (extend, extract)
 import Control.Comonad.Store (experiment)
 import Control.Lens (view)
 import Data.Foldable (toList)
-import Data.List.Extra (nubOrd)
 import qualified Data.Map.Strict as M
 import Data.Maybe (fromJust)
-import GHC.TypeNats (KnownNat, type (<=))
+import Data.Proxy (Proxy (Proxy))
+import GHC.TypeNats (KnownNat, natVal, type (<=))
 import qualified GHC.TypeNats as GHC
-import SizedGrid
+import SizedGrid hiding (Grid)
 
 data Cell = Open | Trees | Lumber deriving (Eq, Ord)
 
-type FocusedForest n = FocusedGrid '[HardWrap n, HardWrap n] Cell
+type Grid n = FocusedGrid '[HardWrap n, HardWrap n] Cell
+
+gridKey :: Grid n -> [Cell]
+gridKey = toList
 
 -- $setup
 -- >>> input = ".#.#...|#.\n.....#|##|\n.|..|...#.\n..|#.....#\n#.#|||#|#|\n...#.||...\n.|....|...\n||...#|.#|\n|.||||..|.\n...#.|..|."
@@ -30,14 +33,14 @@ main = do
   input <- parse @50 <$> readFile "input/2018/18.txt"
   print $ solve input
 
-parse :: forall n. (KnownNat n, 1 <= n, KnownNat (n GHC.* n)) => String -> FocusedForest n
+parse :: forall n. (KnownNat n, 1 <= n, KnownNat (n GHC.* n)) => String -> Grid n
 parse = view asFocusedGrid . fromJust . gridFromList . map (map parseCell) . lines
   where
     parseCell = \case '.' -> Open; '|' -> Trees; '#' -> Lumber
 
 -- >>> solve example
 -- (1147,0)
-solve :: (KnownNat n, 1 <= n) => FocusedForest n -> (Int, Int)
+solve :: (KnownNat n, 1 <= n) => Grid n -> (Int, Int)
 solve fg = (resourceValue part1, resourceValue part2)
   where
     next = extend step
@@ -47,25 +50,40 @@ solve fg = (resourceValue part1, resourceValue part2)
     -- Detect cycle
     (seen, endIdx, loopStart) =
       until
-        (\(m, _, c) -> toList c `M.member` m)
-        (\(m, i, c) -> (M.insert (toList c) i m, i + 1, next c))
+        (\(m, _, g) -> M.member (gridKey g) m)
+        (\(m, i, g) -> (M.insert (gridKey g) i m, i + 1, next g))
         (M.empty, 0, fg)
 
-    startIdx = seen M.! toList loopStart
+    startIdx = seen M.! gridKey loopStart
     remSteps = (1000000000 - startIdx) `mod` (endIdx - startIdx)
 
-step :: (KnownNat n, 1 <= n) => FocusedForest n -> Cell
+step :: (KnownNat n, 1 <= n) => Grid n -> Cell
 step fg = case extract fg of
   Open -> if count Trees >= 3 then Trees else Open
   Trees -> if count Lumber >= 3 then Lumber else Trees
   Lumber -> if count Lumber >= 1 && count Trees >= 1 then Lumber else Open
   where
-    count c = length $ filter (== c) (neigh fg)
-    neigh = experiment (\p -> filter (/= p) $ nubOrd $ moorePoints 1 p)
+    count c = length $ filter (== c) neighs
+    -- neighs = experiment (filter (/= pos fg) . nubOrd . moorePoints 1) fg
+    neighs = experiment neighborsOf fg
 
-resourceValue :: FocusedForest n -> Int
+resourceValue :: Grid n -> Int
 resourceValue fg = trees * lumber
   where
-    g = toList fg
-    trees = length $ filter (== Trees) g
-    lumber = length $ filter (== Lumber) g
+    cs = toList fg
+    trees = length $ filter (== Trees) cs
+    lumber = length $ filter (== Lumber) cs
+
+-- Manual neighbourhood positions
+neighborsOf :: forall n. (KnownNat n, 1 <= n) => Coord '[HardWrap n, HardWrap n] -> [Coord '[HardWrap n, HardWrap n]]
+neighborsOf (r :| c :| _) =
+  [ toEnum nr :| toEnum nc :| EmptyCoord
+  | dr <- [-1 .. 1],
+    dc <- [-1 .. 1],
+    (dr, dc) /= (0, 0),
+    let nr = fromEnum r + dr,
+    let nc = fromEnum c + dc,
+    nr >= 0 && nr < nVal && nc >= 0 && nc < nVal
+  ]
+  where
+    nVal = fromIntegral (natVal (Proxy @n))
