@@ -10,19 +10,19 @@ import Control.Comonad (extend, extract)
 import Control.Comonad.Store (experiment)
 import Control.Lens (view)
 import Data.Foldable (toList)
-import qualified Data.Map.Strict as M
+import qualified Data.IntMap.Strict as M
 import Data.Maybe (fromJust)
 import Data.Proxy (Proxy (Proxy))
 import GHC.TypeNats (KnownNat, natVal, type (<=))
 import qualified GHC.TypeNats as GHC
 import SizedGrid hiding (Grid)
 
-data Cell = Open | Trees | Lumber deriving (Eq, Ord)
+data Cell = Open | Trees | Lumber deriving (Eq, Ord, Enum)
 
 type Grid n = FocusedGrid '[HardWrap n, HardWrap n] Cell
 
-gridKey :: Grid n -> [Cell]
-gridKey = toList
+gridHash :: Grid n -> Int
+gridHash = foldl' (\h c -> h * 3 + fromEnum c) 0
 
 -- $setup
 -- >>> input = ".#.#...|#.\n.....#|##|\n.|..|...#.\n..|#.....#\n#.#|||#|#|\n...#.||...\n.|....|...\n||...#|.#|\n|.||||..|.\n...#.|..|."
@@ -50,11 +50,11 @@ solve fg = (resourceValue part1, resourceValue part2)
     -- Detect cycle
     (seen, endIdx, loopStart) =
       until
-        (\(m, _, g) -> M.member (gridKey g) m)
-        (\(m, i, g) -> (M.insert (gridKey g) i m, i + 1, next g))
+        (\(m, _, g) -> M.member (gridHash g) m)
+        (\(m, i, g) -> (M.insert (gridHash g) i m, i + 1, next g))
         (M.empty, 0, fg)
 
-    startIdx = seen M.! gridKey loopStart
+    startIdx = seen M.! gridHash loopStart
     remSteps = (1000000000 - startIdx) `mod` (endIdx - startIdx)
 
 step :: (KnownNat n, 1 <= n) => Grid n -> Cell
