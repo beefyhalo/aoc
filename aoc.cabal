@@ -71,6 +71,7 @@ executable aoc-2015-01
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -127,6 +128,7 @@ executable aoc-2015-02
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -183,6 +185,7 @@ executable aoc-2015-03
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -239,6 +242,7 @@ executable aoc-2015-04
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -295,6 +299,7 @@ executable aoc-2015-05
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -351,6 +356,7 @@ executable aoc-2015-06
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -407,6 +413,7 @@ executable aoc-2015-07
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -463,6 +470,7 @@ executable aoc-2015-08
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -519,6 +527,7 @@ executable aoc-2015-09
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -575,6 +584,7 @@ executable aoc-2015-10
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -631,6 +641,7 @@ executable aoc-2015-11
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -687,6 +698,7 @@ executable aoc-2015-12
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -743,6 +755,7 @@ executable aoc-2015-13
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -799,6 +812,7 @@ executable aoc-2015-14
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -855,6 +869,7 @@ executable aoc-2015-15
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -911,6 +926,7 @@ executable aoc-2015-16
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -967,6 +983,7 @@ executable aoc-2015-17
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1023,6 +1040,7 @@ executable aoc-2015-18
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1079,6 +1097,7 @@ executable aoc-2015-19
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1135,6 +1154,7 @@ executable aoc-2015-20
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1191,6 +1211,7 @@ executable aoc-2015-21
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1247,6 +1268,7 @@ executable aoc-2015-22
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1303,6 +1325,7 @@ executable aoc-2015-23
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1359,6 +1382,7 @@ executable aoc-2015-24
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1415,6 +1439,7 @@ executable aoc-2015-25
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1471,6 +1496,7 @@ executable aoc-2016-01
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1527,6 +1553,7 @@ executable aoc-2016-02
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1583,6 +1610,7 @@ executable aoc-2016-03
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1639,6 +1667,7 @@ executable aoc-2016-04
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1695,6 +1724,7 @@ executable aoc-2016-05
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1751,6 +1781,7 @@ executable aoc-2016-06
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1807,6 +1838,7 @@ executable aoc-2016-07
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1863,6 +1895,7 @@ executable aoc-2016-08
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1919,6 +1952,7 @@ executable aoc-2016-09
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -1975,6 +2009,7 @@ executable aoc-2016-10
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2031,6 +2066,7 @@ executable aoc-2016-11
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2087,6 +2123,7 @@ executable aoc-2016-12
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2143,6 +2180,7 @@ executable aoc-2016-13
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2199,6 +2237,7 @@ executable aoc-2016-14
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2255,6 +2294,7 @@ executable aoc-2016-15
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2311,6 +2351,7 @@ executable aoc-2016-16
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2367,6 +2408,7 @@ executable aoc-2016-17
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2423,6 +2465,7 @@ executable aoc-2016-18
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2479,6 +2522,7 @@ executable aoc-2016-19
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2535,6 +2579,7 @@ executable aoc-2016-20
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2591,6 +2636,7 @@ executable aoc-2016-21
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2647,6 +2693,7 @@ executable aoc-2016-22
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2703,6 +2750,7 @@ executable aoc-2016-23
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2759,6 +2807,7 @@ executable aoc-2016-24
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2815,6 +2864,7 @@ executable aoc-2016-25
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2871,6 +2921,7 @@ executable aoc-2017-01
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2927,6 +2978,7 @@ executable aoc-2017-02
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -2983,6 +3035,7 @@ executable aoc-2017-03
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3039,6 +3092,7 @@ executable aoc-2017-04
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3095,6 +3149,7 @@ executable aoc-2017-05
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3151,6 +3206,7 @@ executable aoc-2017-06
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3207,6 +3263,7 @@ executable aoc-2017-07
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3263,6 +3320,7 @@ executable aoc-2017-08
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3319,6 +3377,7 @@ executable aoc-2017-09
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3375,6 +3434,7 @@ executable aoc-2017-10
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3431,6 +3491,7 @@ executable aoc-2017-11
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3487,6 +3548,7 @@ executable aoc-2017-12
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3543,6 +3605,7 @@ executable aoc-2017-13
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3599,6 +3662,7 @@ executable aoc-2017-14
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3655,6 +3719,7 @@ executable aoc-2017-15
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3711,6 +3776,7 @@ executable aoc-2017-16
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3767,6 +3833,7 @@ executable aoc-2017-17
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3823,6 +3890,7 @@ executable aoc-2017-18
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3879,6 +3947,7 @@ executable aoc-2017-19
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3935,6 +4004,7 @@ executable aoc-2017-20
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -3991,6 +4061,7 @@ executable aoc-2017-21
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4047,6 +4118,7 @@ executable aoc-2017-22
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4103,6 +4175,7 @@ executable aoc-2017-23
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4159,6 +4232,7 @@ executable aoc-2017-24
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4215,6 +4289,7 @@ executable aoc-2017-25
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4271,6 +4346,7 @@ executable aoc-2018-01
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4327,6 +4403,7 @@ executable aoc-2018-02
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4383,6 +4460,7 @@ executable aoc-2018-03
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4439,6 +4517,7 @@ executable aoc-2018-04
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4495,6 +4574,7 @@ executable aoc-2018-05
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4551,6 +4631,7 @@ executable aoc-2018-06
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4607,6 +4688,7 @@ executable aoc-2018-07
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4663,6 +4745,7 @@ executable aoc-2018-08
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4719,6 +4802,7 @@ executable aoc-2018-09
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4775,6 +4859,7 @@ executable aoc-2018-10
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4831,6 +4916,7 @@ executable aoc-2018-11
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4887,6 +4973,7 @@ executable aoc-2018-12
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4943,6 +5030,7 @@ executable aoc-2018-13
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -4999,6 +5087,7 @@ executable aoc-2018-14
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5055,6 +5144,7 @@ executable aoc-2018-15
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5111,6 +5201,7 @@ executable aoc-2018-16
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5167,6 +5258,7 @@ executable aoc-2018-17
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5223,6 +5315,7 @@ executable aoc-2018-18
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5279,6 +5372,7 @@ executable aoc-2018-19
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5335,6 +5429,7 @@ executable aoc-2018-20
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5391,6 +5486,7 @@ executable aoc-2018-21
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5447,6 +5543,7 @@ executable aoc-2018-22
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5503,6 +5600,64 @@ executable aoc-2018-23
     , semirings
     , sized-grid
     , split
+    , text
+    , uniplate
+    , unordered-containers
+    , vector
+    , vector-algorithms
+    , vector-sized
+    , vector-space
+  default-language: Haskell2010
+
+executable aoc-2018-24
+  main-is: src/2018/24.hs
+  other-modules:
+      Paths_aoc
+  autogen-modules:
+      Paths_aoc
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      MemoTrie
+    , adjunctions
+    , aeson
+    , arithmoi
+    , array
+    , attoparsec
+    , base >=4.7 && <5
+    , bitvec
+    , bytestring
+    , comonad
+    , constraints
+    , containers
+    , cryptohash-md5
+    , data-fix
+    , deepseq
+    , extra
+    , free
+    , ghc-typelits-knownnat
+    , ghc-typelits-natnormalise
+    , heap
+    , hmatrix
+    , lens
+    , linear
+    , list-shuffle
+    , memory
+    , mod
+    , monad-loops
+    , mono-traversable
+    , monoidal-containers
+    , mtl
+    , nonempty-zipper
+    , parallel
+    , parsec
+    , random
+    , recursion-schemes
+    , regex-tdfa
+    , scientific
+    , semirings
+    , sized-grid
+    , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5559,6 +5714,7 @@ executable aoc-2024-01
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5615,6 +5771,7 @@ executable aoc-2024-02
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5671,6 +5828,7 @@ executable aoc-2024-03
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5727,6 +5885,7 @@ executable aoc-2024-04
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5783,6 +5942,7 @@ executable aoc-2025-01
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5839,6 +5999,7 @@ executable aoc-2025-02
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5895,6 +6056,7 @@ executable aoc-2025-03
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -5951,6 +6113,7 @@ executable aoc-2025-04
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -6007,6 +6170,7 @@ executable aoc-2025-05
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -6063,6 +6227,7 @@ executable aoc-2025-06
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -6119,6 +6284,7 @@ executable aoc-2025-07
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -6175,6 +6341,7 @@ executable aoc-2025-08
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -6231,6 +6398,7 @@ executable aoc-2025-09
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -6287,6 +6455,7 @@ executable aoc-2025-10
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -6343,6 +6512,7 @@ executable aoc-2025-11
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
@@ -6399,6 +6569,7 @@ executable aoc-2025-12
     , semirings
     , sized-grid
     , split
+    , text
     , uniplate
     , unordered-containers
     , vector
