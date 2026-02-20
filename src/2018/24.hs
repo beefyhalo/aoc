@@ -7,8 +7,9 @@ import Data.Function (on)
 import Data.Functor (($>))
 import qualified Data.IntMap.Strict as IM
 import Data.List (sortOn)
-import Data.Maybe (fromJust, listToMaybe)
-import Data.Ord (Down (..))
+import Data.Maybe (fromJust)
+import Data.MonoTraversable (maximumByMay)
+import Data.Ord (Down (..), comparing)
 import qualified Data.Set as S
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
@@ -90,17 +91,19 @@ targetPhase b = snd $ foldl' select (b, []) attackers
     attackers = sortOn (\(_, g) -> Down (effectivePower g, initiative g)) $ IM.toList b
 
     select (avail, acc) (aid, atk)
-      | Just (did, _) <- listToMaybe tgts = (IM.delete did avail, (aid, did) : acc)
+      | Just (did, _) <- best = (IM.delete did avail, (aid, did) : acc)
       | otherwise = (avail, acc)
       where
         enemies = IM.filter ((/= team atk) . team) avail
-        tgts = sortOn (Down . key . snd) $ IM.toList $ IM.filter ((> 0) . damageTo atk) enemies
+        tgts = IM.filter ((> 0) . damageTo atk) enemies
+        best = maximumByMay (comparing (key . snd)) $ IM.toList tgts
+
         key def = (damageTo atk def, effectivePower def, initiative def)
 
 attackPhase :: Battle -> [(Int, Int)] -> Battle
 attackPhase start ts = foldl' atk start order
   where
-    order = sortOn (\(aid, _) -> Down (initiative (start IM.! aid))) ts
+    order = sortOn (\(aid, _) -> Down $ initiative (start IM.! aid)) ts
 
     atk b (aid, did)
       | (Just a, Just d) <- (IM.lookup aid b, IM.lookup did b),
