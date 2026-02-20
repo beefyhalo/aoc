@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Control.Applicative ((<|>))
 import Data.Attoparsec.Text
@@ -68,13 +69,14 @@ parser = do
     pAtk = fromJust . readMaybe . T.unpack . T.toTitle <$> takeWhile1 (`notElem` (" ,);" :: String))
 
 -- >>> solve example
--- (5216,123)
+-- (5216,51)
 solve :: Battle -> (Int, Int)
-solve input = (totalUnits final, 123)
+solve input = (totalUnits final, totalUnits boosted)
   where
     final = simulate input
-
--- winner = head $ nub [team g | g <- IM.elems final]
+    boosted =
+      head
+        [b | n <- [0 ..], let b = simulate (boost Immune n input), all ((== Immune) . team) b]
 
 simulate :: Battle -> Battle
 simulate = until done step
@@ -105,3 +107,10 @@ attackPhase start ts = foldl' atk start order
         units a > 0 =
           IM.adjust (\g -> g {units = max 0 (units g - damageTo a d `div` hp d)}) did b
       | otherwise = b
+
+boost :: Team -> Int -> Battle -> Battle
+boost tm n = IM.map f
+  where
+    f g
+      | team g == tm = g {attack = attack g + n}
+      | otherwise = g
