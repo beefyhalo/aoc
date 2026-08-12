@@ -78,6 +78,7 @@ ghc-options:
   - -Wmissing-home-modules
   - -Wpartial-fields
   - -Wredundant-constraints
+  - -Wunused-packages
 
 executables:
   aoc-2015-01:

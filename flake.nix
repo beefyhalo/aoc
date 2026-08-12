@@ -15,9 +15,10 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             # Haskell toolchain
-            ghc
-            stack
+            haskell.compiler.ghc912
+            haskell.packages.ghc912.haskell-language-server
             cabal-install
+            hpack # regenerates aoc.cabal from package.yaml
 
             # System libraries needed by dependencies (e.g. hmatrix)
             lapack
