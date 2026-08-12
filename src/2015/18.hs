@@ -52,13 +52,10 @@ step fg
     neighs = experiment neighborsOf fg
     aliveCount = length $ filter (== Alive) neighs
 
-stepCorners :: forall n. Rule n
+stepCorners :: Rule n
 stepCorners fg
   | isCorner (pos fg) = Alive
   | otherwise = step fg
-  where
-    n = fromEnum (natVal (Proxy @n)) - 1
-    isCorner ((fromEnum -> r) :| (fromEnum -> c) :| _) = (r == 0 || r == n) && (c == 0 || c == n)
 
 -- Manual neighbourhood positions
 neighborsOf :: forall n. (KnownNat n, 1 <= n) => Coord '[Clamped n, Clamped n] -> [Coord '[Clamped n, Clamped n]]
