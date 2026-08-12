@@ -34,7 +34,6 @@ common puzzle
     -Wmissing-home-modules
     -Wpartial-fields
     -Wredundant-constraints
-    -Wunused-packages
   build-depends:
       adjunctions
     , aeson
