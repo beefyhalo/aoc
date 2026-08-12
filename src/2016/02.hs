@@ -7,16 +7,18 @@ import Control.Comonad.Store (extract, seeks)
 import Data.AffineSpace ((.+^))
 import Data.Maybe (fromJust, isNothing, mapMaybe)
 import GHC.TypeLits (KnownNat, type (<=))
-import SizedGrid (FocusedGrid (..), HardWrap, gridFromList)
+import SizedGrid (Clamped, Coord, FocusedGrid (..), coordFromTuple, gridFromList)
 
 data Move = U | D | L | R
 
-delta :: Move -> (Integer, Integer)
+-- A displacement is a Coord of the axes' Diffs, so it is built rather than
+-- written as a tuple literal; coordFromTuple is the short way to say it.
+delta :: Move -> Coord '[Integer, Integer]
 delta = \case
-  U -> (-1, 0)
-  D -> (1, 0)
-  L -> (0, -1)
-  R -> (0, 1)
+  U -> coordFromTuple (-1, 0)
+  D -> coordFromTuple (1, 0)
+  L -> coordFromTuple (0, -1)
+  R -> coordFromTuple (0, 1)
 
 -- $setup
 -- >>> input = "ULL\nRRDDD\nLURDL\nUUUUD"
@@ -40,21 +42,21 @@ parse = map parseMove
 -- >>> solve keypad2 example
 -- "1985"
 -- "5DB3"
-solve :: (KnownNat n, 1 <= n) => FocusedGrid '[HardWrap n, HardWrap n] (Maybe Char) -> [[Move]] -> String
+solve :: (KnownNat n, 1 <= n) => FocusedGrid '[Clamped n, Clamped n] (Maybe Char) -> [[Move]] -> String
 solve start = mapMaybe extract . drop 1 . scanl (foldl' move) start
   where
     move fg c =
       let next = seeks (.+^ delta c) fg
        in if isNothing $ extract next then fg else next -- It's a "wall", stay put
 
-keypad :: FocusedGrid '[HardWrap 3, HardWrap 3] (Maybe Char)
+keypad :: FocusedGrid '[Clamped 3, Clamped 3] (Maybe Char)
 keypad =
   FocusedGrid
     { focusedGrid = fmap Just . fromJust $ gridFromList ["123", "456", "789"],
-      focusedGridPosition = mempty .+^ (1, 1)
+      focusedGridPosition = mempty .+^ coordFromTuple (1, 1)
     }
 
-keypad2 :: FocusedGrid '[HardWrap 5, HardWrap 5] (Maybe Char)
+keypad2 :: FocusedGrid '[Clamped 5, Clamped 5] (Maybe Char)
 keypad2 =
   FocusedGrid
     { focusedGrid =
@@ -66,5 +68,5 @@ keypad2 =
               [Nothing, Just 'A', Just 'B', Just 'C', Nothing],
               [Nothing, Nothing, Just 'D', Nothing, Nothing]
             ],
-      focusedGridPosition = mempty .+^ (2, 0)
+      focusedGridPosition = mempty .+^ coordFromTuple (2, 0)
     }

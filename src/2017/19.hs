@@ -32,7 +32,7 @@ main = do
   Just (startFocus -> input) <- parse @201 <$> readFile "input/2017/19.txt"
   print $ solve input
 
-parse :: forall n. (KnownNat n, KnownNat (n GHC.* n)) => String -> Maybe (Grid '[HardWrap n, HardWrap n] Cell)
+parse :: forall n. (KnownNat n, KnownNat (n GHC.* n)) => String -> Maybe (Grid '[Clamped n, Clamped n] Cell)
 parse = gridFromList . map (map parseCell) . lines
   where
     parseCell c
@@ -41,14 +41,14 @@ parse = gridFromList . map (map parseCell) . lines
       | isSpace c = Empty
       | otherwise = Path
 
-startFocus :: forall n. (KnownNat n, 1 <= n) => Grid '[HardWrap n, HardWrap n] Cell -> FocusedGrid '[HardWrap n, HardWrap n] Cell
-startFocus g = FocusedGrid {focusedGrid = g, focusedGridPosition = mempty .+^ (0, toInteger col)}
+startFocus :: forall n. (KnownNat n, 1 <= n) => Grid '[Clamped n, Clamped n] Cell -> FocusedGrid '[Clamped n, Clamped n] Cell
+startFocus g = FocusedGrid {focusedGrid = g, focusedGridPosition = mempty .+^ coordFromTuple (0, toInteger col)}
   where
     Just col = elemIndex Path (toList g)
 
 -- >>> solve example
 -- ("ABCDEF",38)
-solve :: (KnownNat n, 1 <= n) => FocusedGrid '[HardWrap n, HardWrap n] Cell -> (String, Int)
+solve :: (KnownNat n, 1 <= n) => FocusedGrid '[Clamped n, Clamped n] Cell -> (String, Int)
 solve g = (catMaybes stream, length stream)
   where
     stream = unfoldr step (g, S)
@@ -60,15 +60,17 @@ orthogonal = \case
   E -> [N, S]
   W -> [N, S]
 
-shift :: (KnownNat n, 1 <= n) => Dir -> Coord '[HardWrap n, HardWrap n] -> Coord '[HardWrap n, HardWrap n]
+shift :: (KnownNat n, 1 <= n) => Dir -> Coord '[Clamped n, Clamped n] -> Coord '[Clamped n, Clamped n]
 shift d g =
-  g .+^ case d of
-    N -> (-1, 0)
-    S -> (1, 0)
-    E -> (0, 1)
-    W -> (0, -1)
+  g .+^ coordFromTuple
+    ( case d of
+        N -> (-1, 0)
+        S -> (1, 0)
+        E -> (0, 1)
+        W -> (0, -1)
+    )
 
-type State n = (FocusedGrid '[HardWrap n, HardWrap n] Cell, Dir)
+type State n = (FocusedGrid '[Clamped n, Clamped n] Cell, Dir)
 
 step :: (KnownNat n, 1 <= n) => State n -> Maybe (Maybe Char, State n)
 step (g, dir) = case extract g of

@@ -19,7 +19,7 @@ import SizedGrid hiding (Grid)
 
 data Cell = Open | Trees | Lumber deriving (Eq, Ord, Enum)
 
-type Grid n = FocusedGrid '[HardWrap n, HardWrap n] Cell
+type Grid n = FocusedGrid '[Clamped n, Clamped n] Cell
 
 gridHash :: Grid n -> Int
 gridHash = foldl' (\h c -> h * 3 + fromEnum c) 0
@@ -75,7 +75,7 @@ resourceValue fg = trees * lumber
     lumber = length $ filter (== Lumber) cs
 
 -- Manual neighbourhood positions
-neighborsOf :: forall n. (KnownNat n, 1 <= n) => Coord '[HardWrap n, HardWrap n] -> [Coord '[HardWrap n, HardWrap n]]
+neighborsOf :: forall n. (KnownNat n, 1 <= n) => Coord '[Clamped n, Clamped n] -> [Coord '[Clamped n, Clamped n]]
 neighborsOf (r :| c :| _) =
   [ toEnum nr :| toEnum nc :| EmptyCoord
   | dr <- [-1 .. 1],

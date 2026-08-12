@@ -28,18 +28,18 @@ main = do
   print $ solve 100 input
   print $ partTwo 100 input
 
-parse :: (KnownNat n, KnownNat (n GHC.* n)) => String -> Maybe (Grid '[HardWrap n, HardWrap n] Cell)
+parse :: (KnownNat n, KnownNat (n GHC.* n)) => String -> Maybe (Grid '[Clamped n, Clamped n] Cell)
 parse = gridFromList . map (map (\c -> if c == '#' then Alive else Dead)) . lines
 
 -- >>> solve 2 example
 -- >>> partTwo 2 example
 -- 8
 -- 14
-solve, partTwo :: (KnownNat n, 1 <= n) => Int -> FocusedGrid '[HardWrap n, HardWrap n] Cell -> Int
+solve, partTwo :: (KnownNat n, 1 <= n) => Int -> FocusedGrid '[Clamped n, Clamped n] Cell -> Int
 solve n = length . filter (== Alive) . toList . (!! n) . iterate (extend step)
 partTwo n = length . filter (== Alive) . toList . (!! n) . iterate (extend stepCorners)
 
-type Rule n = (KnownNat n, 1 <= n) => FocusedGrid '[HardWrap n, HardWrap n] Cell -> Cell
+type Rule n = (KnownNat n, 1 <= n) => FocusedGrid '[Clamped n, Clamped n] Cell -> Cell
 
 step :: Rule n
 step fg
@@ -61,7 +61,7 @@ stepCorners fg
     isCorner ((fromEnum -> r) :| (fromEnum -> c) :| _) = (r == 0 || r == n) && (c == 0 || c == n)
 
 -- Manual neighbourhood positions
-neighborsOf :: forall n. (KnownNat n, 1 <= n) => Coord '[HardWrap n, HardWrap n] -> [Coord '[HardWrap n, HardWrap n]]
+neighborsOf :: forall n. (KnownNat n, 1 <= n) => Coord '[Clamped n, Clamped n] -> [Coord '[Clamped n, Clamped n]]
 neighborsOf (r :| c :| _) =
   [ toEnum nr :| toEnum nc :| EmptyCoord
   | dr <- [-1 .. 1],

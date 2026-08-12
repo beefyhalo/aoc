@@ -30,7 +30,7 @@ import Data.Maybe (fromJust, mapMaybe)
 import GHC.TypeNats (KnownNat, type (+), type (<=))
 import GHC.TypeNats qualified as GHC
 import SizedGrid (Grid, IsGrid (asFocusedGrid), Periodic, StrengthenCoord (strengthenCoord), WeakenCoord (weakenCoord), gridFromList)
-import SizedGrid.Coord (Coord)
+import SizedGrid.Coord (Coord, coordFromTuple)
 
 data Cell = X | M | A | S deriving (Eq, Show)
 
@@ -68,8 +68,8 @@ solve = sum . fmap occurences . extend (\s -> if extract s == X then experiment 
           [ Three i j k
           | dy <- [-1 .. 1],
             dx <- [-1 .. 1],
-            let d = (dy, dx),
-            d /= (0, 0),
+            (dy, dx) /= (0, 0),
+            let d = coordFromTuple (dy, dx),
             let i, j, k :: Coord '[Periodic (n + 1), Periodic (n + 1)]
                 i = strengthenCoord c .+^ d
                 j = i .+^ d
@@ -88,7 +88,7 @@ type ContextTwo a = Compose Maybe (Product Two Two) a
 
 -- >>> partTwo example
 -- 9
-partTwo :: forall n. (1 <= n, KnownNat n) => Input n -> Int
+partTwo :: forall n. (1 <= n, KnownNat n, KnownNat (n + 1), n <= n + 1) => Input n -> Int
 partTwo = sum . fmap (bool 0 1 . isXmas) . extend (\s -> if extract s == A then experiment applyContext s else Compose Nothing) . view asFocusedGrid
   where
     applyContext :: Coord '[Periodic n, Periodic n] -> ContextTwo (Coord '[Periodic n, Periodic n])
@@ -99,8 +99,8 @@ partTwo = sum . fmap (bool 0 1 . isXmas) . extend (\s -> if extract s == A then 
            in Compose $
                 traverse weakenCoord $
                   Pair
-                    (Two (c .+^ (-1, -1)) (c .+^ (1, 1)))
-                    (Two (c .+^ (-1, 1)) (c .+^ (1, -1)))
+                    (Two (c .+^ coordFromTuple (-1, -1)) (c .+^ coordFromTuple (1, 1)))
+                    (Two (c .+^ coordFromTuple (-1, 1)) (c .+^ coordFromTuple (1, -1)))
 
     isXmas :: ContextTwo Cell -> Bool
     isXmas (Compose (Just (Pair l r))) = on (&&) (`elem` [Two M S, Two S M]) l r

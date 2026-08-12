@@ -5,9 +5,8 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE ViewPatterns #-}
 
-import Control.Comonad.Store (Comonad (extract), ComonadStore (experiment), extend, pos)
+import Control.Comonad.Store (Comonad (extract), ComonadStore (experiment), extend, pos, seek)
 import Control.Lens (FoldableWithIndex (ifoldMap'), view)
-import Data.Containers.ListUtils (nubOrd)
 import Data.Foldable (toList)
 import Data.Function (on)
 import Data.List (unfoldr)
@@ -30,15 +29,15 @@ main = do
 
 -- >>> parse @10 input
 -- Just (Grid {unGrid = [Empty,Empty,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Empty,Paper,Paper,Paper,Empty,Paper,Empty,Paper,Empty,Paper,Paper,Paper,Paper,Paper,Paper,Paper,Empty,Paper,Empty,Paper,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Empty,Empty,Paper,Empty,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Empty,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Paper,Paper,Paper,Empty,Paper,Empty,Paper,Empty,Paper,Empty,Paper,Empty,Paper,Paper,Paper,Paper,Empty,Paper,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Paper,Paper,Paper,Paper,Empty,Paper,Empty,Paper,Empty,Paper,Paper,Paper,Empty,Paper,Empty]})
-parse :: (KnownNat n, KnownNat (n GHC.* n)) => String -> Maybe (Grid '[HardWrap n, HardWrap n] Cell)
+parse :: (KnownNat n, KnownNat (n GHC.* n)) => String -> Maybe (Grid '[Clamped n, Clamped n] Cell)
 parse = gridFromList . map (map charToCell) . lines
   where
     charToCell '@' = Paper
     charToCell _ = Empty
 
 -- >>> solve example
--- 71
-solve, partTwo :: (KnownNat n, 1 <= n) => FocusedGrid '[HardWrap n, HardWrap n] Cell -> Int
+-- 13
+solve, partTwo :: (KnownNat n, 1 <= n) => FocusedGrid '[Clamped n, Clamped n] Cell -> Int
 solve g = getSum $ ifoldMap' go (view asGrid g)
   where
     go coord = \case
@@ -56,8 +55,8 @@ partTwo = sum . unfoldr go
         g' = extend (\c -> if forklift g (pos c) then Empty else extract c) g
         removed = on (-) (length . filter (== Paper) . toList) g g'
 
-forklift :: (KnownNat n, 1 <= n) => FocusedGrid '[HardWrap n, HardWrap n] Cell -> Coord '[HardWrap n, HardWrap n] -> Bool
+forklift :: (KnownNat n, 1 <= n) => FocusedGrid '[Clamped n, Clamped n] Cell -> Coord '[Clamped n, Clamped n] -> Bool
 forklift g coord = papers < 4
   where
-    neighs = experiment (filter (/= coord) . nubOrd . moorePoints 1) g
+    neighs = experiment neighbours (seek coord g)
     papers = length $ filter (== Paper) neighs
