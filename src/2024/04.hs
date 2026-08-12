@@ -17,24 +17,23 @@ import Control.Arrow ((&&&))
 import Control.Comonad (extend, extract)
 import Control.Comonad.Store (experiment)
 import Control.Lens (view)
-import Data.AffineSpace ((.+^))
 import Data.Attoparsec.ByteString.Char8 (Parser, char, choice, endOfLine, many1, parseOnly, sepBy)
 import Data.Bool (bool)
 import Data.ByteString qualified as BS (readFile)
-import Data.Constraint (withDict, (\\))
-import Data.Constraint.Nat (leTrans, plusMonotone2, plusNat)
 import Data.Function (on)
 import Data.Functor.Compose (Compose (..))
 import Data.Functor.Product (Product (Pair))
-import Data.Maybe (fromJust, mapMaybe)
-import GHC.TypeNats (KnownNat, type (+), type (<=))
+import Data.Maybe (fromJust)
+import GHC.TypeNats (KnownNat, type (<=))
 import GHC.TypeNats qualified as GHC
-import SizedGrid (Grid, IsGrid (asFocusedGrid), Periodic, StrengthenCoord (strengthenCoord), WeakenCoord (weakenCoord), gridFromList)
-import SizedGrid.Coord (Coord, coordFromTuple)
+import SizedGrid (Clamped, Grid, IsGrid (asFocusedGrid), gridFromList)
+import SizedGrid.Coord (Coord, coordFromTuple, coordRay, offsetCoord)
 
 data Cell = X | M | A | S deriving (Eq, Show)
 
-type Input n = Grid '[Periodic n, Periodic n] Cell
+-- The word must not wrap round the edge of the puzzle, so the axes are Clamped:
+-- a walk off the end of one stops instead of coming back on the other side.
+type Input n = Grid '[Clamped n, Clamped n] Cell
 
 -- (2532,1941)
 main :: IO ()
@@ -60,24 +59,18 @@ type Context a = Compose [] Three a
 solve :: forall n. (1 <= n, KnownNat n) => Input n -> Int
 solve = sum . fmap occurences . extend (\s -> if extract s == X then experiment applyContext s else mempty) . view asFocusedGrid
   where
-    applyContext :: Coord '[Periodic n, Periodic n] -> Context (Coord '[Periodic n, Periodic n])
+    applyContext :: Coord '[Clamped n, Clamped n] -> Context (Coord '[Clamped n, Clamped n])
     applyContext c =
-      Compose $
-        mapMaybe
-          (traverse weakenCoord)
-          [ Three i j k
-          | dy <- [-1 .. 1],
-            dx <- [-1 .. 1],
-            (dy, dx) /= (0, 0),
-            let d = coordFromTuple (dy, dx),
-            let i, j, k :: Coord '[Periodic (n + 1), Periodic (n + 1)]
-                i = strengthenCoord c .+^ d
-                j = i .+^ d
-                k = j .+^ d
-          ]
-          \\ plusNat @n @1
-          \\ leTrans @1 @n @(n + 1)
-          \\ plusMonotone2 @n @0 @1
+      Compose
+        [ Three i j k
+        | dy <- [-1 .. 1],
+          dx <- [-1 .. 1],
+          (dy, dx) /= (0, 0),
+          -- Three steps that way, or nothing: the ray stops at the edge, so a
+          -- direction without room for a whole word yields fewer than three
+          -- cells and the pattern match drops it.
+          [i, j, k] <- [take 3 (coordRay c (coordFromTuple (dy, dx)))]
+        ]
 
     occurences :: Context Cell -> Int
     occurences = length . filter (== Three M A S) . getCompose
@@ -88,19 +81,17 @@ type ContextTwo a = Compose Maybe (Product Two Two) a
 
 -- >>> partTwo example
 -- 9
-partTwo :: forall n. (1 <= n, KnownNat n, KnownNat (n + 1), n <= n + 1) => Input n -> Int
+partTwo :: forall n. (1 <= n, KnownNat n) => Input n -> Int
 partTwo = sum . fmap (bool 0 1 . isXmas) . extend (\s -> if extract s == A then experiment applyContext s else Compose Nothing) . view asFocusedGrid
   where
-    applyContext :: Coord '[Periodic n, Periodic n] -> ContextTwo (Coord '[Periodic n, Periodic n])
-    applyContext c' =
-      withDict (plusNat @n @1) . withDict (plusMonotone2 @n @0 @1) $
-        withDict (leTrans @1 @n @(n + 1)) $
-          let c :: Coord '[Periodic (n + 1), Periodic (n + 1)] = strengthenCoord c'
-           in Compose $
-                traverse weakenCoord $
-                  Pair
-                    (Two (c .+^ coordFromTuple (-1, -1)) (c .+^ coordFromTuple (1, 1)))
-                    (Two (c .+^ coordFromTuple (-1, 1)) (c .+^ coordFromTuple (1, -1)))
+    applyContext :: Coord '[Clamped n, Clamped n] -> ContextTwo (Coord '[Clamped n, Clamped n])
+    applyContext c =
+      -- One diagonal step each way, and all four have to land on the grid.
+      Compose $
+        traverse (offsetCoord c . coordFromTuple) $
+          Pair
+            (Two (-1, -1) (1, 1))
+            (Two (-1, 1) (1, -1))
 
     isXmas :: ContextTwo Cell -> Bool
     isXmas (Compose (Just (Pair l r))) = on (&&) (`elem` [Two M S, Two S M]) l r
