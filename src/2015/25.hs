@@ -3,7 +3,7 @@
 
 import Data.Char (isDigit)
 import Data.List.Split (splitOn)
-import Data.Mod (Mod (..), (^%))
+import Data.Mod (Mod, unMod, (^%))
 
 -- The modulus as a type-level natural
 startCode, multiplier :: Mod 33554393
