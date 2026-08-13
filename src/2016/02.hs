@@ -13,7 +13,7 @@ data Move = U | D | L | R
 
 -- A displacement is a Coord of the axes' Diffs, so it is built rather than
 -- written as a tuple literal; coordFromTuple is the short way to say it.
-delta :: Move -> Coord '[Integer, Integer]
+delta :: Move -> Coord '[Int, Int]
 delta = \case
   U -> coordFromTuple (-1, 0)
   D -> coordFromTuple (1, 0)

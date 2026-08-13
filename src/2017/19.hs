@@ -42,7 +42,7 @@ parse = gridFromList . map (map parseCell) . lines
       | otherwise = Path
 
 startFocus :: forall n. (KnownNat n, 1 <= n) => Grid '[Clamped n, Clamped n] Cell -> FocusedGrid '[Clamped n, Clamped n] Cell
-startFocus g = FocusedGrid {focusedGrid = g, focusedGridPosition = mempty .+^ coordFromTuple (0, toInteger col)}
+startFocus g = FocusedGrid {focusedGrid = g, focusedGridPosition = mempty .+^ coordFromTuple (0, col)}
   where
     Just col = elemIndex Path (toList g)
 
