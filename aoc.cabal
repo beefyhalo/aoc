@@ -50,6 +50,7 @@ common puzzle
     , data-fix
     , extra
     , free
+    , grid-sized
     , heap
     , hmatrix
     , lens
@@ -63,7 +64,6 @@ common puzzle
     , parallel
     , recursion-schemes
     , scientific
-    , sized-grid
     , split
     , text
     , uniplate

@@ -9,13 +9,13 @@ import Control.Lens (ifoldl')
 import Data.AffineSpace ((.+^), (.-.))
 import Data.Foldable (toList)
 import Data.Functor.Rep (index, tabulate)
+import Data.Grid.Sized
 import qualified Data.IntMap.Strict as M
 import Data.IntSet (IntSet)
 import qualified Data.IntSet as S
 import Data.List.Split (splitOn)
 import Data.Maybe (mapMaybe)
 import GHC.TypeNats (KnownNat, type (<=))
-import SizedGrid
 
 manhattan ::
   (KnownNat w, KnownNat h, 1 <= w, 1 <= h) =>

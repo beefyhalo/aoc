@@ -5,9 +5,9 @@
 
 import Control.Comonad.Store (extract, seeks)
 import Data.AffineSpace ((.+^))
+import Data.Grid.Sized (Clamped, Coord, FocusedGrid (..), coordFromTuple, gridFromList)
 import Data.Maybe (fromJust, isNothing, mapMaybe)
 import GHC.TypeLits (KnownNat, type (<=))
-import SizedGrid (Clamped, Coord, FocusedGrid (..), coordFromTuple, gridFromList)
 
 data Move = U | D | L | R
 

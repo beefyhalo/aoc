@@ -5,9 +5,9 @@
 import Data.AffineSpace ((.+^))
 import Data.Functor.Identity (Identity (..))
 import Data.Functor.Rep (index, tabulate)
+import Data.Grid.Sized
 import Data.List.Extra (maximumOn)
 import Data.Tuple.Extra (thd3)
-import SizedGrid
 
 type Dims = '[Clamped 300, Clamped 300]
 

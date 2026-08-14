@@ -9,11 +9,11 @@ import Control.Comonad.Store (Comonad (extract), ComonadStore (experiment), exte
 import Control.Lens (FoldableWithIndex (ifoldMap'), view)
 import Data.Foldable (toList)
 import Data.Function (on)
+import Data.Grid.Sized
 import Data.List (unfoldr)
 import Data.Monoid (getSum)
 import GHC.TypeLits (KnownNat, type (<=))
 import qualified GHC.TypeLits as GHC
-import SizedGrid
 
 data Cell = Paper | Empty deriving (Eq, Show)
 

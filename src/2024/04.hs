@@ -23,11 +23,11 @@ import Data.ByteString qualified as BS (readFile)
 import Data.Function (on)
 import Data.Functor.Compose (Compose (..))
 import Data.Functor.Product (Product (Pair))
+import Data.Grid.Sized (Clamped, Grid, IsGrid (asFocusedGrid), gridFromList)
+import Data.Grid.Sized.Coord (Coord, coordFromTuple, coordRay, offsetCoord)
 import Data.Maybe (fromJust)
 import GHC.TypeNats (KnownNat, type (<=))
 import GHC.TypeNats qualified as GHC
-import SizedGrid (Clamped, Grid, IsGrid (asFocusedGrid), gridFromList)
-import SizedGrid.Coord (Coord, coordFromTuple, coordRay, offsetCoord)
 
 data Cell = X | M | A | S deriving (Eq, Show)
 

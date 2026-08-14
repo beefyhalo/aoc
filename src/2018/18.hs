@@ -10,12 +10,12 @@ import Control.Comonad (extend, extract)
 import Control.Comonad.Store (experiment)
 import Control.Lens (view)
 import Data.Foldable (toList)
+import Data.Grid.Sized hiding (Grid)
 import qualified Data.IntMap.Strict as M
 import Data.Maybe (fromJust)
 import Data.Proxy (Proxy (Proxy))
 import GHC.TypeNats (KnownNat, natVal, type (<=))
 import qualified GHC.TypeNats as GHC
-import SizedGrid hiding (Grid)
 
 data Cell = Open | Trees | Lumber deriving (Eq, Ord, Enum)
 

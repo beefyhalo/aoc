@@ -11,10 +11,10 @@ import Control.Comonad (extend, extract)
 import Control.Comonad.Store (experiment, pos)
 import Control.Lens (view)
 import Data.Foldable (toList)
+import Data.Grid.Sized
 import Data.Proxy (Proxy (..))
 import GHC.TypeLits (KnownNat, natVal, type (<=))
 import qualified GHC.TypeLits as GHC
-import SizedGrid
 
 data Cell = Alive | Dead deriving (Eq, Show)
 
