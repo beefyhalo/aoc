@@ -1,10 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE ViewPatterns #-}
-
 import Control.Comonad.Store (Comonad (extract), ComonadStore (experiment), extend, pos, seek)
 import Control.Lens (FoldableWithIndex (ifoldMap'), view)
 import Data.Foldable (toList)
@@ -13,7 +6,6 @@ import Data.Grid.Sized
 import Data.List (unfoldr)
 import Data.Monoid (getSum)
 import GHC.TypeLits (KnownNat, type (<=))
-import qualified GHC.TypeLits as GHC
 
 data Cell = Paper | Empty deriving (Eq, Show)
 
@@ -29,7 +21,7 @@ main = do
 
 -- >>> parse @10 input
 -- Just (Grid {unGrid = [Empty,Empty,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Empty,Paper,Paper,Paper,Empty,Paper,Empty,Paper,Empty,Paper,Paper,Paper,Paper,Paper,Paper,Paper,Empty,Paper,Empty,Paper,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Empty,Empty,Paper,Empty,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Empty,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Paper,Paper,Paper,Empty,Paper,Empty,Paper,Empty,Paper,Empty,Paper,Empty,Paper,Paper,Paper,Paper,Empty,Paper,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Empty,Paper,Paper,Paper,Paper,Paper,Paper,Paper,Paper,Empty,Paper,Empty,Paper,Empty,Paper,Paper,Paper,Empty,Paper,Empty]})
-parse :: (KnownNat n, KnownNat (n GHC.* n)) => String -> Maybe (Grid '[Clamped n, Clamped n] Cell)
+parse :: (KnownNat n) => String -> Maybe (Grid '[Clamped n, Clamped n] Cell)
 parse = gridFromList . map (map charToCell) . lines
   where
     charToCell '@' = Paper

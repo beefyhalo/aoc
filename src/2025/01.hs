@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-import qualified Data.ByteString.Lazy.Char8 as L
+import Data.ByteString.Lazy.Char8 qualified as L
 import Data.Maybe (fromJust)
 
 -- $setup

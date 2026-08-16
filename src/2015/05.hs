@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
-
 main :: IO ()
 main = do
   input <- lines <$> readFile "input/2015/05.txt"

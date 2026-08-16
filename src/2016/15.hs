@@ -5,7 +5,7 @@ import Data.List.Split (wordsBy)
 import Data.Maybe (fromJust)
 import Math.NumberTheory.Moduli (SomeMod, chineseSomeMod, modulo)
 
-newtype CRT = C {unCRT :: SomeMod} deriving (Show)
+newtype CRT = C SomeMod deriving newtype (Show)
 
 instance Semigroup CRT where C x <> C y = C $ fromJust $ chineseSomeMod x y
 
@@ -30,8 +30,8 @@ parse s = C $ -((p + i) `modulo` fromInteger n)
 -- >>> partTwo example
 -- 5
 -- 85
-solve, partTwo :: [CRT] -> SomeMod
-solve = unCRT . mconcat
-partTwo d = solve (extra : d)
+solve, partTwo :: [CRT] -> CRT
+solve = mconcat
+partTwo d = mconcat (extra : d)
   where
     extra = C $ -(toInteger (length d + 1) `modulo` 11)

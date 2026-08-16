@@ -40,4 +40,4 @@ solveRegion :: [Shape] -> Region -> Bool
 solveRegion shapes (w, h, counts) = total <= w * h
   where
     total = sum $ zipWith (*) areas counts
-    areas = map (sum . map (length . filter (== '#'))) shapes
+    areas = sum . map (length . filter (== '#')) <$> shapes

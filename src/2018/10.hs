@@ -3,7 +3,7 @@
 
 import Data.Char (isDigit)
 import Data.List.Extra (minimumOn, wordsBy)
-import qualified Data.Set as S
+import Data.Set qualified as S
 
 data Star = Star {x, y, vx, vy :: Int}
 

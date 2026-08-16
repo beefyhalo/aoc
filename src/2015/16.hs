@@ -1,8 +1,8 @@
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OrPatterns #-}
 
 import Data.List (findIndex)
 import Data.List.Split (splitOn)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 import Data.Maybe (fromJust)
 
 type Aunt = M.Map String Int
@@ -41,8 +41,6 @@ match :: Aunt -> Aunt -> Bool
 match sue = and . M.intersectionWithKey check sue
   where
     check = \case
-      "cats" -> (<)
-      "trees" -> (<)
-      "pomeranians" -> (>)
-      "goldfish" -> (>)
+      "cats"; "trees" -> (<)
+      "pomeranians"; "goldfish" -> (>)
       _ -> (==)

@@ -1,5 +1,5 @@
 import Data.List (maximumBy, minimumBy, transpose)
-import qualified Data.Map.Monoidal.Strict as M
+import Data.Map.Monoidal.Strict qualified as M
 import Data.Monoid
 import Data.Ord (comparing)
 

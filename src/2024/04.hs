@@ -1,17 +1,4 @@
-{-# LANGUAGE BlockArguments #-}
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveTraversable #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE ImportQualifiedPost #-}
-{-# LANGUAGE ImpredicativeTypes #-}
-{-# LANGUAGE KindSignatures #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE ViewPatterns #-}
-
--- (over, (&))
 
 import Control.Arrow ((&&&))
 import Control.Comonad (extend, extract)
@@ -27,7 +14,6 @@ import Data.Grid.Sized (Clamped, Grid, IsGrid (asFocusedGrid), gridFromList)
 import Data.Grid.Sized.Coord (Coord, coordFromTuple, coordRay, offsetCoord)
 import Data.Maybe (fromJust)
 import GHC.TypeNats (KnownNat, type (<=))
-import GHC.TypeNats qualified as GHC
 
 data Cell = X | M | A | S deriving (Eq, Show)
 
@@ -45,7 +31,7 @@ main = either print (print . (solve &&& partTwo)) . parseOnly (parser @140) =<< 
 -- >>> example
 -- Grid {unGrid = [M,M,M,S,X,X,M,A,S,M,M,S,A,M,X,M,S,M,S,A,A,M,X,S,X,M,A,A,M,M,M,S,A,M,A,S,M,S,M,X,X,M,A,S,A,M,X,A,M,M,X,X,A,M,M,X,X,A,M,A,S,M,S,M,S,A,S,X,S,S,S,A,X,A,M,A,S,A,A,A,M,A,M,M,M,X,M,M,M,M,M,X,M,X,A,X,M,A,S,X]}
 
-parser :: (KnownNat n, KnownNat (n GHC.* n)) => Parser (Input n)
+parser :: (KnownNat n) => Parser (Input n)
 parser = fromJust . gridFromList <$> many1 cParser `sepBy` endOfLine
   where
     cParser = choice [X <$ char 'X', M <$ char 'M', A <$ char 'A', S <$ char 'S']

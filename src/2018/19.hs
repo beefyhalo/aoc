@@ -3,7 +3,7 @@
 
 import Data.Bits ((.&.), (.|.))
 import Data.Vector (Vector, (!), (//))
-import qualified Data.Vector as V
+import Data.Vector qualified as V
 
 type Regs = Vector Int
 

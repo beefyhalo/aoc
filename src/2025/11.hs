@@ -1,5 +1,5 @@
 import Data.Bifunctor (second)
-import qualified Data.Map.Lazy as M
+import Data.Map.Lazy qualified as M
 
 -- $setup
 -- >>> input = "aaa: you hhh\nyou: bbb ccc\nbbb: ddd eee\nccc: ddd eee fff\nddd: ggg\neee: out\nfff: out\nggg: out\nhhh: ccc fff iii\niii: out"

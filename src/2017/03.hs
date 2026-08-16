@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 
 main :: IO ()
 main = do

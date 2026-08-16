@@ -5,7 +5,7 @@ import Data.Char (digitToInt)
 import Data.Foldable (toList)
 import Data.List (findIndex, isPrefixOf, tails)
 import Data.Sequence (Seq, index, (|>))
-import qualified Data.Sequence as Seq
+import Data.Sequence qualified as Seq
 import Data.Tuple.Extra (fst3)
 
 main :: IO ()

@@ -33,7 +33,4 @@ reindeerStream (Reindeer v f r) = scanl1 (+) $ cycle (replicate f v ++ replicate
 partTwo n rs = maximum $ foldl1' (zipWith (+)) $ map leaderMask perSecondDists
   where
     perSecondDists = take n $ transpose $ map reindeerStream rs
-
-    leaderMask ds =
-      let m = maximum ds
-       in map (\d -> if d == m then 1 else 0) ds
+    leaderMask ds = [fromEnum $ d == maximum ds | d <- ds]

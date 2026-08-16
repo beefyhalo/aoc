@@ -1,6 +1,6 @@
 import Data.Bit (Bit (..), invertBits, reverseBits)
 import Data.Char (intToDigit)
-import qualified Data.Vector.Unboxed as V
+import Data.Vector.Unboxed qualified as V
 
 -- $setup
 -- >>> input = "110010110100"

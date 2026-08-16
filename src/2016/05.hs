@@ -1,4 +1,3 @@
-{-# LANGUAGE NumericUnderscores #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
@@ -6,9 +5,9 @@ import Control.Lens (ix, none, (&), (.~))
 import Control.Parallel.Strategies (parBuffer, rseq, using)
 import Crypto.Hash.MD5 (hash)
 import Data.Bits (shiftR, (.&.))
-import qualified Data.ByteArray as BA
+import Data.ByteArray qualified as BA
 import Data.ByteString.Char8 (ByteString)
-import qualified Data.ByteString.Char8 as BC
+import Data.ByteString.Char8 qualified as BC
 import Data.List (scanl')
 import Data.List.Split (chunksOf)
 import Data.Word (Word8)

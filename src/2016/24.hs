@@ -4,8 +4,8 @@ import Data.Array (Array, array, assocs, bounds, inRange, listArray, (!))
 import Data.Bits (bit, clearBit, shiftL, testBit)
 import Data.Char (digitToInt, isDigit)
 import Data.Sequence (Seq (..))
-import qualified Data.Sequence as Q
-import qualified Data.Set as S
+import Data.Sequence qualified as Q
+import Data.Set qualified as S
 
 type Coord = (Int, Int)
 

@@ -1,9 +1,8 @@
-{-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 import Data.Bits (complement, shiftL, shiftR, (.&.), (.|.))
 import Data.Char (isDigit)
-import qualified Data.Map.Lazy as M
+import Data.Map.Lazy qualified as M
 
 type Wire = String
 
@@ -43,7 +42,7 @@ parse = M.fromList . map parseLine . lines
       | all isDigit a = Val (read a)
       | otherwise = Ref a
 
--- >>> map (solve example) ["d", "e", "f", "g", "h", "i", "x", "y"]
+-- >>> solve example <$> ["d", "e", "f", "g", "h", "i", "x", "y"]
 -- [72,507,492,114,65412,65079,123,456]
 solve :: M.Map Wire Expr -> Wire -> Int
 solve env w = vals M.! w

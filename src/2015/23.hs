@@ -1,11 +1,9 @@
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE TupleSections #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 import Control.Lens
 import Data.List (unfoldr)
-import qualified Data.List.NonEmpty as NE
-import qualified Data.List.NonEmpty.Zipper as Z
+import Data.List.NonEmpty qualified as NE
+import Data.List.NonEmpty.Zipper qualified as Z
 import Data.List.Split (wordsBy)
 
 data Reg = A | B deriving (Eq, Show)

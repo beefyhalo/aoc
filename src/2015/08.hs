@@ -1,5 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
-
 -- $setup
 -- >>> example = ["\"\"", "\"abc\"", "\"aaa\\\"aaa\"", "\"\\x27\""]
 

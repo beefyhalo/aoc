@@ -1,4 +1,4 @@
-import qualified Data.IntMap.Monoidal.Strict as M
+import Data.IntMap.Monoidal.Strict qualified as M
 import Data.List (isInfixOf, sort)
 import Data.List.Extra (maximumOn)
 import Data.Semigroup (Sum (..))

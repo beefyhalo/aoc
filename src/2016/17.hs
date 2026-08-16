@@ -2,8 +2,8 @@
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Crypto.Hash.MD5 (hash)
-import qualified Data.ByteArray.Encoding as BA
-import qualified Data.ByteString.Char8 as B
+import Data.ByteArray.Encoding qualified as BA
+import Data.ByteString.Char8 qualified as B
 
 type Pos = (Int, Int)
 
@@ -24,7 +24,7 @@ main = do
 -- 370
 solve :: B.ByteString -> Path
 solve pass =
-  head [path | ((3, 3), path) <- concat $ iterate (concatMap (neighbors pass)) [((0, 0), "")]]
+  head [path | ((3, 3), path) <- concat $ iterate (concatMap $ neighbors pass) [((0, 0), "")]]
 
 partTwo :: B.ByteString -> Int
 partTwo pass = dfs ((0, 0), "")

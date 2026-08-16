@@ -4,9 +4,8 @@
 
 import Data.Bits ((.&.), (.|.))
 import Data.Char (isDigit)
-import qualified Data.IntMap as IM
-import Data.IntSet (IntSet)
-import qualified Data.IntSet as S
+import Data.IntMap qualified as IM
+import Data.IntSet qualified as S
 import Data.List (find, findIndices)
 import Data.List.Split (chunksOf, splitOn, wordsBy)
 
@@ -68,14 +67,14 @@ solve (samples, program) = (overThree, head finalRegs)
     mapping = resolve poss
     finalRegs = runProg mapping program
 
-matchingOps :: (Regs, Instr, Regs) -> IntSet
+matchingOps :: (Regs, Instr, Regs) -> S.IntSet
 matchingOps (before, (_, a, b, c), after) = S.fromList $ findIndices (\f -> f before a b c == after) ops
 
 -- deduce mapping
-buildPoss :: [(Regs, Instr, Regs)] -> IM.IntMap IntSet
+buildPoss :: [(Regs, Instr, Regs)] -> IM.IntMap S.IntSet
 buildPoss samples = IM.fromListWith (<>) [(op, matchingOps s) | s@(_, (op, _, _, _), _) <- samples]
 
-resolve :: IM.IntMap IntSet -> IM.IntMap Int
+resolve :: IM.IntMap S.IntSet -> IM.IntMap Int
 resolve = go IM.empty
   where
     go solved poss

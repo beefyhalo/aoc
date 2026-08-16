@@ -1,4 +1,3 @@
-{-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
@@ -7,11 +6,11 @@ import Control.Monad (guard)
 import Data.Function (on)
 import Data.List (find)
 import Data.List.Extra (minimumOn)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 import Data.Maybe (fromMaybe, mapMaybe)
-import qualified Data.Sequence as Q
+import Data.Sequence qualified as Q
 import Data.Set ((\\))
-import qualified Data.Set as S
+import Data.Set qualified as S
 
 type P = (Int, Int)
 

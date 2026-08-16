@@ -1,6 +1,4 @@
-{-# OPTIONS_GHC -Wno-type-defaults #-}
-
-import qualified Data.IntMap.Strict as M
+import Data.IntMap.Strict qualified as M
 
 -- $setup
 -- >>> example = [20,15,10,5,5]
@@ -27,4 +25,4 @@ ways n = (!! n) . foldl' step start
     start = M.singleton 0 1 : replicate n M.empty
     -- ways[s] = ways[s] + ways[s - c]
     -- We pad with 'c' zeros to shift the list and align (s - c) with s
-    step dp c = zipWith (M.unionWith (+)) dp (replicate c M.empty ++ map (M.mapKeys (+ 1)) dp)
+    step dp c = zipWith (M.unionWith (+)) dp $ replicate c M.empty ++ map (M.mapKeys (+ 1)) dp

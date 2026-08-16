@@ -1,10 +1,8 @@
-{-# LANGUAGE ViewPatterns #-}
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Data.Containers.ListUtils (nubOrd)
 import Data.List (permutations)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 
 type Person = String
 

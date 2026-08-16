@@ -1,12 +1,11 @@
-{-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Data.Array (Array, bounds, inRange, listArray, range, (!))
 import Data.Char (isDigit)
-import qualified Data.Heap as H
+import Data.Heap qualified as H
 import Data.List.Split (wordsBy)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 
 data Tool = Neither | Torch | Gear deriving (Eq, Ord, Enum, Bounded, Show)
 

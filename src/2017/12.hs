@@ -1,8 +1,7 @@
-{-# LANGUAGE BangPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-import qualified Data.IntMap.Strict as IM
-import qualified Data.IntSet as IS
+import Data.IntMap.Strict qualified as IM
+import Data.IntSet qualified as IS
 import Data.List.Split (splitOn)
 
 type Graph = IM.IntMap [Int]

@@ -1,10 +1,9 @@
-{-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Data.List (mapAccumL)
 import Data.List.Split (splitOn)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 
 type P = (Int, Int)
 

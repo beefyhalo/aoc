@@ -1,4 +1,3 @@
-{-# LANGUAGE DataKinds #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Data.Char (isDigit)

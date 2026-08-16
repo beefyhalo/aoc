@@ -1,5 +1,3 @@
-{-# LANGUAGE DeriveFunctor #-}
-{-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Data.Functor.Foldable (refold)

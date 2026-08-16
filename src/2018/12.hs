@@ -2,9 +2,9 @@
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
-import qualified Data.IntSet as S
+import Data.IntSet qualified as S
 import Data.List (findIndex)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 import Data.MonoTraversable (osum)
 
 type Pots = S.IntSet

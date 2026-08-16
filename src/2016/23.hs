@@ -1,13 +1,10 @@
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE TupleSections #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Control.Applicative ((<|>))
 import Control.Lens
-import qualified Data.List.NonEmpty as NE
-import qualified Data.List.NonEmpty.Zipper as Z
+import Data.List.NonEmpty qualified as NE
+import Data.List.NonEmpty.Zipper qualified as Z
 import Data.Maybe (fromMaybe)
 import Text.Read (readMaybe)
 
@@ -109,5 +106,5 @@ optimize z rs = case Z.current z : take 5 (Z.rights z) of
 moveOffset :: Int -> Z.Zipper a -> Maybe (Z.Zipper a)
 moveOffset n
   | n > 0 = Z.rightN (fromIntegral n)
-  | n < 0 = Z.leftN (fromIntegral (abs n))
+  | n < 0 = Z.leftN (fromIntegral $ abs n)
   | otherwise = Just

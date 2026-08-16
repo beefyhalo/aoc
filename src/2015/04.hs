@@ -3,9 +3,9 @@
 
 import Crypto.Hash.MD5 (hash)
 import Data.Bits ((.&.))
-import qualified Data.ByteArray as BA
-import qualified Data.ByteString as B
-import qualified Data.ByteString.Char8 as BC
+import Data.ByteArray qualified as BA
+import Data.ByteString qualified as B
+import Data.ByteString.Char8 qualified as BC
 import Data.Word (Word8)
 
 main :: IO ()

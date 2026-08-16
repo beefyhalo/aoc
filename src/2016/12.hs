@@ -1,11 +1,9 @@
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE TupleSections #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Control.Lens
-import qualified Data.List.NonEmpty as NE
-import qualified Data.List.NonEmpty.Zipper as Z
+import Data.List.NonEmpty qualified as NE
+import Data.List.NonEmpty.Zipper qualified as Z
 import Text.Read (readMaybe)
 
 type Reg = Char
@@ -73,5 +71,5 @@ step z regs = (,regs') <$> moveOffset offset z
 moveOffset :: Int -> Z.Zipper a -> Maybe (Z.Zipper a)
 moveOffset n
   | n > 0 = Z.rightN (fromIntegral n)
-  | n < 0 = Z.leftN (fromIntegral (abs n))
+  | n < 0 = Z.leftN (fromIntegral $ abs n)
   | otherwise = Just

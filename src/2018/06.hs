@@ -1,28 +1,16 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 import Control.Lens (ifoldl')
-import Data.AffineSpace ((.+^), (.-.))
+import Data.AffineSpace ((.+^))
 import Data.Foldable (toList)
 import Data.Functor.Rep (index, tabulate)
 import Data.Grid.Sized
-import qualified Data.IntMap.Strict as M
+import Data.IntMap.Strict qualified as M
 import Data.IntSet (IntSet)
-import qualified Data.IntSet as S
+import Data.IntSet qualified as S
 import Data.List.Split (splitOn)
 import Data.Maybe (mapMaybe)
 import GHC.TypeNats (KnownNat, type (<=))
-
-manhattan ::
-  (KnownNat w, KnownNat h, 1 <= w, 1 <= h) =>
-  Coord '[Clamped w, Clamped h] -> Coord '[Clamped w, Clamped h] -> Int
-manhattan c1 c2 = fromIntegral $ sum $ map abs [dx, dy]
-  where
-    (dx, dy) = coordToTuple (c1 .-. c2)
 
 -- $setup
 -- >>> input = "1, 1\n1, 6\n8, 3\n3, 4\n5, 5\n8, 9"
@@ -51,7 +39,7 @@ solve targets = (maximum areas, sum regions)
           | otherwise = Just best
           where
             (best, _, tie) = ifoldl' step (0, maxBound, False) ts
-            step i (bi, bd, ti) (manhattan c -> d) = case compare d bd of
+            step i (bi, bd, ti) (coordManhattan c -> d) = case compare d bd of
               LT -> (i, d, False)
               EQ -> (bi, bd, True)
               GT -> (bi, bd, ti)
@@ -60,12 +48,12 @@ solve targets = (maximum areas, sum regions)
     inf = S.fromList $ mapMaybe (index ownerGrid) border
       where
         border =
-          [x :| y :| EmptyCoord | x <- [minBound .. maxBound], y <- [minBound, maxBound]] ++
-          [x :| y :| EmptyCoord | x <- [minBound, maxBound], y <- [minBound .. maxBound]]
+          [x :| y :| EmptyCoord | x <- [minBound .. maxBound], y <- [minBound, maxBound]]
+            ++ [x :| y :| EmptyCoord | x <- [minBound, maxBound], y <- [minBound .. maxBound]]
 
     areas = M.fromListWith (+) [(pos, 1) | Just pos <- toList ownerGrid, S.notMember pos inf]
 
     regions :: Grid '[Clamped w, Clamped h] Int
     regions = tabulate checkSafe
       where
-        checkSafe c = fromEnum $ sum (manhattan c <$> targets) < 10000
+        checkSafe c = fromEnum $ sum (coordManhattan c <$> targets) < 10000

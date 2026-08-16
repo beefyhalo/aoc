@@ -1,15 +1,11 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-import qualified Data.ByteString.Char8 as B
-import Data.Foldable (foldl')
+import Data.ByteString.Char8 qualified as B
 import Data.List (sort)
 import Data.Maybe (mapMaybe)
-import qualified Data.Vector as V
+import Data.Vector qualified as V
 
 type Range = (Int, Int)
 

@@ -1,5 +1,5 @@
 import Data.List (sort)
-import qualified Data.Set as S
+import Data.Set qualified as S
 
 main :: IO ()
 main = do

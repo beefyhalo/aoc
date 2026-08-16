@@ -2,7 +2,7 @@
 
 import Data.List.Split (splitOn)
 import Data.Monoid (Sum (..))
-import qualified Data.Set as S
+import Data.Set qualified as S
 
 type Pos = (Sum Int, Sum Int)
 

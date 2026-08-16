@@ -1,11 +1,9 @@
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 import Control.Lens
 import Data.List (transpose)
 import Data.List.Split (chunksOf, splitOn)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 
 type Grid = [String]
 
@@ -18,7 +16,7 @@ main = do
   input <- parse <$> readFile "input/2017/21.txt"
   print $ solve input
 
-parse :: String -> (Grid -> Grid)
+parse :: String -> Grid -> Grid
 parse = makeRules . map parseRule . lines
   where
     parseRule (words -> [a, "=>", b]) = (splitOn "/" a, splitOn "/" b)

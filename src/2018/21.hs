@@ -2,7 +2,7 @@
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Data.Bits ((.&.), (.|.))
-import qualified Data.IntSet as S
+import Data.IntSet qualified as S
 import Data.Tuple.Extra (snd3)
 
 main :: IO ()

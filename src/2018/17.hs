@@ -4,10 +4,10 @@
 
 import Data.Char (isDigit)
 import Data.List.Split (wordsBy)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 import Data.Sequence (Seq ((:<|)))
-import qualified Data.Sequence as Q
-import qualified Data.Set as S
+import Data.Sequence qualified as Q
+import Data.Set qualified as S
 
 data Cell = Clay | Sand | Flowing | Settled deriving (Eq, Show)
 

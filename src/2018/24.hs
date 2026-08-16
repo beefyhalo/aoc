@@ -5,14 +5,14 @@ import Control.Applicative ((<|>))
 import Data.Attoparsec.Text
 import Data.Function (on)
 import Data.Functor (($>))
-import qualified Data.IntMap.Strict as IM
+import Data.IntMap.Strict qualified as IM
 import Data.List (sortOn)
 import Data.Maybe (fromJust)
 import Data.MonoTraversable (maximumByMay)
 import Data.Ord (Down (..), comparing)
-import qualified Data.Set as S
-import qualified Data.Text as T
-import qualified Data.Text.IO as TIO
+import Data.Set qualified as S
+import Data.Text qualified as T
+import Data.Text.IO qualified as TIO
 import Text.Read (readMaybe)
 
 data Team = Immune | Infection deriving (Eq, Show)

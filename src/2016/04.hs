@@ -3,7 +3,7 @@
 
 import Data.Bifunctor (second)
 import Data.Char (ord)
-import qualified Data.IntMap.Monoidal.Strict as MM
+import Data.IntMap.Monoidal.Strict qualified as MM
 import Data.List (find, isInfixOf, sortOn, unsnoc)
 import Data.List.Split (splitOn)
 import Data.Monoid (Sum)

@@ -1,10 +1,8 @@
-{-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-import qualified Data.ByteString.Char8 as B
-import qualified Data.Set as S
+import Data.ByteString.Char8 qualified as B
+import Data.Set qualified as S
 
 type Range = (Integer, Integer)
 

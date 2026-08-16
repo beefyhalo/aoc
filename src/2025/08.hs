@@ -1,11 +1,8 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
-{-# OPTIONS_GHC -Wno-type-defaults #-}
 
 import Data.Function (on)
-import Data.IntMap.Monoidal.Strict (MonoidalIntMap)
-import qualified Data.IntMap.Monoidal.Strict as M
-import qualified Data.IntSet as S
+import Data.IntMap.Monoidal.Strict qualified as M
+import Data.IntSet qualified as S
 import Data.List (sortOn, unfoldr)
 import Data.List.Split (splitOn)
 import Data.Ord (Down (Down))
@@ -42,9 +39,9 @@ sortedPairs points = sortOn dist2 [(a, b) | a <- [1 .. n - 1], b <- [a + 1 .. n]
   where
     n = length points
     ary = listArray (1, n) points
-    dist2 (a, b) = sum $ (ary ! a - ary ! b) ^ 2
+    dist2 (a, b) = sum $ (ary ! a - ary ! b) ^ (2 :: Int)
 
-type UnionFind = MonoidalIntMap Int
+type UnionFind = M.MonoidalIntMap Int
 
 find :: UnionFind -> Int -> Int
 find parent x = case M.lookup x parent of

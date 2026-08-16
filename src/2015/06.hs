@@ -1,5 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Control.Monad.ST (ST, runST)
@@ -7,8 +5,8 @@ import Data.Bit (Bit (Bit), countBits, invertInPlace)
 import Data.Foldable (for_)
 import Data.List (stripPrefix)
 import Data.List.Split (splitOn)
-import qualified Data.Vector.Unboxed as V
-import qualified Data.Vector.Unboxed.Mutable as MV
+import Data.Vector.Unboxed qualified as V
+import Data.Vector.Unboxed.Mutable qualified as MV
 
 size :: Int
 size = 1000

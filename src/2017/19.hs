@@ -1,10 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
@@ -16,7 +9,6 @@ import Data.Grid.Sized
 import Data.List (elemIndex, unfoldr)
 import Data.Maybe (catMaybes)
 import GHC.TypeNats (KnownNat, type (<=))
-import qualified GHC.TypeNats as GHC
 
 data Cell = Path | Turn | Letter Char | Empty deriving (Eq, Show)
 
@@ -32,7 +24,7 @@ main = do
   Just (startFocus -> input) <- parse @201 <$> readFile "input/2017/19.txt"
   print $ solve input
 
-parse :: forall n. (KnownNat n, KnownNat (n GHC.* n)) => String -> Maybe (Grid '[Clamped n, Clamped n] Cell)
+parse :: forall n. (KnownNat n) => String -> Maybe (Grid '[Clamped n, Clamped n] Cell)
 parse = gridFromList . map (map parseCell) . lines
   where
     parseCell c

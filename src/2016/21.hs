@@ -1,4 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
@@ -6,7 +5,7 @@
 import Control.Lens (ix, (&), (.~))
 import Control.Monad (ap)
 import Data.Sequence (Seq, deleteAt, elemIndexL, index, insertAt)
-import qualified Data.Sequence as Seq
+import Data.Sequence qualified as Seq
 
 data Instruction
   = SwapPos Int Int

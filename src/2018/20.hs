@@ -1,5 +1,3 @@
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
@@ -8,11 +6,10 @@ import Control.Lens (at, non, uses, (%=))
 import Control.Monad (foldM)
 import Control.Monad.State.Strict (State, execState)
 import Data.Attoparsec.ByteString.Char8 (char, inClass, many', parseOnly, satisfy, sepBy1)
-import qualified Data.ByteString as B
-import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as M
+import Data.ByteString qualified as B
+import Data.Map.Strict qualified as M
 import Data.Set (Set)
-import qualified Data.Set as S
+import Data.Set qualified as S
 
 data Regex = Seq [Regex] | Alt [Regex] | Dir Char
 
@@ -45,7 +42,7 @@ solve input = (maximum dists, length $ M.filter (>= 1000) dists)
   where
     dists = execState (eval (S.singleton (0, 0)) input) (M.singleton (0, 0) 0)
 
-eval :: Set Pos -> Regex -> State (Map Pos Int) (Set Pos)
+eval :: Set Pos -> Regex -> State (M.Map Pos Int) (Set Pos)
 eval frontier = \case
   Seq rs -> foldM eval frontier rs
   Alt rs -> S.unions <$> traverse (eval frontier) rs

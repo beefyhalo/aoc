@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-import qualified Data.IntSet as S
+import Data.IntSet qualified as S
 import Data.List (delete)
 
 main :: IO ()

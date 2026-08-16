@@ -1,10 +1,6 @@
-{-# LANGUAGE BangPatterns #-}
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE ViewPatterns #-}
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-import qualified Data.ByteString.Char8 as B
+import Data.ByteString.Char8 qualified as B
 import Data.Char (digitToInt)
 import Data.Function (fix)
 import Data.List (foldl1')

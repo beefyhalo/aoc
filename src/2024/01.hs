@@ -1,11 +1,10 @@
 {-# LANGUAGE BlockArguments #-}
-{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 import Control.Arrow ((***))
 import Data.Attoparsec.ByteString.Char8 (Parser, decimal, endOfLine, parseOnly, sepBy, string)
 import Data.Foldable (Foldable (foldMap'))
-import Data.IntMap.Monoidal.Strict qualified as Map
+import Data.IntMap.Monoidal.Strict qualified as M
 import Data.List (sort)
 import Data.Monoid (Sum (..))
 import GHC.Exts (fromString)
@@ -37,6 +36,6 @@ solve, partTwo :: Input -> Int
 solve = sum . uncurry (zipWith distance) . (sort *** sort)
   where
     distance = fmap abs . (-)
-partTwo = getSum . Map.foldMapWithKey ((*) . Sum) . uncurry (Map.intersectionWith (*)) . (counts *** counts)
+partTwo = getSum . M.foldMapWithKey ((*) . Sum) . uncurry (M.intersectionWith (*)) . (counts *** counts)
   where
-    counts = foldMap' (`Map.singleton` 1)
+    counts = foldMap' (`M.singleton` 1)

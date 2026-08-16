@@ -1,8 +1,6 @@
-{-# LANGUAGE BangPatterns #-}
-
 import Control.Monad.ST (runST)
-import qualified Data.Vector as V
-import qualified Data.Vector.Mutable as MV
+import Data.Vector qualified as V
+import Data.Vector.Mutable qualified as MV
 
 main :: IO ()
 main = do
@@ -16,7 +14,7 @@ solve :: (Int -> Int) -> V.Vector Int -> Int
 solve update input = runST $ do
   v <- V.thaw input
   let len = V.length input
-  let go !p !s
+      go !p !s
         | p < 0 || p >= len = pure s
         | otherwise = do
             o <- MV.read v p

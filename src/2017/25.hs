@@ -4,12 +4,12 @@ import Control.Applicative ((<|>))
 import Control.Monad (replicateM_)
 import Control.Monad.State.Strict (State, execState, state)
 import Data.Attoparsec.ByteString.Char8 (Parser, anyChar, char, decimal, endOfLine, parseOnly, sepBy, skipSpace, string)
-import qualified Data.ByteString.Char8 as B
+import Data.ByteString.Char8 qualified as B
 import Data.Either (fromRight)
-import qualified Data.List.NonEmpty as NE
+import Data.List.NonEmpty qualified as NE
 import Data.List.NonEmpty.Zipper (Zipper)
-import qualified Data.List.NonEmpty.Zipper as Z
-import qualified Data.Map.Strict as M
+import Data.List.NonEmpty.Zipper qualified as Z
+import Data.Map.Strict qualified as M
 import Data.Maybe (fromJust)
 
 type StateName = Char

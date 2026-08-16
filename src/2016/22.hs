@@ -1,12 +1,11 @@
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
-{-# OPTIONS_GHC -Wno-name-shadowing #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Data.List.Split (splitOn)
 import Data.Maybe (fromMaybe)
 import Data.Sequence (Seq (..))
-import qualified Data.Sequence as Seq
-import qualified Data.Set as Set
+import Data.Sequence qualified as Seq
+import Data.Set qualified as Set
 
 type Pos = (Int, Int)
 

@@ -1,6 +1,8 @@
 {-# LANGUAGE BlockArguments #-}
 {-# LANGUAGE OverloadedStrings #-}
 
+{- HLINT ignore "Unused LANGUAGE pragma" -}
+
 import Data.Attoparsec.ByteString.Char8 (Parser, decimal, endOfLine, parseOnly, sepBy, space)
 import Data.List (inits, tails)
 import GHC.Exts (fromString)

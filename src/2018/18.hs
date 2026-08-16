@@ -1,9 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE TypeOperators #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 import Control.Comonad (extend, extract)
@@ -11,11 +5,10 @@ import Control.Comonad.Store (experiment)
 import Control.Lens (view)
 import Data.Foldable (toList)
 import Data.Grid.Sized hiding (Grid)
-import qualified Data.IntMap.Strict as M
+import Data.IntMap.Strict qualified as M
 import Data.Maybe (fromJust)
 import Data.Proxy (Proxy (Proxy))
 import GHC.TypeNats (KnownNat, natVal, type (<=))
-import qualified GHC.TypeNats as GHC
 
 data Cell = Open | Trees | Lumber deriving (Eq, Ord, Enum)
 
@@ -33,7 +26,7 @@ main = do
   input <- parse @50 <$> readFile "input/2018/18.txt"
   print $ solve input
 
-parse :: forall n. (KnownNat n, 1 <= n, KnownNat (n GHC.* n)) => String -> Grid n
+parse :: forall n. (KnownNat n, 1 <= n) => String -> Grid n
 parse = view asFocusedGrid . fromJust . gridFromList . map (map parseCell) . lines
   where
     parseCell = \case '.' -> Open; '|' -> Trees; '#' -> Lumber

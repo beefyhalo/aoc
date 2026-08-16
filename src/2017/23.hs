@@ -1,5 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
@@ -9,8 +7,8 @@
 import Control.Lens
 import Control.Monad.Extra (whenJust)
 import Control.Monad.State.Strict (State, execState)
-import qualified Data.Map.Strict as M
-import qualified Data.Vector.Strict as V
+import Data.Map.Strict qualified as M
+import Data.Vector.Strict qualified as V
 import Text.Read (readMaybe)
 
 data Prog = Prog

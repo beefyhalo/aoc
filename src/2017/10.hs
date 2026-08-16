@@ -2,11 +2,11 @@ import Control.Monad (foldM_)
 import Control.Monad.ST (ST)
 import Data.Bits (xor)
 import Data.Char (ord)
-import Data.List.Split (splitOn)
-import qualified Data.Vector.Unboxed as V
-import qualified Data.Vector.Unboxed.Mutable as MV
-import Text.Printf (printf)
 import Data.Foldable (for_)
+import Data.List.Split (splitOn)
+import Data.Vector.Unboxed qualified as V
+import Data.Vector.Unboxed.Mutable qualified as MV
+import Text.Printf (printf)
 
 main :: IO ()
 main = do
@@ -36,6 +36,7 @@ runKnot lengths rounds size =
     (\v -> foldM_ (step v) (0, 0) (concat $ replicate rounds lengths))
     (V.generate size id)
   where
+    step :: MV.MVector s Int -> (Int, Int) -> Int -> ST s (Int, Int)
     step v (p, s) l = ((p + l + s) `mod` size, s + 1) <$ rev v p l
 
 rev :: MV.MVector s Int -> Int -> Int -> ST s ()

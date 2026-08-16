@@ -1,5 +1,3 @@
-{-# LANGUAGE BangPatterns #-}
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
@@ -7,7 +5,7 @@
 import Control.Lens
 import Control.Monad (foldM)
 import Control.Monad.State.Strict (State, evalState)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 import Data.Monoid (Sum (..))
 
 data Node = Clean | Weakened | Infected | Flagged deriving (Eq, Enum)

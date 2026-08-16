@@ -1,9 +1,8 @@
-{-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
-import qualified Data.Map.Strict as MM
+import Data.Map.Strict qualified as M
 
-type Regs = MM.Map String Int
+type Regs = M.Map String Int
 
 type Instr = (String, Int, String, String, Int) -- reg, delta, condReg, condOp, condVal
 
@@ -19,18 +18,17 @@ parse line = (r, delta, cr, co, read cv)
     delta = if op == "inc" then read v else -read v
 
 solve :: [Instr] -> (Int, Int)
-solve instrs = (final, maximum maxes)
+solve instrs = (last maxes, maximum maxes)
   where
-    regss = scanl step MM.empty instrs
+    regss = scanl step M.empty instrs
     maxes = [maximum regs | regs <- regss, not $ null regs]
-    final = last maxes
 
 step :: Regs -> Instr -> Regs
 step regs (r, delta, cr, co, cv)
-  | check condVal cv co = MM.insertWith (+) r delta regs
+  | check condVal cv co = M.insertWith (+) r delta regs
   | otherwise = regs
   where
-    condVal = MM.findWithDefault 0 cr regs
+    condVal = M.findWithDefault 0 cr regs
 
 check :: Int -> Int -> String -> Bool
 check x y = \case

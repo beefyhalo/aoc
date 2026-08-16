@@ -1,13 +1,10 @@
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE TupleSections #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Control.Lens
 import Data.List (unfoldr)
-import qualified Data.List.NonEmpty as NE
-import qualified Data.List.NonEmpty.Zipper as Z
+import Data.List.NonEmpty qualified as NE
+import Data.List.NonEmpty.Zipper qualified as Z
 import Data.Maybe (catMaybes)
 import Text.Read (readMaybe)
 

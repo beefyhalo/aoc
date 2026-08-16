@@ -1,5 +1,3 @@
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Control.Comonad.Trans.Cofree (CofreeF ((:<)))
@@ -9,8 +7,8 @@ import Data.Containers.ListUtils (nubOrd)
 import Data.Fix (refold, refoldM)
 import Data.List (delete, permutations, sortOn)
 import Data.List.Split (splitOn)
-import qualified Data.Map.Strict as M
-import qualified Data.Set as S
+import Data.Map.Strict qualified as M
+import Data.Set qualified as S
 
 type City = String
 

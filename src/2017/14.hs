@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -Wno-type-defaults #-}
-
 import Control.Monad (foldM, foldM_, when)
 import Control.Monad.ST (ST, runST)
 import Data.Bit (Bit (Bit), countBits)
@@ -7,8 +5,8 @@ import Data.Bits (testBit, xor)
 import Data.Char (ord)
 import Data.Foldable (for_, traverse_)
 import Data.Vector.Unboxed (Vector)
-import qualified Data.Vector.Unboxed as V
-import qualified Data.Vector.Unboxed.Mutable as MV
+import Data.Vector.Unboxed qualified as V
+import Data.Vector.Unboxed.Mutable qualified as MV
 
 -- $setup
 -- >>> example = parse "flqrgnkx"
@@ -20,7 +18,7 @@ main = do
   print $ partTwo input
 
 parse :: String -> V.Vector Bit
-parse key = V.concat [mkRow (key ++ "-" ++ show r) | r <- [0 .. 127]]
+parse key = V.concat [mkRow (key ++ "-" ++ show r) | r <- [0 :: Int .. 127]]
   where
     mkRow s = V.fromList [Bit (testBit byte i) | byte <- V.toList $ dense s, i <- [7, 6 .. 0]]
 
@@ -60,6 +58,7 @@ runKnot lengths rounds size =
     (\v -> foldM_ (step v) (0, 0) (concat $ replicate rounds lengths))
     (V.generate size id)
   where
+    step :: MV.MVector s Int -> (Int, Int) -> Int -> ST s (Int, Int)
     step v (p, s) l = ((p + l + s) `mod` size, s + 1) <$ rev v p l
 
 rev :: MV.MVector s Int -> Int -> Int -> ST s ()

@@ -2,7 +2,7 @@
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Data.List.Extra (minimumOn, splitOn)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 import Linear.Metric (quadrance)
 import Linear.V3 (V3 (..))
 
@@ -48,6 +48,6 @@ tick Particle {..} = Particle pid (pos + v') v' acc
     v' = vel + acc
 
 removeCollisions :: [Particle] -> [Particle]
-removeCollisions ps = concat [g | g@[_] <- M.elems groups]
+removeCollisions ps = [p | [p] <- M.elems groups]
   where
     groups = M.fromListWith (++) [(pos p, [p]) | p <- ps]

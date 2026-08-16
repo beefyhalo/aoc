@@ -20,10 +20,10 @@ source-repository head
   type: git
   location: https://github.com/beefyhalo/aoc
 
--- Every puzzle shares one dependency set and one warning set. A new day only
--- needs its own four-line stanza below.
 common puzzle
-  default-language: Haskell2010
+  default-language: GHC2024
+  default-extensions:
+    ViewPatterns
   ghc-options:
     -Wall
     -Wcompat

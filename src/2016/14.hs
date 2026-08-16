@@ -1,10 +1,7 @@
-{-# LANGUAGE OverloadedStrings #-}
-{-# OPTIONS_GHC -Wno-type-defaults #-}
-
 import Control.Parallel.Strategies (parBuffer, rdeepseq, using)
 import Crypto.Hash.MD5 (hash)
 import Data.ByteArray.Encoding (Base (Base16), convertToBase)
-import qualified Data.ByteString.Char8 as B
+import Data.ByteString.Char8 qualified as B
 import Data.Maybe (listToMaybe)
 
 main :: IO ()
@@ -18,18 +15,18 @@ main = do
 -- 22728
 -- 22551
 solve, partTwo :: B.ByteString -> Int
-solve salt = findKeys salt 0 !! 63
-partTwo salt = findKeys salt 2016 !! 63
+solve = (!! 63) . findKeys 0
+partTwo = (!! 63) . findKeys 2016
 
-findKeys :: B.ByteString -> Int -> [Int]
-findKeys salt n =
+findKeys :: Int -> B.ByteString -> [Int]
+findKeys n salt =
   [ i
   | (i, h) <- zip [0 ..] hashes,
     Just c <- [firstTriplet h],
     any (hasQuintuplet c) (take 1000 $ drop (i + 1) hashes)
   ]
   where
-    hashes = [stretch n (md5 (salt <> B.pack (show i))) | i <- [0 ..]] `using` parBuffer 512 rdeepseq
+    hashes = [stretch n (md5 (salt <> B.pack (show i))) | i <- [0 :: Int ..]] `using` parBuffer 512 rdeepseq
 
 md5 :: B.ByteString -> B.ByteString
 md5 = convertToBase Base16 . hash

@@ -1,6 +1,6 @@
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 import Data.Vector.Unboxed (Vector, (!), (//))
-import qualified Data.Vector.Unboxed as V
+import Data.Vector.Unboxed qualified as V
 
 main :: IO ()
 main = do
@@ -8,12 +8,12 @@ main = do
   print $ solve input
 
 -- >>> solve (V.fromList [0,2,7,0])
--- index out of bounds (4,4)
+-- (5,4)
 solve :: Vector Int -> (Int, Int)
 solve = go M.empty 0
   where
     go seen count current
-      | current `M.member` seen = (count, count - (seen M.! current))
+      | current `M.member` seen = (count, count - seen M.! current)
       | otherwise = go (M.insert current count seen) (count + 1) (step current)
 
 -- O(val)

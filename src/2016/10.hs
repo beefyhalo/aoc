@@ -4,7 +4,7 @@
 
 import Data.Either (partitionEithers)
 import Data.List (sort)
-import qualified Data.Map.Lazy as M
+import Data.Map.Lazy qualified as M
 
 data Target = Bot Int | Out Int deriving (Eq, Ord, Show)
 

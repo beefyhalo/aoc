@@ -1,8 +1,5 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE ViewPatterns #-}
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-
 import Data.AffineSpace ((.+^))
+import Data.Bifunctor (first)
 import Data.Functor.Identity (Identity (..))
 import Data.Functor.Rep (index, tabulate)
 import Data.Grid.Sized
@@ -50,10 +47,5 @@ squareSum :: Int -> Coord Dims -> Grid Dims Int -> Int
 squareSum size p sat =
   sum [s * index sat (p .+^ off) | (off, s) <- corners]
   where
-    d = fromIntegral (size - 1)
-    corners =
-      [ (coordFromTuple (d, d), 1),
-        (coordFromTuple (-1, d), -1),
-        (coordFromTuple (d, -1), -1),
-        (coordFromTuple (-1, -1), 1)
-      ]
+    d = size - 1
+    corners = first coordFromTuple <$> [((d, d), 1), ((-1, d), -1), ((d, -1), -1), ((-1, -1), 1)]

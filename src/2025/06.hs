@@ -1,10 +1,8 @@
-{-# LANGUAGE BangPatterns #-}
-{-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 import Control.Applicative (Alternative (many), (<|>))
 import Data.Attoparsec.ByteString.Char8 (char, decimal, parseOnly, skipSpace)
-import qualified Data.ByteString.Char8 as BC
+import Data.ByteString.Char8 qualified as BC
 import Data.Foldable (fold)
 import Data.List (transpose)
 

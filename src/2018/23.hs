@@ -1,10 +1,9 @@
-{-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
 import Data.Char (isDigit)
-import qualified Data.Heap as H
+import Data.Heap qualified as H
 import Data.List.Extra (maximumOn)
 import Data.List.Split (wordsBy)
 

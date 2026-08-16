@@ -2,7 +2,7 @@
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Data.List (mapAccumL)
-import qualified Data.Map.Strict as M
+import Data.Map.Strict qualified as M
 import Data.Maybe (catMaybes)
 import Data.Tuple (swap)
 

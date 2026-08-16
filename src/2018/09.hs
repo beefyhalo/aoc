@@ -1,13 +1,12 @@
-{-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Control.Lens
 import Control.Monad.State.Strict (State, execState)
 import Data.Foldable (traverse_)
-import qualified Data.IntMap.Strict as M
+import Data.IntMap.Strict qualified as M
 import Data.Maybe (mapMaybe)
-import qualified Data.Sequence as S
+import Data.Sequence qualified as S
 import Text.Read (readMaybe)
 
 data Game = Game

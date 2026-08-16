@@ -1,17 +1,15 @@
-{-# LANGUAGE BangPatterns #-}
-
 import Control.Applicative ((<|>))
 import Data.Attoparsec.ByteString.Char8 (Parser, char, decimal, many', many1, parseOnly, sepBy, skipSpace)
 import Data.Bits (Bits (..))
 import Data.Bool (bool)
 import Data.ByteString.Char8 (ByteString)
-import qualified Data.ByteString.Char8 as B
+import Data.ByteString.Char8 qualified as B
 import Data.Either (fromRight)
 import Data.IntMap.Strict (IntMap)
-import qualified Data.IntMap.Strict as IM
+import Data.IntMap.Strict qualified as IM
 import Data.List (findIndices, subsequences)
-import qualified Data.Map.Strict as M
-import qualified Data.Vector.Storable as V
+import Data.Map.Strict qualified as M
+import Data.Vector.Storable qualified as V
 import Numeric.LinearAlgebra (Vector)
 
 data Machine = Machine

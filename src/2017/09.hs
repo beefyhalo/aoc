@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
-import qualified Data.ByteString.Char8 as B
+import Data.ByteString.Char8 qualified as B
 
 data State = Normal | Garbage | Canceled deriving (Show)
 

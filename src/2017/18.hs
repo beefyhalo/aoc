@@ -1,13 +1,11 @@
-{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 {-# OPTIONS_GHC -Wno-x-partial #-}
 
 import Control.Lens
-import Data.Map (Map)
-import qualified Data.Map as M
+import Data.Map.Strict qualified as M
 import Data.Vector (Vector, (!?))
-import qualified Data.Vector as V
+import Data.Vector qualified as V
 import Text.Read (readMaybe)
 
 data Val = L Int | R Char deriving (Show)
@@ -16,7 +14,7 @@ data Inst = Snd Val | Set Char Val | Add Char Val | Mul Char Val | Mod Char Val 
 
 data Machine = Machine
   { _ip :: Int,
-    _regs :: Map Char Int,
+    _regs :: M.Map Char Int,
     _inbox :: [Int],
     _out :: [Int]
   }

@@ -1,6 +1,4 @@
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 import Control.Applicative (Alternative)
@@ -11,9 +9,9 @@ import Control.Monad.State.Strict (StateT, runStateT)
 import Control.Monad.Writer.Strict (WriterT, execWriterT, lift, tell)
 import Data.Char (isDigit)
 import Data.Foldable (for_)
-import qualified Data.Heap as H
+import Data.Heap qualified as H
 import Data.Monoid (Sum (..))
-import qualified Data.Set as S
+import Data.Set qualified as S
 
 data Spell = MagicMissile | Drain | Shield | Poison | Recharge deriving (Eq, Ord, Enum, Bounded, Show)
 

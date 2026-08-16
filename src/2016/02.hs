@@ -1,6 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE TypeOperators #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 import Control.Comonad.Store (extract, seeks)
