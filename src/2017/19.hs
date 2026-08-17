@@ -5,7 +5,7 @@ import Control.Comonad.Store (extract, peeks, seeks)
 import Data.AffineSpace ((.+^))
 import Data.Char (isAlpha, isSpace)
 import Data.Foldable (toList)
-import Data.Grid.Sized
+import Data.Grid.Sized hiding (Path)
 import Data.List (elemIndex, unfoldr)
 import Data.Maybe (catMaybes)
 import GHC.TypeNats (KnownNat, type (<=))
