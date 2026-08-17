@@ -1,4 +1,4 @@
-import Data.AffineSpace ((.+^))
+import Data.AffineSpace (Diff, (.+^))
 import Data.Bifunctor (first)
 import Data.Functor.Identity (Identity (..))
 import Data.Functor.Rep (index, tabulate)
@@ -31,11 +31,14 @@ solve :: Int -> Grid Dims Int -> ((Int, Int), Int)
 solve size sat =
   maximumOn
     snd
-    [ ((c, r), squareSum size p sat)
+    [ ((c, r), squareSum corners p sat)
     | p@((fromEnum -> r) :| (fromEnum -> c) :| _) <- allCoord,
       r + size <= 300,
       c + size <= 300
     ]
+  where
+    d = size - 1
+    corners = first coordFromTuple <$> [((d, d), 1), ((-1, d), -1), ((d, -1), -1), ((-1, -1), 1)]
 
 -- >>> partTwo (makeSAT 18)
 -- ((90,269),16,113)
@@ -43,9 +46,6 @@ partTwo :: Grid Dims Int -> ((Int, Int), Int, Int)
 partTwo sat =
   maximumOn thd3 [(c, size, v) | size <- [1 .. 16], let (c, v) = solve size sat]
 
-squareSum :: Int -> Coord Dims -> Grid Dims Int -> Int
-squareSum size p sat =
+squareSum :: [(Diff (Coord Dims), Int)] -> Coord Dims -> Grid Dims Int -> Int
+squareSum corners p sat =
   sum [s * index sat (p .+^ off) | (off, s) <- corners]
-  where
-    d = size - 1
-    corners = first coordFromTuple <$> [((d, d), 1), ((-1, d), -1), ((d, -1), -1), ((-1, -1), 1)]
