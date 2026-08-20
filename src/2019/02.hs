@@ -3,8 +3,8 @@
 import Control.Arrow ((&&&))
 import Control.Monad.ST (ST, runST)
 import Data.List.Split (wordsBy)
-import qualified Data.Vector.Unboxed as V
-import qualified Data.Vector.Unboxed.Mutable as MV
+import Data.Vector.Unboxed qualified as V
+import Data.Vector.Unboxed.Mutable qualified as MV
 
 type Memory = V.Vector Int
 

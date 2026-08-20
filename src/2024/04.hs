@@ -9,8 +9,8 @@ import Data.ByteString qualified as BS (readFile)
 import Data.Function (on)
 import Data.Functor.Compose (Compose (..))
 import Data.Functor.Product (Product (Pair))
-import Data.Grid.Sized (Clamped, FocusedGrid (..), Grid, gridFromList, zeroCoord)
-import Data.Grid.Sized.Coord (Coord, coordFromTuple, coordRay, offsetCoord)
+import Data.Grid.Sized (Clamped, FocusedGrid (..), Grid, gridFromList, zeroCoord, deltaFromTuple)
+import Data.Grid.Sized.Coord (Coord, coordRay, offsetCoord)
 import Data.Maybe (fromJust)
 import GHC.TypeNats (KnownNat, type (<=))
 
@@ -54,7 +54,7 @@ solve = sum . fmap occurences . extend (\s -> if extract s == X then experiment 
           -- Three steps that way, or nothing: the ray stops at the edge, so a
           -- direction without room for a whole word yields fewer than three
           -- cells and the pattern match drops it.
-          [i, j, k] <- [take 3 (coordRay c (coordFromTuple (dy, dx)))]
+          [i, j, k] <- [take 3 (coordRay c (deltaFromTuple (dy, dx)))]
         ]
 
     occurences :: Context Cell -> Int
@@ -73,7 +73,7 @@ partTwo = sum . fmap (bool 0 1 . isXmas) . extend (\s -> if extract s == A then 
     applyContext c =
       -- One diagonal step each way, and all four have to land on the grid.
       Compose $
-        traverse (offsetCoord c . coordFromTuple) $
+        traverse (offsetCoord c . deltaFromTuple) $
           Pair
             (Two (-1, -1) (1, 1))
             (Two (-1, 1) (1, -1))
