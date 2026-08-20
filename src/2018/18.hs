@@ -2,7 +2,6 @@
 
 import Control.Comonad (extend, extract)
 import Control.Comonad.Store (experiment)
-import Control.Lens (view)
 import Data.Foldable (toList)
 import Data.Grid.Sized hiding (Grid)
 import Data.IntMap.Strict qualified as M
@@ -27,7 +26,7 @@ main = do
   print $ solve input
 
 parse :: forall n. (KnownNat n, 1 <= n) => String -> Grid n
-parse = view asFocusedGrid . fromJust . gridFromList . map (map parseCell) . lines
+parse = (`FocusedGrid` zeroCoord) . fromJust . gridFromList . map (map parseCell) . lines
   where
     parseCell = \case '.' -> Open; '|' -> Trees; '#' -> Lumber
 

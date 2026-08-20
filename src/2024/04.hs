@@ -3,14 +3,13 @@
 import Control.Arrow ((&&&))
 import Control.Comonad (extend, extract)
 import Control.Comonad.Store (experiment)
-import Control.Lens (view)
 import Data.Attoparsec.ByteString.Char8 (Parser, char, choice, endOfLine, many1, parseOnly, sepBy)
 import Data.Bool (bool)
 import Data.ByteString qualified as BS (readFile)
 import Data.Function (on)
 import Data.Functor.Compose (Compose (..))
 import Data.Functor.Product (Product (Pair))
-import Data.Grid.Sized (Clamped, Grid, IsGrid (asFocusedGrid), gridFromList)
+import Data.Grid.Sized (Clamped, FocusedGrid (..), Grid, gridFromList, zeroCoord)
 import Data.Grid.Sized.Coord (Coord, coordFromTuple, coordRay, offsetCoord)
 import Data.Maybe (fromJust)
 import GHC.TypeNats (KnownNat, type (<=))
@@ -43,7 +42,7 @@ type Context a = Compose [] Three a
 -- >>> solve example
 -- 18
 solve :: forall n. (1 <= n, KnownNat n) => Input n -> Int
-solve = sum . fmap occurences . extend (\s -> if extract s == X then experiment applyContext s else mempty) . view asFocusedGrid
+solve = sum . fmap occurences . extend (\s -> if extract s == X then experiment applyContext s else mempty) . (`FocusedGrid` zeroCoord)
   where
     applyContext :: Coord '[Clamped n, Clamped n] -> Context (Coord '[Clamped n, Clamped n])
     applyContext c =
@@ -68,7 +67,7 @@ type ContextTwo a = Compose Maybe (Product Two Two) a
 -- >>> partTwo example
 -- 9
 partTwo :: forall n. (1 <= n, KnownNat n) => Input n -> Int
-partTwo = sum . fmap (bool 0 1 . isXmas) . extend (\s -> if extract s == A then experiment applyContext s else Compose Nothing) . view asFocusedGrid
+partTwo = sum . fmap (bool 0 1 . isXmas) . extend (\s -> if extract s == A then experiment applyContext s else Compose Nothing) . (`FocusedGrid` zeroCoord)
   where
     applyContext :: Coord '[Clamped n, Clamped n] -> ContextTwo (Coord '[Clamped n, Clamped n])
     applyContext c =

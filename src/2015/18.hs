@@ -1,6 +1,5 @@
 import Control.Comonad (extend, extract)
 import Control.Comonad.Store (experiment, pos)
-import Control.Lens (view)
 import Data.Bool (bool)
 import Data.Foldable (toList)
 import Data.Grid.Sized
@@ -10,11 +9,11 @@ data Cell = Alive | Dead deriving (Eq, Show)
 
 -- $setup
 -- >>> input = ".#.#.#\n...##.\n#....#\n..#...\n#.#..#\n####.."
--- >>> Just example = view asFocusedGrid <$> parse @6 input
+-- >>> Just example = (`FocusedGrid` zeroCoord) <$> parse @6 input
 
 main :: IO ()
 main = do
-  Just (view asFocusedGrid -> input) <- parse @100 <$> readFile "input/2015/18.txt"
+  Just ((`FocusedGrid` zeroCoord) -> input) <- parse @100 <$> readFile "input/2015/18.txt"
   print $ solve 100 input
   print $ partTwo 100 input
 

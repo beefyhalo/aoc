@@ -11,11 +11,11 @@ data Cell = Paper | Empty deriving (Eq, Show)
 
 -- $setup
 -- >>> input = "..@@.@@@@.\n@@@.@.@.@@\n@@@@@.@.@@\n@.@@@@..@.\n@@.@@@@.@@\n.@@@@@@@.@\n.@.@.@.@@@\n@.@@@.@@@@\n.@@@@@@@@.\n@.@.@@@.@."
--- >>> Just (view asFocusedGrid -> example) = parse @10 input
+-- >>> Just ((`FocusedGrid` zeroCoord) -> example) = parse @10 input
 
 main :: IO ()
 main = do
-  Just (view asFocusedGrid -> input) <- parse @136 <$> readFile "input/2025/04.txt"
+  Just ((`FocusedGrid` zeroCoord) -> input) <- parse @136 <$> readFile "input/2025/04.txt"
   print $ solve input
   print $ partTwo input
 
